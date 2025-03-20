@@ -4,15 +4,14 @@
   "homepage": "https://www.sost.in/",
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://www.sost.in"
   "scripts": {
-  "dev": "vite",
-  "build": "vite build",
-  "lint": "eslint .",
-  "preview": "vite preview",
-  "copy-cname": "node -e \"require('fs').copyFileSync('CNAME', 'dist/CNAME')\"",
-  "deploy": "npm run build && npm run copy-cname && gh-pages -d dist"
-},
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "predeploy": "npm run build && node -e \"const fs = require('fs'); fs.writeFileSync('./dist/CNAME', 'www.sost.in');\"",
+    "deploy": "gh-pages -d dist"
+  },
   "dependencies": {
     "mdb-react-ui-kit": "^9.0.0",
     "react": "^18.3.1",
