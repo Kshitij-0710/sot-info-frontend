@@ -20,6 +20,9 @@ const ProjectsPage = () => {
   const projectsPerPage = 5;
   const [currentPage, setCurrentPage] = useState(1);
   
+  // New state for filter
+  const [projectFilter, setProjectFilter] = useState('all'); // 'all', 'student', or 'faculty'
+  
   // Function to check for data updates in the background
   const checkForUpdates = async () => {
     try {
@@ -156,11 +159,25 @@ const ProjectsPage = () => {
     setDataVersion(newVersion);
   };
   
+  // Handle filter change
+  const handleFilterChange = (filter) => {
+    setProjectFilter(filter);
+    setCurrentPage(1); // Reset to first page when changing filters
+  };
+  
+  // Filter projects based on selection
+  const filteredProjects = projects.filter(project => {
+    if (projectFilter === 'all') return true;
+    if (projectFilter === 'student') return project.user_type === 'STUDENT';
+    if (projectFilter === 'faculty') return project.user_type === 'FACULTY';
+    return true;
+  });
+  
   // Calculate pagination details
-  const totalPages = Math.ceil(projects.length / projectsPerPage);
+  const totalPages = Math.ceil(filteredProjects.length / projectsPerPage);
   const indexOfLastProject = currentPage * projectsPerPage;
   const indexOfFirstProject = indexOfLastProject - projectsPerPage;
-  const currentProjects = projects.slice(indexOfFirstProject, indexOfLastProject);
+  const currentProjects = filteredProjects.slice(indexOfFirstProject, indexOfLastProject);
   
   // Function to change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -332,6 +349,10 @@ const ProjectsPage = () => {
     );
   }
   
+  // Count projects by type for display
+  const studentProjectsCount = projects.filter(project => project.user_type === 'STUDENT').length;
+  const facultyProjectsCount = projects.filter(project => project.user_type === 'FACULTY').length;
+  
   return (
     <div className="projects-page-container">
         <section className="projects-hero">
@@ -350,12 +371,12 @@ const ProjectsPage = () => {
               <p>Active Projects</p>
             </div>
             <div className="projects-stat-item">
-              <h2>25+</h2>
-              <p>Industry Partners</p>
+              <h2>{studentProjectsCount}</h2>
+              <p>Student Projects</p>
             </div>
             <div className="projects-stat-item">
-              <h2>12</h2>
-              <p>Award-Winning Projects</p>
+              <h2>{facultyProjectsCount}</h2>
+              <p>Faculty Projects</p>
             </div>
             <div className="projects-stat-item">
               <h2>8</h2>
@@ -379,11 +400,39 @@ const ProjectsPage = () => {
                   <span className="refresh-icon">↻</span>
                 </button>
               </div>
-              <p>Below are projects developed by our students and faculty. These projects showcase innovation, technical excellence, and creative problem-solving approaches.</p>
+              
+              {/* Project type toggle buttons */}
+              <div className="project-filter-buttons">
+                <button 
+                  className={`filter-btn ${projectFilter === 'all' ? 'active' : ''}`}
+                  onClick={() => handleFilterChange('all')}
+                >
+                  All Projects
+                </button>
+                <button 
+                  className={`filter-btn ${projectFilter === 'student' ? 'active' : ''}`}
+                  onClick={() => handleFilterChange('student')}
+                >
+                  Student Projects
+                </button>
+                <button 
+                  className={`filter-btn ${projectFilter === 'faculty' ? 'active' : ''}`}
+                  onClick={() => handleFilterChange('faculty')}
+                >
+                  Faculty Projects
+                </button>
+              </div>
+              
+              <p>
+                {projectFilter === 'all' && 'Below are projects developed by our students and faculty.'}
+                {projectFilter === 'student' && 'Below are projects developed by our talented students.'}
+                {projectFilter === 'faculty' && 'Below are research and development projects led by our faculty.'}
+                {' '}These projects showcase innovation, technical excellence, and creative problem-solving approaches.
+              </p>
             </div>
             <div className="projects-table-container">
-              {projects.length === 0 ? (
-                <p>No projects available at this time.</p>
+              {filteredProjects.length === 0 ? (
+                <p className="no-projects-message">No {projectFilter !== 'all' ? projectFilter : ''} projects available at this time.</p>
               ) : (
                 <>
                   <table className="projects-table">
@@ -478,6 +527,71 @@ const ProjectsPage = () => {
           
           .refresh-icon {
             font-size: 35px;
+          }
+          
+          /* Project filter buttons */
+          .project-filter-buttons {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+          }
+          
+          .filter-btn {
+            padding: 10px 20px;
+            background-color: #1a1a1a;
+            color: white;
+            border: 1px solid #333;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: 500;
+            font-size: 16px;
+          }
+          
+          .filter-btn:hover {
+            background-color: #2a2a2a;
+            border-color: #444;
+          }
+          
+          .filter-btn.active {
+            background-color: #f64758;
+            color: white;
+            border-color: #f64758;
+          }
+          
+          .no-projects-message {
+            text-align: center;
+            padding: 30px;
+            background: #1a1a1a;
+            border-radius: 8px;
+            color: white;
+            margin: 20px 0;
+          }
+          
+          /* Responsive filter buttons */
+          @media (max-width: 768px) {
+            .project-filter-buttons {
+              justify-content: center;
+              gap: 10px;
+            }
+            
+            .filter-btn {
+              padding: 8px 16px;
+              font-size: 14px;
+            }
+          }
+          
+          @media (max-width: 480px) {
+            .project-filter-buttons {
+              flex-direction: column;
+              width: 100%;
+            }
+            
+            .filter-btn {
+              width: 100%;
+              padding: 10px;
+            }
           }
         `}</style>
     </div>
