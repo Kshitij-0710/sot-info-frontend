@@ -51,6 +51,9 @@ const SignUp = () => {
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(null);
     
+    // New state for email validation
+    const [emailError, setEmailError] = useState('');
+    
     // New state for OTP popup
     const [showOtpPopup, setShowOtpPopup] = useState(false);
     const [otpValue, setOtpValue] = useState('');
@@ -62,6 +65,11 @@ const SignUp = () => {
             ...loginData,
             [name]: value
         });
+        
+        // Clear email error when typing in login form
+        if (name === 'email') {
+            setEmailError('');
+        }
     };
 
     const handleRegisterChange = (e) => {
@@ -70,10 +78,36 @@ const SignUp = () => {
             ...registerData,
             [name]: value
         });
+        
+        // Validate email when it changes in registration form
+        if (name === 'email') {
+            validateEmail(value);
+        }
+    };
+    
+    // Email validation function
+    const validateEmail = (email) => {
+        setEmailError('');
+        
+        if (email) {
+            // Check if email ends with woxsen.edu.in
+            if (!email.endsWith('@woxsen.edu.in')) {
+                setEmailError('Email must be from the woxsen.edu.in domain');
+                return false;
+            }
+        }
+        
+        return true;
     };
 
     const handleLogin = async (e) => {
         e.preventDefault();
+        
+        // Validate email before submission
+        if (!validateEmail(loginData.email)) {
+            return;
+        }
+        
         setIsLoading(true);
         setError(null);
         setSuccess(null);
@@ -184,6 +218,12 @@ const SignUp = () => {
 
     const handleRegister = async (e) => {
         e.preventDefault();
+        
+        // Validate email before submission
+        if (!validateEmail(registerData.email)) {
+            return;
+        }
+        
         setIsLoading(true);
         setError(null);
         setSuccess(null);
@@ -452,11 +492,15 @@ const SignUp = () => {
                     <input 
                         type="email" 
                         name="email"
-                        placeholder="Email" 
+                        placeholder="Email (must have @woxsen.edu.in)" 
                         value={loginData.email}
                         onChange={handleLoginChange}
                         required
+                        className={emailError && activeTab === 'login' ? 'input-error' : ''}
                     />
+                    {emailError && activeTab === 'login' && (
+                        <div className="error-message">{emailError}</div>
+                    )}
                     <input 
                         type="password" 
                         name="password"
@@ -465,7 +509,7 @@ const SignUp = () => {
                         onChange={handleLoginChange}
                         required
                     />
-                    <button type="submit" disabled={isLoading}>
+                    <button type="submit" disabled={isLoading || emailError}>
                         {isLoading ? 'Signing In...' : 'Sign In'}
                     </button>
                 </form>
@@ -484,11 +528,15 @@ const SignUp = () => {
                     <input 
                         type="email" 
                         name="email"
-                        placeholder="Email" 
+                        placeholder="Email (must end with @woxsen.edu.in)" 
                         value={registerData.email}
                         onChange={handleRegisterChange}
                         required
+                        className={emailError && activeTab === 'register' ? 'input-error' : ''}
                     />
+                    {emailError && activeTab === 'register' && (
+                        <div className="error-message">{emailError}</div>
+                    )}
                     <input 
                         type="password" 
                         name="password"
@@ -515,7 +563,7 @@ const SignUp = () => {
                         <option value="STUDENT">Student</option>
                         <option value="FACULTY">Faculty</option>
                     </select>
-                    <button type="submit" disabled={isLoading}>
+                    <button type="submit" disabled={isLoading || emailError}>
                         {isLoading ? 'Signing Up...' : 'Sign Up'}
                     </button>
                 </form>

@@ -15,11 +15,12 @@ const ResearchPage = () => {
   const [dataVersion, setDataVersion] = useState(0);
   const projectsPerPage = 5;
   const [currentPage, setCurrentPage] = useState(1);
+  // New state for toggling between student and faculty projects
+  const [activeTab, setActiveTab] = useState('all'); // 'all', 'student', or 'faculty'
 
   // Function to check for data updates in the background
   const checkForUpdates = async () => {
     try {
-      
       await new Promise(resolve => setTimeout(resolve, Math.random() * 1000));
 
       const response = await fetch(apiConfig.getUrl('api/forms/'), {
@@ -59,7 +60,6 @@ const ResearchPage = () => {
       }
     } catch (error) {
       console.error("Background update check failed:", error);
-      
     }
   };
 
@@ -152,14 +152,28 @@ const ResearchPage = () => {
     setDataVersion(newVersion);
   };
 
-  // Calculate pagination details
-  const totalPages = Math.ceil(researches.length / projectsPerPage);
+  // Filter projects based on active tab
+  const filteredProjects = researches.filter(project => {
+    if (activeTab === 'all') return true;
+    if (activeTab === 'student') return project.user_type === 'STUDENT';
+    if (activeTab === 'faculty') return project.user_type === 'FACULTY';
+    return true;
+  });
+
+  // Calculate pagination details for filtered projects
+  const totalPages = Math.ceil(filteredProjects.length / projectsPerPage);
   const indexOfLastProject = currentPage * projectsPerPage;
   const indexOfFirstProject = indexOfLastProject - projectsPerPage;
-  const currentProjects = researches.slice(indexOfFirstProject, indexOfLastProject);
+  const currentProjects = filteredProjects.slice(indexOfFirstProject, indexOfLastProject);
 
   // Function to change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  // Reset to page 1 when changing tabs
+  const handleTabChange = (tab) => {
+    setActiveTab(tab);
+    setCurrentPage(1);
+  };
 
   // Generate page numbers
   const pageNumbers = [];
@@ -177,7 +191,6 @@ const ResearchPage = () => {
             <div className="circle circle-2"></div>
             <div className="circle circle-3"></div>
           </div>
-          
         </div>
       </div>
     );
@@ -329,6 +342,10 @@ const ResearchPage = () => {
     );
   }
 
+  // Count of student and faculty projects for the stats
+  const studentProjectsCount = researches.filter(project => project.user_type === 'STUDENT').length;
+  const facultyProjectsCount = researches.filter(project => project.user_type === 'FACULTY').length;
+
   return (
     <div className="page-container">
       <section className="placement-hero">
@@ -347,12 +364,12 @@ const ResearchPage = () => {
             <p>Active Research Projects</p>
           </div>
           <div className="stat-item">
-            <h2>15+</h2>
-            <p>Research Publications</p>
+            <h2>{facultyProjectsCount}</h2>
+            <p>Faculty Research</p>
           </div>
           <div className="stat-item">
-            <h2>8</h2>
-            <p>Research Labs</p>
+            <h2>{studentProjectsCount}</h2>
+            <p>Student Research</p>
           </div>
           <div className="stat-item">
             <h2>30+</h2>
@@ -377,10 +394,32 @@ const ResearchPage = () => {
               </button>
             </div>
             <p>Our research is focused on but not limited to the following areas. Each area is led by faculty members with expertise in the respective domains, guiding students and research teams in their explorations.</p>
+            
+            {/* Toggle buttons for student/faculty projects */}
+            <div className="research-toggle">
+              <button 
+                className={`toggle-btn ${activeTab === 'all' ? 'active' : ''}`}
+                onClick={() => handleTabChange('all')}
+              >
+                All Projects
+              </button>
+              <button 
+                className={`toggle-btn ${activeTab === 'faculty' ? 'active' : ''}`}
+                onClick={() => handleTabChange('faculty')}
+              >
+                Faculty Research
+              </button>
+              <button 
+                className={`toggle-btn ${activeTab === 'student' ? 'active' : ''}`}
+                onClick={() => handleTabChange('student')}
+              >
+                Student Research
+              </button>
+            </div>
           </div>
           <div className="research-table-container">
-            {researches.length === 0 ? (
-              <p>No research projects available at this time.</p>
+            {filteredProjects.length === 0 ? (
+              <p className="no-projects-message">No {activeTab !== 'all' ? activeTab : ''} research projects available at this time.</p>
             ) : (
               <>
                 <table className="research-table">
@@ -393,7 +432,7 @@ const ResearchPage = () => {
                   </thead>
                   <tbody>
                     {currentProjects.map((project, index) => (
-                      <tr key={project.id || index}>
+                      <tr key={project.id || index} className={`project-row ${project.user_type?.toLowerCase()}`}>
                         <td>{project.title}</td>
                         <td>
                           {project.user?.name ||
@@ -456,16 +495,16 @@ const ResearchPage = () => {
       }
       
       .refresh-button {
-        background: none;
-
-        border: none;
-        font-size: 18px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #f64758;
-        transition: transform 0.3s ease;
+        margin-top: 0px;
+            background: none;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #f64758;
+            transition: transform 0.3s ease;
       }
       
       .refresh-button:hover {
@@ -475,7 +514,74 @@ const ResearchPage = () => {
       .refresh-icon {
         font-size: 35px;
       }
-        `}</style>
+
+      /* New styles for toggle buttons */
+      .research-toggle {
+        display: flex;
+            gap: 15px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+      }
+      
+      .toggle-btn {
+        padding: 10px 20px;
+            background-color: #1a1a1a;
+            color: white;
+            border: 1px solid #333;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: 500;
+            font-size: 16px;
+      }
+      
+      .toggle-btn:hover {
+        background-color: #2a2a2a;
+            border-color: #444;
+      }
+      
+      .toggle-btn.active {
+        background-color: #f64758;
+            color: white;
+            border-color: #f64758;
+      }
+      
+
+      
+      .no-projects-message {
+        text-align: center;
+            padding: 30px;
+            background: #1a1a1a;
+            border-radius: 8px;
+            color: white;
+            margin: 20px 0;
+      }
+
+      @media (max-width: 768px) {
+        .research-toggle {
+          justify-content: center;
+          gap: 10px;
+        }
+        
+        .toggle-btn {
+          padding: 8px 16px;
+          font-size: 14px;
+        }
+      }
+      
+      @media (max-width: 480px) {
+        .research-toggle {
+          flex-direction: column;
+          width: 100%;
+        }
+        
+        .toggle-btn {
+          width: 100%;
+          padding: 10px;
+        }
+      }
+
+      `}</style>
     </div>
   );
 };

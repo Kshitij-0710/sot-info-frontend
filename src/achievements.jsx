@@ -16,6 +16,8 @@ const AchievementsPage = () => {
   const [dataVersion, setDataVersion] = useState(0);
   const projectsPerPage = 5;
   const [currentPage, setCurrentPage] = useState(1);
+  // Filter state for student/faculty toggle
+  const [activeFilter, setActiveFilter] = useState("all"); // "all", "student", or "faculty"
 
   // Function to check for data updates in the background
   const checkForUpdates = async () => {
@@ -151,11 +153,19 @@ const AchievementsPage = () => {
     setDataVersion(newVersion);
   };
 
+  // Filter achievements based on activeFilter
+  const filteredAchievements = achievements.filter(achievement => {
+    if (activeFilter === "all") return true;
+    if (activeFilter === "student") return achievement.user_type === "STUDENT";
+    if (activeFilter === "faculty") return achievement.user_type === "FACULTY";
+    return true;
+  });
+
   // Calculate pagination details
-  const totalPages = Math.ceil(achievements.length / projectsPerPage);
+  const totalPages = Math.ceil(filteredAchievements.length / projectsPerPage);
   const indexOfLastAchievement = currentPage * projectsPerPage;
   const indexOfFirstAchievement = indexOfLastAchievement - projectsPerPage;
-  const currentAchievements = achievements.slice(indexOfFirstAchievement, indexOfLastAchievement);
+  const currentAchievements = filteredAchievements.slice(indexOfFirstAchievement, indexOfLastAchievement);
 
   // Function to change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -165,6 +175,16 @@ const AchievementsPage = () => {
   for (let i = 1; i <= totalPages; i++) {
     pageNumbers.push(i);
   }
+
+  // Handler for filter change
+  const handleFilterChange = (filter) => {
+    setActiveFilter(filter);
+    setCurrentPage(1); // Reset to first page when filter changes
+  };
+
+  // Get counts for statistics
+  const studentAchievementsCount = achievements.filter(a => a.user_type === "STUDENT").length;
+  const facultyAchievementsCount = achievements.filter(a => a.user_type === "FACULTY").length;
 
   // Loading state
   const PremiumLoader = () => {
@@ -265,6 +285,65 @@ const AchievementsPage = () => {
       opacity: 0.5;
     }
   }
+
+  /* Filter toggle buttons styles */
+  .filter-toggle-container {
+    display: flex;
+            gap: 15px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+  }
+  
+  .filter-toggle-button {
+    padding: 10px 20px;
+            background-color: #1a1a1a;
+            color: white;
+            border: 1px solid #333;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: 500;
+            font-size: 16px;
+  }
+
+  .filter-toggle-button:hover (
+    background-color: #2a2a2a;
+            border-color: #444;
+  )
+  
+  .filter-toggle-button.active {
+    background-color: #f64758;
+    color: white;
+    border-color: #f64758;
+  }
+  
+  .filter-toggle-button:hover:not(.active) {
+    background: #444;
+    border-color: #555;
+  }
+  @media (max-width: 768px) {
+    .filter-toggle-container {
+      justify-content: center;
+      gap: 10px;
+    }
+    
+    .filter-toggle-button {
+      padding: 8px 16px;
+      font-size: 14px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .filter-toggle-container {
+      flex-direction: column;
+      width: 100%;
+    }
+    
+    .filter-toggle-button {
+      width: 100%;
+      padding: 10px;
+    }
+  }
   `;
   
   // Loading state
@@ -293,6 +372,7 @@ const AchievementsPage = () => {
 
   return (
     <div className="achievements-page-container">
+      <style>{premiumLoaderStyles}</style>
       <section className="achievements-hero">
         <div className="achievements-hero-content">
           <h1 className="achievements-hero-title">Achievements at School of Technology</h1>
@@ -308,12 +388,12 @@ const AchievementsPage = () => {
             <p>Total Achievements</p>
           </div>
           <div className="achievements-stat-item">
-            <h2>30+</h2>
-            <p>Awards This Year</p>
+            <h2>{studentAchievementsCount}</h2>
+            <p>Student Achievements</p>
           </div>
           <div className="achievements-stat-item">
-            <h2>15</h2>
-            <p>International Recognitions</p>
+            <h2>{facultyAchievementsCount}</h2>
+            <p>Faculty Achievements</p>
           </div>
           <div className="achievements-stat-item">
             <h2>25+</h2>
@@ -338,10 +418,32 @@ const AchievementsPage = () => {
               </button>
             </div>
             <p>Below are some of the notable achievements by our students and faculty. These achievements demonstrate excellence, innovation, and dedication to advancing knowledge and solving real-world problems.</p>
+            
+            {/* Filter toggle buttons */}
+            <div className="filter-toggle-container">
+              <button 
+                className={`filter-toggle-button ${activeFilter === "all" ? "active" : ""}`}
+                onClick={() => handleFilterChange("all")}
+              >
+                All Achievements
+              </button>
+              <button 
+                className={`filter-toggle-button ${activeFilter === "student" ? "active" : ""}`}
+                onClick={() => handleFilterChange("student")}
+              >
+                Student Achievements
+              </button>
+              <button 
+                className={`filter-toggle-button ${activeFilter === "faculty" ? "active" : ""}`}
+                onClick={() => handleFilterChange("faculty")}
+              >
+                Faculty Achievements
+              </button>
+            </div>
           </div>
           <div className="achievements-table-container">
-            {achievements.length === 0 ? (
-              <p>No achievements available at this time.</p>
+            {filteredAchievements.length === 0 ? (
+              <p>No {activeFilter !== "all" ? activeFilter : ""} achievements available at this time.</p>
             ) : (
               <>
                 <table className="achievements-table">

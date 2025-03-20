@@ -104,7 +104,7 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="logo">
         <Link to="/">
-          <img src={`${import.meta.env.BASE_URL}images/image1.svg`} alt="Logo" />
+          <img src={`${import.meta.env.BASE_URL}images/logo.png`} alt="Logo" />
         </Link>
       </div>
 
@@ -153,6 +153,7 @@ const Navbar = () => {
         <Link to="/projects">Projects</Link>
         <Link to="/research">Research</Link>
         <Link to="/placements">Placements</Link>
+        <Link to="/achievements">Achievements</Link>
         <Link to="/contactpage">Contact</Link>
 
         
