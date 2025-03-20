@@ -3,12 +3,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 80vh;
+  height: 100vh;
   background-color: #000000;
   background-image: 
     linear-gradient(125deg, rgba(13, 13, 16, 0.97) 0%, rgba(7, 7, 9, 0.98) 100%),
     url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='rgba(255,255,255,0.025)' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
   position: relative;
+  padding: 100px 0;
 }
 
 /* Subtle animated background effect */
@@ -16,7 +17,6 @@
   content: "";
   position: absolute;
   width: 100%;
-
   background: 
     radial-gradient(circle at 10% 10%, rgba(158, 128, 96, 0.05) 0%, rgba(0, 0, 0, 0) 60%),
     radial-gradient(circle at 90% 90%, rgba(158, 128, 96, 0.03) 0%, rgba(0, 0, 0, 0) 60%);
@@ -189,7 +189,7 @@
   padding: 18px;
   background: linear-gradient(90deg, rgba(246, 71, 88, 0.8), rgba(212, 100, 120, 0.8));
   border: none;
-  color: rgba(22, 22, 24, 0.9);
+  color: #fff;
   border-radius: 2px;
   cursor: pointer;
   font-size: 15px;
@@ -201,6 +201,18 @@
   overflow: hidden;
   margin-top: 10px;
 }
+.form-container input:-webkit-autofill,
+.form-container input:-webkit-autofill:hover, 
+.form-container input:-webkit-autofill:focus, 
+.form-container input:-webkit-autofill:active {
+  background-color: rgba(22, 22, 24, 0.9) !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0.9) !important;
+  -webkit-box-shadow: 0 0 0px 1000px rgba(22, 22, 24, 0.9) inset !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+
 
 .form-container button::before {
   content: '';
@@ -342,7 +354,7 @@
   color: white;
   font-size: 22px;
   text-align: center;
-  letter-spacing: 10px;
+  letter-spacing: 8px;
   margin-bottom: 30px;
   transition: all 0.3s ease;
 }
@@ -408,16 +420,91 @@
 .resend-otp-btn:hover {
   color: rgb(255, 155, 165);
 }
-
-/* Responsive design */
-@media (max-width: 540px) {
+/* Responsive design for tablets and small screens */
+@media (max-width: 768px) {
   .auth-container {
     width: 90%;
-    padding: 40px 30px;
+    padding: 30px 20px;
   }
-  
+
   .otp-popup {
     width: 90%;
-    padding: 30px;
+    padding: 25px 15px; /* Reduce padding */
+  }
+
+  .tabs button {
+    font-size: 14px;
+    padding: 12px 0;
+  }
+
+  .form-container input,
+  .form-container select,
+  .form-container button {
+    padding: 14px; /* Smaller input fields on mobile */
+    font-size: 14px;
+  }
+  
+  .form-container h2 {
+    font-size: 24px;
+  }
+
+  .error-message, 
+  .success-message {
+    font-size: 13px;
+    padding: 12px;
+  }
+}
+
+/* Responsive design for mobile screens */
+@media (max-width: 540px) {
+  .auth-container {
+    width: 92%;
+    padding: 25px 18px;
+  }
+
+  .otp-popup {
+    width: 92%;
+    padding: 20px 15px; /* Reduce padding */
+  }
+
+  .form-container input,
+  .form-container select,
+  .form-container button {
+    padding: 12px 14px; /* Optimize touch area */
+    font-size: 14px;
+  }
+
+  .tabs button {
+    font-size: 13px; /* Adjust tab text */
+    padding: 12px 0;
+  }
+}
+
+/* Further optimizations for very small screens */
+@media (max-width: 400px) {
+  .auth-container {
+    width: 96%;
+    padding: 20px 12px;
+  }
+
+  .form-container h2 {
+    font-size: 22px;
+  }
+
+  .form-container input,
+  .form-container select,
+  .form-container button {
+    font-size: 13px;
+    padding: 10px;
+  }
+
+  .tabs button {
+    font-size: 12px;
+  }
+
+  .error-message, 
+  .success-message {
+    font-size: 12px;
+    padding: 10px;
   }
 }
