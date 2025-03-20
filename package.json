@@ -1,6 +1,7 @@
 {
   "name": "sot-website",
   "private": true,
+  "homepage": "https://www.sost.in/",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
