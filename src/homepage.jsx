@@ -2,6 +2,7 @@ import './styles/imageslider.css';
 
 import React, { useEffect, useRef, useState } from "react";
 import { FaArrowRight } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 import ContactUs from "./contactus";
 import './index.css';
@@ -262,10 +263,10 @@ const PlacementHighlights = () => {
         </div>
         
         <div className="view-more-container">
-          <a href="/placements" className="view-more-link">
-            View All Placement Details <FaArrowRight className="arrow-icon" />
-          </a>
-        </div>
+  <Link to="/placements" className="view-more-link">
+    View All Placement Details <FaArrowRight className="arrow-icon" />
+  </Link>
+</div>
       </div>
     </section>
   );
