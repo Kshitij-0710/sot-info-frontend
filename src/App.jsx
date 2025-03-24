@@ -9,6 +9,8 @@ import Navbar from "./navbar";
 import ProjectsPage from "./projects";
 import ResearchPage from "./research";
 import SignUp from "./signup";
+import EventsPage from "./Events";
+
 
 
 const App = () => {
@@ -24,6 +26,7 @@ const App = () => {
         <Route path="/research" element={<ResearchPage />} />
         <Route path="/contactpage" element={<ContactPage />} />
         <Route path="/achievements" element={<AchievementsPage />} />
+        <Route path="/events" element={<EventsPage />} />
 
       </Routes>
 

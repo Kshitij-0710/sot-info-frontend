@@ -1,6 +1,7 @@
 import './styles/imageslider.css';
 
 import React, { useEffect, useRef, useState } from "react";
+import { FaArrowRight } from "react-icons/fa";
 
 import ContactUs from "./contactus";
 import './index.css';
@@ -156,6 +157,120 @@ const ImageSlider = () => {
   );
 };
 
+// Placement testimonial data
+const testimonials = [
+  {
+    id: 1,
+    title: "Dream Opportunity at Google",
+    student: "Aisha Patel",
+    description: "The placement cell helped me refine my skills and connect with the right companies. The experience was invaluable!",
+    package: "24 LPA",
+    company: "Google",
+    date: "2024-05-15",
+    created_at: "2024-05-20T14:15:22Z"
+  },
+  {
+    id: 2,
+    title: "My Journey to Amazon",
+    student: "Raj Sharma",
+    description: "I secured my dream role thanks to the extensive preparation and industry connections provided by SOT.",
+    package: "21 LPA",
+    company: "Amazon",
+    date: "2024-05-10",
+    created_at: "2024-05-18T10:45:30Z"
+  },
+  {
+    id: 3,
+    title: "Microsoft Success Story",
+    student: "Priya Singh",
+    description: "The industry-aligned curriculum and practical exposure at SOT gave me an edge during my interviews.",
+    package: "20 LPA",
+    company: "Microsoft",
+    date: "2024-04-25",
+    created_at: "2024-05-05T09:30:15Z"
+  },
+];
+
+// Top hiring company logos
+const companyLogos = [
+  { name: "Google", src: "https://img.icons8.com/color/96/google-logo.png" },
+  { name: "Microsoft", src: "https://img.icons8.com/fluency/96/microsoft.png" },
+  { name: "Amazon", src: "https://img.icons8.com/color/96/amazon.png" },
+  { name: "Meta", src: "https://img.icons8.com/color/96/facebook-new.png" },
+];
+
+const PlacementHighlights = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const testimonialsPerPage = 2;
+
+  const nextTestimonials = () => {
+    setCurrentIndex((prevIndex) => {
+      if (prevIndex + testimonialsPerPage >= testimonials.length) {
+        return 0; // Reset to the beginning when reaching the end
+      }
+      return prevIndex + testimonialsPerPage;
+    });
+  };
+
+  return (
+    <section className="placement-highlights dark-theme">
+      <div className="placement-highlights-container">
+        <h2 className="section-heading">Placement Success Stories</h2>
+        
+        <div className="placement-testimonials">
+          <div className="testimonials-container">
+            {testimonials
+              .slice(currentIndex, currentIndex + testimonialsPerPage)
+              .map((testimonial, index) => (
+                <div key={testimonial.id} className="testimonial-card">
+                  <div className="testimonial-header">
+                    <h3 className="testimonial-title">{testimonial.title}</h3>
+                  </div>
+                  <div className="testimonial-content">
+                    <p className="testimonial-quote">"{testimonial.description}"</p>
+                    <div className="testimonial-details">
+                      <h4 className="testimonial-name">{testimonial.student}</h4>
+                      <p className="testimonial-company">
+                        <strong>{testimonial.company}</strong>
+                      </p>
+                      <p className="testimonial-date">Placed on: {new Date(testimonial.date).toLocaleDateString()}</p>
+                      <div className="testimonial-package-container">
+                        <p className="testimonial-package">{testimonial.package}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+          </div>
+          
+          {/* Next arrow button removed as requested */}
+        </div>
+
+        <div className="top-recruiters">
+          <h3>Top Recruiters</h3>
+          <div className="company-logos">
+            {companyLogos.map((company, index) => (
+              <div key={index} className="company-logo-container">
+                <img
+                  src={company.src}
+                  alt={company.name}
+                  className="company-logo"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+        
+        <div className="view-more-container">
+          <a href="/placements" className="view-more-link">
+            View All Placement Details <FaArrowRight className="arrow-icon" />
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 const HomePage = () => {
   return (
     <div className="page-container">
@@ -163,6 +278,7 @@ const HomePage = () => {
           <ImageSlider />
         </div>
         <div className="content-container">
+        <PlacementHighlights />
         <section className="section-research">
   <div className="container-research">
     <h2 className="section-heading">Research, Projects & Achievements</h2>
