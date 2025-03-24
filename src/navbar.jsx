@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { FaBars, FaSignOutAlt, FaTimes } from "react-icons/fa";
+import { FaBars } from "react-icons/fa";
 import { Link, useNavigate, useLocation } from "react-router-dom";
+import Sidebar from "./components/Sidebar";
 import "./styles/homepage.css";
 
 const Navbar = () => {
@@ -95,92 +96,33 @@ const Navbar = () => {
     navigate("/");
   };
 
-  const getUserDisplayName = () => {
-    if (!userData) return "User";
-    return userData.name || userData.email || "User";
-  };
-
   return (
-    <nav className="navbar">
-      <div className="logo">
-        <Link to="/">
-          <img src={`${import.meta.env.BASE_URL}images/logo.png`} alt="Logo" />
-        </Link>
-      </div>
-
-      {/* Hamburger Icon */}
-      <div className="hamburger" onClick={() => setMenuOpen(true)}>
-        <FaBars />
-      </div>
-
-      {/* Mobile Menu */}
-      <div className={`mobile-menu ${menuOpen ? "open" : ""}`}>
-        <div className="close-icon" onClick={() => setMenuOpen(false)}>
-          <FaTimes />
+    <>
+      <nav className="navbar">
+        <div className="nav-left">
+          <button className="menu-button" onClick={() => setMenuOpen(true)}>
+            <FaBars />
+          </button>
+          {!isLoggedIn && (
+            <Link to="/signup" className="login-link">Register/Login</Link>
+          )}
         </div>
-        <Link to="/" onClick={() => setMenuOpen(false)}>Home</Link>
-        <Link to="/projects" onClick={() => setMenuOpen(false)}>Projects</Link>
-        <Link to="/research" onClick={() => setMenuOpen(false)}>Research</Link>
-        <Link to="/events" onClick={() => setMenuOpen(false)}>Events</Link>
-        <Link to="/achievements" onClick={() => setMenuOpen(false)}>Achievements</Link>
-        <Link to="/placements" onClick={() => setMenuOpen(false)}>Placements</Link>
-        <Link to="/contactpage" onClick={() => setMenuOpen(false)}>Contact</Link>
 
-        {isLoggedIn ? (
-          <>
-            <Link to="/forms" onClick={() => setMenuOpen(false)}>Forms</Link>
-            <div className="user-dropdown">
-            <img 
-              src={`${import.meta.env.BASE_URL}images/pfp.jpeg`} 
-              alt="Profile" 
-              className="profile-img"
-            />
-              <div className="dropdown-content">
-                <span>Hello, {getUserDisplayName()}</span>
-                <button onClick={handleLogout} className="logout-button">
-                  <FaSignOutAlt /> Logout
-                </button>
-              </div>
-            </div>
-          </>
-        ) : (
-          <Link to="/signup" onClick={() => setMenuOpen(false)}>Register/Login</Link>
-        )}
-      </div>
+        <div className="logo">
+          <Link to="/">
+            <img src={`${import.meta.env.BASE_URL}images/logo.png`} alt="Logo" />
+          </Link>
+        </div>
+      </nav>
 
-      {/* Desktop Menu */}
-      <div className="nav-links">
-        <Link to="/">Home</Link>
-        <Link to="/projects">Projects</Link>
-        <Link to="/research">Research</Link>
-        <Link to="/achievements">Achievements</Link>
-        <Link to="/events">Events</Link>
-        <Link to="/placements">Placements</Link>
-        <Link to="/contactpage">Contact</Link>
-
-        
-        {isLoggedIn && <Link to="/forms">Forms</Link>}
-
-        {isLoggedIn ? (
-          <div className="user-dropdown">
-            <img 
-              src={`${import.meta.env.BASE_URL}images/pfp.jpeg`} 
-              alt="Profile" 
-              className="profile-img"
-            />
-
-            <div className="dropdown-content">
-              <span>Hello, <br></br>{getUserDisplayName()}</span>
-              <button onClick={handleLogout} className="logout-button">
-                <FaSignOutAlt /> Logout
-              </button>
-            </div>
-          </div>
-        ) : (
-          <Link to="/signup">Register/Login</Link>
-        )}
-      </div>
-    </nav>
+      <Sidebar
+        isOpen={menuOpen}
+        onClose={() => setMenuOpen(false)}
+        isLoggedIn={isLoggedIn}
+        userData={userData}
+        handleLogout={handleLogout}
+      />
+    </>
   );
 };
 
