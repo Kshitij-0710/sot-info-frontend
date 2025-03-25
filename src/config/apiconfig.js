@@ -1,5 +1,5 @@
 const apiConfig = {
-    baseUrl: 'https://dev.sajayr.tech/',
+    baseUrl: 'http://prod.sost.in/',
     
     getUrl(endpoint) {
       const path = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
