@@ -1,15 +1,11 @@
 import './styles/imageslider.css';
 
 import React, { useEffect, useRef, useState } from "react";
-<<<<<<< HEAD
 import { FaArrowRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-=======
-import { FaArrowRight } from 'react-icons/fa';
->>>>>>> 5d36a38 (added api for fetching placements)
-import ContactUs from "./contactus";
 import apiConfig from "./config/apiconfig";
+import ContactUs from "./contactus";
 import './index.css';
 import TopContributions from "./topcontributions";
 
