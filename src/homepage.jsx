@@ -294,11 +294,8 @@ const PlacementHighlights = () => {
     View All Placement Details <FaArrowRight className="arrow-icon" />
   </Link>
 </div>
-          <a href="/#placements" className="view-more-link">
-            View All Placement Details <FaArrowRight className="arrow-icon" />
-          </a>
         </div>
-      </div>
+
     </section>
   );
 };
