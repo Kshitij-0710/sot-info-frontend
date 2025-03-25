@@ -18,6 +18,8 @@ const AchievementsPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   // Filter state for student/faculty toggle
   const [activeFilter, setActiveFilter] = useState("all"); // "all", "student", or "faculty"
+  // New state for search
+  const [searchQuery, setSearchQuery] = useState("");
 
   // Function to check for data updates in the background
   const checkForUpdates = async () => {
@@ -153,12 +155,22 @@ const AchievementsPage = () => {
     setDataVersion(newVersion);
   };
 
-  // Filter achievements based on activeFilter
+  // Filter achievements based on activeFilter and search query
   const filteredAchievements = achievements.filter(achievement => {
-    if (activeFilter === "all") return true;
-    if (activeFilter === "student") return achievement.user_type === "STUDENT";
-    if (activeFilter === "faculty") return achievement.user_type === "FACULTY";
-    return true;
+    // User type filter
+    const matchesUserType = 
+      activeFilter === "all" || 
+      (activeFilter === "student" && achievement.user_type === "STUDENT") || 
+      (activeFilter === "faculty" && achievement.user_type === "FACULTY");
+
+    // Search query filter (case-insensitive)
+    const matchesSearch = 
+      searchQuery === "" || 
+      achievement.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      achievement.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      (achievement.user?.name && achievement.user.name.toLowerCase().includes(searchQuery.toLowerCase()));
+
+    return matchesUserType && matchesSearch;
   });
 
   // Calculate pagination details
@@ -180,6 +192,11 @@ const AchievementsPage = () => {
   const handleFilterChange = (filter) => {
     setActiveFilter(filter);
     setCurrentPage(1); // Reset to first page when filter changes
+  };
+
+  // Handler for search
+  const handleSearch = () => {
+    setCurrentPage(1); // Reset to first page when searching
   };
 
   // Get counts for statistics
@@ -289,27 +306,59 @@ const AchievementsPage = () => {
   /* Filter toggle buttons styles */
   .filter-toggle-container {
     display: flex;
-            gap: 15px;
-            margin: 20px 0;
-            flex-wrap: wrap;
+    gap: 15px;
+    margin: 20px 0;
+    flex-wrap: wrap;
   }
   
   .filter-toggle-button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .search-container {
+    display: flex;
+        gap: 15px;
+        align-items: center;
+        flex-wrap: wrap;
+  }
+  
+  .filter-toggle-button, .search-button {
     padding: 10px 20px;
-            background-color: #1a1a1a;
-            color: white;
-            border: 1px solid #333;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-weight: 500;
-            font-size: 16px;
+    background-color: #1a1a1a;
+    color: white;
+    border: 1px solid #333;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: 500;
+    font-size: 16px;
   }
 
-  .filter-toggle-button:hover (
+  .search-input {
+    flex-grow: 1;
+        padding: 10px;
+        border: 1px solid #333;
+        background-color: #1a1a1a;
+        color: white;
+        border-radius: 6px;
+        min-width: 200px;
+  }
+  
+  .search-button {
+    padding: 10px 20px;
+    white-space: nowrap;
+  }
+
+  .search-button:hover {
+    background-color: #f64758;
+  }
+  
+  .filter-toggle-button:hover {
     background-color: #2a2a2a;
-            border-color: #444;
-  )
+    border-color: #444;
+  }
   
   .filter-toggle-button.active {
     background-color: #f64758;
@@ -321,27 +370,32 @@ const AchievementsPage = () => {
     background: #444;
     border-color: #555;
   }
+  
   @media (max-width: 768px) {
-    .filter-toggle-container {
+    .filter-toggle-container, .search-container {
       justify-content: center;
       gap: 10px;
     }
     
-    .filter-toggle-button {
+    .filter-toggle-button, .search-input, .search-button {
       padding: 8px 16px;
       font-size: 14px;
     }
   }
   
   @media (max-width: 480px) {
-    .filter-toggle-container {
+    .filter-toggle-container, .search-container {
       flex-direction: column;
       width: 100%;
     }
     
-    .filter-toggle-button {
+    .filter-toggle-button, .search-input, .search-button {
       width: 100%;
       padding: 10px;
+    }
+    
+    .search-container {
+      flex-direction: row;
     }
   }
   `;
@@ -419,6 +473,8 @@ const AchievementsPage = () => {
             </div>
             <p>Below are some of the notable achievements by our students and faculty. These achievements demonstrate excellence, innovation, and dedication to advancing knowledge and solving real-world problems.</p>
             
+           
+            
             {/* Filter toggle buttons */}
             <div className="filter-toggle-container">
               <button 
@@ -440,10 +496,26 @@ const AchievementsPage = () => {
                 Faculty Achievements
               </button>
             </div>
+             {/* Search Container */}
+             <div className="search-container">
+              <input 
+                type="text" 
+                placeholder="Search achievements..."
+                className="search-input"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+              <button 
+                className="search-button"
+                onClick={handleSearch}
+              >
+                Search
+              </button>
+            </div>
           </div>
           <div className="achievements-table-container">
             {filteredAchievements.length === 0 ? (
-              <p>No {activeFilter !== "all" ? activeFilter : ""} achievements available at this time.</p>
+              <p>No {activeFilter !== "all" ? activeFilter : ""} achievements found matching your search.</p>
             ) : (
               <>
                 <table className="achievements-table">

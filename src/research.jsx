@@ -17,6 +17,10 @@ const ResearchPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   // New state for toggling between student and faculty projects
   const [activeTab, setActiveTab] = useState('all'); // 'all', 'student', or 'faculty'
+  
+  // New state for search functionality
+  const [searchQuery, setSearchQuery] = useState('');
+  const [isSearchActive, setIsSearchActive] = useState(false);
 
   // Function to check for data updates in the background
   const checkForUpdates = async () => {
@@ -152,12 +156,37 @@ const ResearchPage = () => {
     setDataVersion(newVersion);
   };
 
-  // Filter projects based on active tab
+  // Function to handle search
+  const handleSearch = () => {
+    setIsSearchActive(true);
+    setCurrentPage(1);
+  };
+
+  // Reset search
+  const resetSearch = () => {
+    setSearchQuery('');
+    setIsSearchActive(false);
+    setCurrentPage(1);
+  };
+
+  // Filter projects based on active tab, search, and user type
   const filteredProjects = researches.filter(project => {
-    if (activeTab === 'all') return true;
-    if (activeTab === 'student') return project.user_type === 'STUDENT';
-    if (activeTab === 'faculty') return project.user_type === 'FACULTY';
-    return true;
+    // User type filter
+    const matchesUserType = 
+      activeTab === 'all' || 
+      (activeTab === 'student' && project.user_type === 'STUDENT') || 
+      (activeTab === 'faculty' && project.user_type === 'FACULTY');
+
+    // Search filter
+    const matchesSearch = !isSearchActive || 
+      (searchQuery && (
+        project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        project.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        (project.user?.name && project.user.name.toLowerCase().includes(searchQuery.toLowerCase())) ||
+        (project.team_members && project.team_members.toLowerCase().includes(searchQuery.toLowerCase()))
+      ));
+
+    return matchesUserType && matchesSearch;
   });
 
   // Calculate pagination details for filtered projects
@@ -173,6 +202,8 @@ const ResearchPage = () => {
   const handleTabChange = (tab) => {
     setActiveTab(tab);
     setCurrentPage(1);
+    // Reset search when changing tabs
+    resetSearch();
   };
 
   // Generate page numbers
@@ -395,31 +426,53 @@ const ResearchPage = () => {
             </div>
             <p>Our research is focused on but not limited to the following areas. Each area is led by faculty members with expertise in the respective domains, guiding students and research teams in their explorations.</p>
             
-            {/* Toggle buttons for student/faculty projects */}
-            <div className="research-toggle">
-              <button 
-                className={`toggle-btn ${activeTab === 'all' ? 'active' : ''}`}
-                onClick={() => handleTabChange('all')}
-              >
-                All Projects
-              </button>
-              <button 
-                className={`toggle-btn ${activeTab === 'faculty' ? 'active' : ''}`}
-                onClick={() => handleTabChange('faculty')}
-              >
-                Faculty Research
-              </button>
-              <button 
-                className={`toggle-btn ${activeTab === 'student' ? 'active' : ''}`}
-                onClick={() => handleTabChange('student')}
-              >
-                Student Research
-              </button>
+            {/* Toggle buttons for student/faculty projects and search */}
+            <div className="research-controls">
+              <div className="research-toggle">
+                <button 
+                  className={`toggle-btn ${activeTab === 'all' ? 'active' : ''}`}
+                  onClick={() => handleTabChange('all')}
+                >
+                  All Research
+                </button>
+                <button 
+                  className={`toggle-btn ${activeTab === 'faculty' ? 'active' : ''}`}
+                  onClick={() => handleTabChange('faculty')}
+                >
+                  Faculty Research
+                </button>
+                <button 
+                  className={`toggle-btn ${activeTab === 'student' ? 'active' : ''}`}
+                  onClick={() => handleTabChange('student')}
+                >
+                  Student Research
+                </button>
+              </div>
+              
+              <div className="search-container">
+                <input 
+                  type="text" 
+                  placeholder="Search research projects..." 
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="search-input"
+                />
+                <button 
+                  onClick={handleSearch} 
+                  className={`toggle-btn search-btn ${isSearchActive ? 'active' : ''}`}
+                >
+                  Search
+                </button>
+                
+              </div>
             </div>
           </div>
           <div className="research-table-container">
             {filteredProjects.length === 0 ? (
-              <p className="no-projects-message">No {activeTab !== 'all' ? activeTab : ''} research projects available at this time.</p>
+              <p className="no-projects-message">
+                No {activeTab !== 'all' ? activeTab : ''} research projects 
+                {isSearchActive ? ` matching "${searchQuery}"` : ''} available at this time.
+              </p>
             ) : (
               <>
                 <table className="research-table">
@@ -496,15 +549,15 @@ const ResearchPage = () => {
       
       .refresh-button {
         margin-top: 0px;
-            background: none;
-            border: none;
-            font-size: 18px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #f64758;
-            transition: transform 0.3s ease;
+        background: none;
+        border: none;
+        font-size: 18px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #f64758;
+        transition: transform 0.3s ease;
       }
       
       .refresh-button:hover {
@@ -515,72 +568,112 @@ const ResearchPage = () => {
         font-size: 35px;
       }
 
-      /* New styles for toggle buttons */
+      /* New styles for research controls */
+      .research-controls {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      /* New styles for search container */
+      .search-container {
+        display: flex;
+        gap: 15px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .search-input {
+        flex-grow: 1;
+        padding: 10px;
+        border: 1px solid #333;
+        background-color: #1a1a1a;
+        color: white;
+        border-radius: 6px;
+        min-width: 200px;
+      }
+
+
+      .search-btn {
+        padding: 10px 20px;
+        white-space: nowrap;
+      }
+
+      .search-btn:hover {
+        background-color: #f64758;
+      }
+
+      .reset-search-btn {
+        background-color: #666;
+        color: white;
+      }
+
+      /* Existing styles for toggle buttons */
       .research-toggle {
         display: flex;
-            gap: 15px;
-            margin: 20px 0;
-            flex-wrap: wrap;
+        gap: 15px;
+        flex-wrap: wrap;
       }
       
       .toggle-btn {
         padding: 10px 20px;
-            background-color: #1a1a1a;
-            color: white;
-            border: 1px solid #333;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-weight: 500;
-            font-size: 16px;
+        background-color: #1a1a1a;
+        color: white;
+        border: 1px solid #333;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-weight: 500;
+        font-size: 16px;
       }
       
       .toggle-btn:hover {
-        background-color: #2a2a2a;
-            border-color: #444;
+        background-color: #f64758;
+        border-color: #444;
       }
       
       .toggle-btn.active {
         background-color: #f64758;
-            color: white;
-            border-color: #f64758;
+        color: white;
+        border-color: #f64758;
       }
-      
-
       
       .no-projects-message {
         text-align: center;
-            padding: 30px;
-            background: #1a1a1a;
-            border-radius: 8px;
-            color: white;
-            margin: 20px 0;
+        padding: 30px;
+        background: #1a1a1a;
+        border-radius: 8px;
+        color: white;
+        margin: 20px 0;
       }
 
       @media (max-width: 768px) {
-        .research-toggle {
+        .research-toggle, .search-container {
           justify-content: center;
           gap: 10px;
         }
         
-        .toggle-btn {
+        .toggle-btn, .search-input {
           padding: 8px 16px;
           font-size: 14px;
+        }
+
+        .search-input {
+          width: 100%;
         }
       }
       
       @media (max-width: 480px) {
-        .research-toggle {
+        .research-toggle, .search-container {
           flex-direction: column;
           width: 100%;
         }
         
-        .toggle-btn {
+        .toggle-btn, .search-input {
           width: 100%;
           padding: 10px;
         }
       }
-
       `}</style>
     </div>
   );
