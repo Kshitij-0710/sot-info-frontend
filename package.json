@@ -4,6 +4,10 @@
   "homepage": "https://www.sost.in/",
   "version": "0.0.0",
   "type": "module",
+<<<<<<< HEAD
+=======
+  "homepage": "https://www.sost.in",
+>>>>>>> master
   "scripts": {
     "dev": "vite",
     "build": "vite build",
