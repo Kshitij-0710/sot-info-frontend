@@ -1264,10 +1264,7 @@
   box-shadow: 0 5px 15px rgba(246, 71, 88, 0.4);
 }
 
-.arrow-icon {
-  margin-left: 0.6rem;
-  transition: transform 0.3s ease;
-}
+
 
 .view-more-link:hover .arrow-icon {
   transform: translateX(5px);

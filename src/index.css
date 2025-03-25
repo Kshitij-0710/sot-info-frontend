@@ -743,7 +743,7 @@ button[type="submit"]:hover {
   gap: 0;
 }
 
-.slider-arrow {
+.custom-slider-arrow {
   position: absolute;
   top: calc(50% - 35px) !important; /* Move up by 5px from previous position */
   transform: none !important;
@@ -763,28 +763,28 @@ button[type="submit"]:hover {
   padding: 0 !important;
 }
 
-.slider-arrow:hover {
+.custom-slider-arrow:hover {
   background-color: rgba(0, 0, 0, 0.9);
   border-color: white;
   transform: none !important; /* Don't use transform for positioning on hover either */
 }
 
 /* Remove conflicting top property from these selectors */
-.prev-arrow, .next-arrow {
+.custom-prev-arrow, .custom-next-arrow {
   margin-top: 0 !important;
   height: 60px !important;
   line-height: 60px !important;
 }
 
-.prev-arrow {
+.custom-prev-arrow {
   left: 0 !important; /* Force left position */
 }
 
-.next-arrow {
-  right: 0 !important; /* Force right position */
+.custom-next-arrow {
+  right: 0px !important; /* Force right position */
 }
 
-.slider-arrow svg {
+.custom-slider-arrow svg {
   font-size: 1.5rem;
   display: block; /* Ensure consistent display */
   margin: 0 auto; /* Center horizontally */
@@ -808,13 +808,13 @@ button[type="submit"]:hover {
     padding: 0 30px;
   }
   
-  .slider-arrow {
+  .custom-slider-arrow {
     width: 25px;
     height: 50px;
     top: calc(50% - 30px) !important; /* Adjusted for tablet screens */
   }
   
-  .slider-arrow svg {
+  .custom-slider-arrow svg {
     font-size: 1.2rem;
   }
 }
@@ -824,13 +824,13 @@ button[type="submit"]:hover {
     padding: 0 25px;
   }
   
-  .slider-arrow {
+  .custom-slider-arrow {
     width: 20px;
     height: 40px;
     top: calc(50% - 25px) !important; /* Adjusted for mobile screens */
   }
   
-  .slider-arrow svg {
+  .custom-slider-arrow svg {
     font-size: 1rem;
   }
 }
