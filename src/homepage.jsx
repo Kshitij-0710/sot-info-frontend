@@ -290,17 +290,14 @@ const PlacementHighlights = () => {
         </div>
         
         <div className="view-more-container">
-<<<<<<< HEAD
   <Link to="/placements" className="view-more-link">
     View All Placement Details <FaArrowRight className="arrow-icon" />
   </Link>
 </div>
-=======
           <a href="/#placements" className="view-more-link">
             View All Placement Details <FaArrowRight className="arrow-icon" />
           </a>
         </div>
->>>>>>> 5d36a38 (added api for fetching placements)
       </div>
     </section>
   );
