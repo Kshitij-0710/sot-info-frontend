@@ -1,9 +1,9 @@
 import './styles/imageslider.css';
 
 import React, { useEffect, useRef, useState } from "react";
-import { FaArrowRight } from "react-icons/fa";
-
+import { FaArrowRight } from 'react-icons/fa';
 import ContactUs from "./contactus";
+import apiConfig from "./config/apiconfig";
 import './index.css';
 import TopContributions from "./topcontributions";
 
@@ -157,40 +157,6 @@ const ImageSlider = () => {
   );
 };
 
-// Placement testimonial data
-const testimonials = [
-  {
-    id: 1,
-    title: "Dream Opportunity at Google",
-    student: "Aisha Patel",
-    description: "The placement cell helped me refine my skills and connect with the right companies. The experience was invaluable!",
-    package: "24 LPA",
-    company: "Google",
-    date: "2024-05-15",
-    created_at: "2024-05-20T14:15:22Z"
-  },
-  {
-    id: 2,
-    title: "My Journey to Amazon",
-    student: "Raj Sharma",
-    description: "I secured my dream role thanks to the extensive preparation and industry connections provided by SOT.",
-    package: "21 LPA",
-    company: "Amazon",
-    date: "2024-05-10",
-    created_at: "2024-05-18T10:45:30Z"
-  },
-  {
-    id: 3,
-    title: "Microsoft Success Story",
-    student: "Priya Singh",
-    description: "The industry-aligned curriculum and practical exposure at SOT gave me an edge during my interviews.",
-    package: "20 LPA",
-    company: "Microsoft",
-    date: "2024-04-25",
-    created_at: "2024-05-05T09:30:15Z"
-  },
-];
-
 // Top hiring company logos
 const companyLogos = [
   { name: "Google", src: "https://img.icons8.com/color/96/google-logo.png" },
@@ -200,17 +166,75 @@ const companyLogos = [
 ];
 
 const PlacementHighlights = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const testimonialsPerPage = 2;
+  const [testimonials, setTestimonials] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const nextTestimonials = () => {
-    setCurrentIndex((prevIndex) => {
-      if (prevIndex + testimonialsPerPage >= testimonials.length) {
-        return 0; // Reset to the beginning when reaching the end
+  useEffect(() => {
+    const fetchPlacements = async () => {
+      try {
+        // Using the baseUrl from your API config
+        const response = await fetch(apiConfig.getUrl('/api/placements/top_placements/'));
+        
+        // Check if the response is ok
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        
+        // Parse the JSON response
+        const data = await response.json();
+        
+        // Filter to get only the top 2 placements
+        const topPlacements = data.filter(placement => placement.top_2);
+        
+        setTestimonials(topPlacements);
+        setLoading(false);
+      } catch (err) {
+        console.error('Error fetching placement data:', err);
+        setError('Failed to load placement data');
+        setLoading(false);
+        
+        // Fallback to hardcoded data if API call fails
+        setTestimonials(hardcodedTestimonials);
       }
-      return prevIndex + testimonialsPerPage;
-    });
-  };
+    };
+
+    fetchPlacements();
+  }, []);
+
+  // Hardcoded testimonial data as fallback
+  const hardcodedTestimonials = [
+    {
+      id: 1,
+      title: "Dream Opportunity at Google",
+      student: "Aisha Patel",
+      description: "The placement cell helped me refine my skills and connect with the right companies. The experience was invaluable!",
+      package: "24 LPA",
+      company: "Google",
+      date: "2024-05-15",
+      created_at: "2024-05-20T14:15:22Z",
+      top_2: true
+    },
+    {
+      id: 2,
+      title: "My Journey to Amazon",
+      student: "Raj Sharma",
+      description: "I secured my dream role thanks to the extensive preparation and industry connections provided by SOT.",
+      package: "21 LPA",
+      company: "Amazon",
+      date: "2024-05-10",
+      created_at: "2024-05-18T10:45:30Z",
+      top_2: true
+    }
+  ];
+
+  if (loading) {
+    return <div className="loading">Loading placement data...</div>;
+  }
+
+  if (error && testimonials.length === 0) {
+    return <div className="error">{error}</div>;
+  }
 
   return (
     <section className="placement-highlights dark-theme">
@@ -219,9 +243,8 @@ const PlacementHighlights = () => {
         
         <div className="placement-testimonials">
           <div className="testimonials-container">
-            {testimonials
-              .slice(currentIndex, currentIndex + testimonialsPerPage)
-              .map((testimonial, index) => (
+            {testimonials.length > 0 ? (
+              testimonials.map((testimonial) => (
                 <div key={testimonial.id} className="testimonial-card">
                   <div className="testimonial-header">
                     <h3 className="testimonial-title">{testimonial.title}</h3>
@@ -233,17 +256,20 @@ const PlacementHighlights = () => {
                       <p className="testimonial-company">
                         <strong>{testimonial.company}</strong>
                       </p>
-                      <p className="testimonial-date">Placed on: {new Date(testimonial.date).toLocaleDateString()}</p>
+                      <p className="testimonial-date">
+                        Placed on: {new Date(testimonial.date).toLocaleDateString()}
+                      </p>
                       <div className="testimonial-package-container">
                         <p className="testimonial-package">{testimonial.package}</p>
                       </div>
                     </div>
                   </div>
                 </div>
-              ))}
+              ))
+            ) : (
+              <div className="no-data">No top placement data available</div>
+            )}
           </div>
-          
-          {/* Next arrow button removed as requested */}
         </div>
 
         <div className="top-recruiters">
@@ -262,7 +288,7 @@ const PlacementHighlights = () => {
         </div>
         
         <div className="view-more-container">
-          <a href="/placements" className="view-more-link">
+          <a href="/#placements" className="view-more-link">
             View All Placement Details <FaArrowRight className="arrow-icon" />
           </a>
         </div>
@@ -270,6 +296,7 @@ const PlacementHighlights = () => {
     </section>
   );
 };
+
 
 const HomePage = () => {
   return (
