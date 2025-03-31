@@ -4,6 +4,7 @@
   "homepage": "https://www.sost.in/",
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://www.sost.in",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

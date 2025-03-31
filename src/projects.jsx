@@ -22,6 +22,9 @@ const ProjectsPage = () => {
   
   // New state for filter
   const [projectFilter, setProjectFilter] = useState('all'); // 'all', 'student', or 'faculty'
+  const [searchQuery, setSearchQuery] = useState(''); // New state for search query
+  const [isSearching, setIsSearching] = useState(false); // New state to track searching
+
   
   // Function to check for data updates in the background
   const checkForUpdates = async () => {
@@ -159,20 +162,38 @@ const ProjectsPage = () => {
     setDataVersion(newVersion);
   };
   
-  // Handle filter change
   const handleFilterChange = (filter) => {
     setProjectFilter(filter);
     setCurrentPage(1); // Reset to first page when changing filters
   };
-  
-  // Filter projects based on selection
-  const filteredProjects = projects.filter(project => {
-    if (projectFilter === 'all') return true;
-    if (projectFilter === 'student') return project.user_type === 'STUDENT';
-    if (projectFilter === 'faculty') return project.user_type === 'FACULTY';
-    return true;
-  });
-  
+    // Handle search input change
+    const handleSearchChange = (e) => {
+      setSearchQuery(e.target.value);
+      setCurrentPage(1); // Reset to first page when searching
+    };
+    
+    // Handle search button click
+    const handleSearchClick = () => {
+      setIsSearching(true);
+      // You can add additional search logic here if needed
+    };
+    
+    // Filter projects based on selection and search
+    const filteredProjects = projects.filter(project => {
+      const matchesFilter = 
+        projectFilter === 'all' || 
+        (projectFilter === 'student' && project.user_type === 'STUDENT') || 
+        (projectFilter === 'faculty' && project.user_type === 'FACULTY');
+      
+      const matchesSearch = 
+        !searchQuery || 
+        project.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+        project.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        (project.user?.name && project.user.name.toLowerCase().includes(searchQuery.toLowerCase())) ||
+        (project.team_members && project.team_members.toLowerCase().includes(searchQuery.toLowerCase()));
+      
+      return matchesFilter && matchesSearch;
+    });
   // Calculate pagination details
   const totalPages = Math.ceil(filteredProjects.length / projectsPerPage);
   const indexOfLastProject = currentPage * projectsPerPage;
@@ -354,6 +375,7 @@ const ProjectsPage = () => {
   const facultyProjectsCount = projects.filter(project => project.user_type === 'FACULTY').length;
   
   return (
+    
     <div className="projects-page-container">
         <section className="projects-hero">
           <div className="projects-hero-content">
@@ -400,6 +422,13 @@ const ProjectsPage = () => {
                   <span className="refresh-icon">↻</span>
                 </button>
               </div>
+              <p>
+                {projectFilter === 'all' && 'Below are projects developed by our students and faculty.'}
+                {projectFilter === 'student' && 'Below are projects developed by our talented students.'}
+                {projectFilter === 'faculty' && 'Below are research and development projects led by our faculty.'}
+                {' '}These projects showcase innovation, technical excellence, and creative problem-solving approaches.
+              </p>
+              
               
               {/* Project type toggle buttons */}
               <div className="project-filter-buttons">
@@ -422,13 +451,25 @@ const ProjectsPage = () => {
                   Faculty Projects
                 </button>
               </div>
+              <div className="projects-search-container">
+                <div className="search-input-wrapper">
+                  <input 
+                    type="text" 
+                    placeholder="Search projects..." 
+                    className="projects-search-input"
+                    value={searchQuery}
+                    onChange={handleSearchChange}
+                  />
+                  <button 
+                    className={`search-btn ${isSearching ? 'searching' : ''}`}
+                    onClick={handleSearchClick}
+                  >
+                    Search
+                  </button>
+                </div>
+              </div>
               
-              <p>
-                {projectFilter === 'all' && 'Below are projects developed by our students and faculty.'}
-                {projectFilter === 'student' && 'Below are projects developed by our talented students.'}
-                {projectFilter === 'faculty' && 'Below are research and development projects led by our faculty.'}
-                {' '}These projects showcase innovation, technical excellence, and creative problem-solving approaches.
-              </p>
+             
             </div>
             <div className="projects-table-container">
               {filteredProjects.length === 0 ? (
@@ -591,6 +632,72 @@ const ProjectsPage = () => {
             .filter-btn {
               width: 100%;
               padding: 10px;
+            }
+          }
+          .projects-search-container {
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+          }
+          
+          .search-input-wrapper {
+            display: flex;
+            width: 100%;
+            gap: 10px;
+          }
+          
+          .projects-search-input {
+            flex-grow: 1;
+            padding: 10px 20px;
+            border: 1px solid #333;
+            background-color: #1a1a1a;
+            color: white;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: all 0.2s ease;
+          }
+          
+          
+          .projects-search-input::placeholder {
+            color: #888;
+          }
+          
+          .search-btn {
+            padding: 10px 20px;
+            background-color: #1a1a1a;
+            color: white;
+            border: 1px solid #333;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: 500;
+            font-size: 16px;
+          }
+          
+          .search-btn:hover {
+            background-color: #f64758;
+          }
+          
+          .search-btn.searching {
+            background-color: #f64758;
+            color: white;
+            border-color: #f64758;
+          }
+          
+          @media (max-width: 768px) {
+            .projects-search-input,
+            .search-btn {
+              font-size: 14px;
+              padding: 8px 16px;
+            }
+            
+            .search-input-wrapper {
+              flex-direction: column;
+            }
+            
+            .search-btn {
+              margin-top: 10px;
+              width: 100%;
             }
           }
         `}</style>

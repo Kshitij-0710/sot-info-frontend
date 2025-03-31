@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { FaBars } from "react-icons/fa";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { FaBars, FaTimes } from "react-icons/fa";
+
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Sidebar from "./components/Sidebar";
 import "./styles/homepage.css";
 
@@ -100,8 +101,8 @@ const Navbar = () => {
     <>
       <nav className="navbar">
         <div className="nav-left">
-          <button className="menu-button" onClick={() => setMenuOpen(true)}>
-            <FaBars />
+          <button className="menu-button" onClick={() => setMenuOpen(prev => !prev)}>
+            {menuOpen ? <FaTimes /> : <FaBars />}
           </button>
           {!isLoggedIn && (
             <Link to="/signup" className="login-link">Register/Login</Link>

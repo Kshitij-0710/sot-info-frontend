@@ -167,14 +167,25 @@ const TopContributions = () => {
   const SliderArrow = ({ direction, onClick, sliderRef }) => {
     return (
       <button
-        className={`slider-arrow ${direction}-arrow`}
-        onClick={onClick || (() => direction === 'prev' ? sliderRef.current.slickPrev() : sliderRef.current.slickNext())}
-        aria-label={direction === 'prev' ? 'Previous' : 'Next'}
+        className={`custom-slider-arrow ${direction === "prev" ? "custom-prev-arrow" : "custom-next-arrow"}`}
+        onClick={
+          onClick ||
+          (() => {
+            if (direction === "prev") {
+              sliderRef.current.slickPrev();
+            } else {
+              sliderRef.current.slickNext();
+            }
+          })
+        }
+        aria-label={direction === "prev" ? "Previous" : "Next"}
       >
-        {direction === 'prev' ? <IoIosArrowBack /> : <IoIosArrowForward />}
+        {direction === "prev" ? <IoIosArrowBack /> : <IoIosArrowForward />}
       </button>
     );
   };
+  
+  
 
   // Slider settings
   const sliderSettings = {
