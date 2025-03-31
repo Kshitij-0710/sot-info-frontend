@@ -4,7 +4,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { FaArrowRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-import apiConfig from "./config/apiconfig";
 import ContactUs from "./contactus";
 import apiConfig from "./config/apiconfig";
 import './index.css';
