@@ -31,6 +31,7 @@
   }
   
   .achievements-hero-description {
+    color: white;
     font-size: 1.3rem;
     line-height: 1.8;
   }
@@ -67,6 +68,7 @@
   }
   
   .achievements-stat-item p {
+    color: white;
     font-size: 1.2rem;
     margin-top: 0.5rem;
   }
