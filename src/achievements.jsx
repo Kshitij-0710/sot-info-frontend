@@ -182,11 +182,47 @@ const AchievementsPage = () => {
   // Function to change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  // Generate page numbers
-  const pageNumbers = [];
-  for (let i = 1; i <= totalPages; i++) {
-    pageNumbers.push(i);
-  }
+  // Generate limited page numbers for pagination
+  const getPageNumbers = () => {
+    const maxVisiblePages = 5;
+    let pageNumbers = [];
+    
+    if (totalPages <= maxVisiblePages) {
+      // If total pages are less than or equal to max visible, show all
+      for (let i = 1; i <= totalPages; i++) {
+        pageNumbers.push(i);
+      }
+    } else if (currentPage <= 3) {
+      // Show first 5 pages when at the beginning
+      for (let i = 1; i <= 5; i++) {
+        pageNumbers.push(i);
+      }
+      // Add ellipsis and last page
+      pageNumbers.push('...');
+      pageNumbers.push(totalPages);
+    } else if (currentPage >= totalPages - 2) {
+      // Show first page, ellipsis, and last 5 pages when near the end
+      pageNumbers.push(1);
+      pageNumbers.push('...');
+      for (let i = totalPages - 4; i <= totalPages; i++) {
+        pageNumbers.push(i);
+      }
+    } else {
+      // Show first page, ellipsis, current page and neighbors, ellipsis, last page
+      pageNumbers.push(1);
+      pageNumbers.push('...');
+      
+      // Add current page and neighbors
+      for (let i = currentPage - 1; i <= currentPage + 1; i++) {
+        pageNumbers.push(i);
+      }
+      
+      pageNumbers.push('...');
+      pageNumbers.push(totalPages);
+    }
+    
+    return pageNumbers;
+  };
 
   // Handler for filter change
   const handleFilterChange = (filter) => {
@@ -309,6 +345,11 @@ const AchievementsPage = () => {
     gap: 15px;
     margin: 20px 0;
     flex-wrap: wrap;
+  }
+  
+  .pagination-ellipsis {
+    margin: 0 5px;
+    color: #888;
   }
   
   .filter-toggle-button {
@@ -546,7 +587,9 @@ const AchievementsPage = () => {
                 {totalPages > 1 && (
                   <div className="pagination-container">
                     <div className="pagination">
-                      {pageNumbers.map(number => (
+                      {getPageNumbers().map((number, index) => (
+                        number === '...' ? 
+                        <span key={`ellipsis-${index}`} className="pagination-ellipsis">...</span> :
                         <button
                           key={number}
                           onClick={() => paginate(number)}
