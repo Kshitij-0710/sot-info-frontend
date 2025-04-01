@@ -36,6 +36,7 @@ const Sidebar = ({ isOpen, onClose, isLoggedIn, userData, handleLogout }) => {
             <Link to="/projects" onClick={onClose}>Projects</Link>
             <Link to="/research" onClick={onClose}>Research</Link>
             <Link to="/events" onClick={onClose}>Events</Link>
+            <Link to="/posts" onClick={onClose}>Posts</Link>
             <Link to="/achievements" onClick={onClose}>Achievements</Link>
             <Link to="/placements" onClick={onClose}>Placements</Link>
             <Link to="/contactpage" onClick={onClose}>Contact</Link>

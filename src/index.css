@@ -240,6 +240,7 @@ button[type="submit"]:hover {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .card:hover {
@@ -795,11 +796,47 @@ button[type="submit"]:hover {
 
 /* Adjust card styling for slider */
 .card-slider .card {
-  height: 100%;
+  height: 350px; /* Fixed height for all cards */
   display: flex;
   flex-direction: column;
   margin: 0 auto;
   width: 100%;
+  position: relative;
+  padding-bottom: 60px; /* Ensure space for the button at bottom */
+}
+
+/* Add styles to handle text overflow within cards */
+.card-slider .card p {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 6; /* Show at most 6 lines of text */
+  -webkit-box-orient: vertical;
+  margin-bottom: 0.5rem;
+}
+
+/* Style card titles to prevent overflow */
+.card-slider .card h4 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-bottom: 0.5rem;
+  height: 1.5rem;
+  line-height: 1.5rem;
+}
+
+/* Style contributor text */
+.card-slider .card .contributor {
+  font-style: italic;
+  color: #aaa;
+  margin-bottom: 0.8rem;
+  -webkit-line-clamp: 1;
+}
+
+/* Position the view details button at the bottom */
+.card-slider .card .view-details-btn {
+  position: absolute;
+  bottom: 20px;
+  left: 16px;
 }
 
 /* Make sure the slider is visible on all screen sizes */
@@ -817,6 +854,14 @@ button[type="submit"]:hover {
   .custom-slider-arrow svg {
     font-size: 1.2rem;
   }
+  
+  .card-slider .card {
+    height: 320px; /* Slightly reduced height for tablets */
+  }
+  
+  .card-slider .card p {
+    -webkit-line-clamp: 5; /* Show fewer lines on smaller screens */
+  }
 }
 
 @media (max-width: 480px) {
@@ -832,6 +877,14 @@ button[type="submit"]:hover {
   
   .custom-slider-arrow svg {
     font-size: 1rem;
+  }
+  
+  .card-slider .card {
+    height: 300px; /* Shorter height for mobile */
+  }
+  
+  .card-slider .card p {
+    -webkit-line-clamp: 4; /* Show even fewer lines on mobile */
   }
 }
 
