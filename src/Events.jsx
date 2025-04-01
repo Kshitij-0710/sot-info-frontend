@@ -5,9 +5,8 @@ import './index.css';
 import TopContributions from "./topcontributions";
 import axios from 'axios';
 import apiConfig from "./config/apiconfig";
-
 // Modal Component for event details
-const EventModal = ({ event, isOpen, onClose, onRegister }) => {
+const EventModal = ({ event, isOpen, onClose }) => {
   if (!isOpen) return null;
 
   // Determine event type for header display
@@ -68,7 +67,6 @@ const EventModal = ({ event, isOpen, onClose, onRegister }) => {
             <p className="modal-description">{event.description}</p>
             
             <div className="modal-actions">
-              <button className="register-btn" onClick={() => onRegister(event.id)}>Register Now</button>
               <button className="share-btn" onClick={() => shareEvent(event)}>Share Event</button>
             </div>
           </div>
@@ -112,30 +110,28 @@ const EventsPage = () => {
   const fetchEvents = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(apiConfig.getUrl('api/events/'));
-      setEvents(response.data);
       
-      // Sort events into upcoming and past
-      const now = new Date();
-      const upcoming = [];
-      const past = [];
+      // Get all events and featured events
+      const [eventsResponse, featuredResponse] = await Promise.all([
+        axios.get(apiConfig.getUrl('api/events/')),
+        axios.get(apiConfig.getUrl('api/events/featured/'))
+      ]);
       
-      response.data.forEach(event => {
-        const eventDate = new Date(event.date);
-        if (eventDate >= now) {
-          upcoming.push(event);
-        } else {
-          past.push(event);
-        }
-      });
+      // All regular events
+      const allEvents = eventsResponse.data;
+      
+      // Featured events
+      const featured = featuredResponse.data;
+      
+      // Filter out non-featured events for upcoming section
+      const upcoming = allEvents.filter(event => !event.is_featured);
       
       // Sort upcoming events by date (closest first)
       upcoming.sort((a, b) => new Date(a.date) - new Date(b.date));
-      // Sort past events by date (most recent first)
-      past.sort((a, b) => new Date(b.date) - new Date(a.date));
       
+      setEvents(allEvents);
       setUpcomingEvents(upcoming);
-      setPastEvents(past);
+      setPastEvents(featured);
       setLoading(false);
     } catch (err) {
       setError('Failed to fetch events. Please try again later.');
@@ -153,28 +149,6 @@ const EventsPage = () => {
   const closeModal = () => {
     setIsModalOpen(false);
     document.body.style.overflow = 'auto'; // Restore scrolling
-  };
-
-  const handleRegister = async (eventId) => {
-    try {
-      // Replace with your actual user ID or authentication mechanism
-      const userId = 1; // Example user ID
-      
-      await axios.post(apiConfig.getUrl('api/event-registrations/'), {
-        event: eventId,
-        user: userId
-      });
-      
-      alert('Successfully registered for the event!');
-    } catch (err) {
-      // Check if error is due to duplicate registration
-      if (err.response && err.response.status === 400) {
-        alert('You are already registered for this event.');
-      } else {
-        alert('Failed to register. Please try again later.');
-        console.error('Registration error:', err);
-      }
-    }
   };
 
   // Display a loading state
@@ -232,7 +206,6 @@ const EventsPage = () => {
           <div className="events-grid">
             {upcomingEvents.map((event) => (
               <div key={event.id} className="event-card">
-                {event.is_featured && <span className="featured-tag">Featured</span>}
                 <img 
                   src={event.image_url || '/images/default-event.jpg'} 
                   alt={event.title} 
@@ -261,12 +234,13 @@ const EventsPage = () => {
           </div>
         )}
 
-        {/* Past Events Section */}
-        <h2 className="section-heading">Past Events</h2>
+        {/* Featured Events Section (formerly Past Events) */}
+        <h2 className="section-heading">Featured Events</h2>
         {pastEvents.length > 0 ? (
           <div className="events-grid">
             {pastEvents.map((event) => (
-              <div key={event.id} className="event-card past-event">
+              <div key={event.id} className="event-card featured-event">
+                <span className="featured-tag">Featured</span>
                 <img 
                   src={event.image_url || '/images/default-event.jpg'} 
                   alt={event.title} 
@@ -291,7 +265,7 @@ const EventsPage = () => {
           </div>
         ) : (
           <div className="no-events-message">
-            <p>No past events to display.</p>
+            <p>No featured events to display.</p>
           </div>
         )}
 
@@ -300,8 +274,7 @@ const EventsPage = () => {
           <EventModal 
             event={selectedEvent} 
             isOpen={isModalOpen} 
-            onClose={closeModal}
-            onRegister={handleRegister}
+            onClose={closeModal} 
           />
         )}
 
