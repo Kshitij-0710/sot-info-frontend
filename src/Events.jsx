@@ -5,6 +5,7 @@ import './index.css';
 import TopContributions from "./topcontributions";
 import axios from 'axios';
 import apiConfig from "./config/apiconfig";
+
 // Modal Component for event details
 const EventModal = ({ event, isOpen, onClose }) => {
   if (!isOpen) return null;
@@ -15,7 +16,7 @@ const EventModal = ({ event, isOpen, onClose }) => {
     if (title.includes('workshop')) return { text: 'WORKSHOP', color: '#00a8ff' };
     if (title.includes('symposium')) return { text: 'SYMPOSIUM', color: '#4a00e0' };
     if (title.includes('fair')) return { text: 'FAIR', color: '#00c853' };
-    return { text: 'EVENT', color: '#fc3c5b' };
+    return { text: 'EVENT', color: '#f64758' };
   };
 
   const eventType = getEventType();
@@ -234,12 +235,12 @@ const EventsPage = () => {
           </div>
         )}
 
-        {/* Featured Events Section (formerly Past Events) */}
+        {/* Featured Events Section */}
         <h2 className="section-heading">Featured Events</h2>
         {pastEvents.length > 0 ? (
           <div className="events-grid">
             {pastEvents.map((event) => (
-              <div key={event.id} className="event-card featured-event">
+              <div key={event.id} className="event-card">
                 <span className="featured-tag">Featured</span>
                 <img 
                   src={event.image_url || '/images/default-event.jpg'} 
