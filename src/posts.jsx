@@ -8,35 +8,22 @@ const Posts = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const [apiResponse, setApiResponse] = useState(null); // For debugging
 
   // Fetch LinkedIn posts from the API
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        console.log("Fetching LinkedIn posts...");
         setLoading(true);
-        
-        
-        
         const response = await axios.get(apiConfig.getUrl("/api/linkedin-embeds/"));
-        console.log("API Response:", response.data);
         
-        setApiResponse(response.data); // Store full response for debugging
-        
-        // Check if embed_urls exists in response data
         if (response.data && response.data.embed_urls) {
           setPosts(response.data.embed_urls);
-          console.log("Posts set successfully:", response.data.embed_urls);
         } else {
-          // If the expected data structure isn't found
-          console.error("Unexpected API response structure:", response.data);
-          setError("API returned an unexpected data format. Check console for details.");
+          setError("Failed to load LinkedIn posts. Please try again later.");
         }
       } catch (err) {
         console.error('Error fetching LinkedIn posts:', err);
-        console.error('Error details:', err.response ? err.response.data : 'No response data');
-        setError(`Failed to load LinkedIn posts: ${err.message}. Check the console for more details.`);
+        setError("Failed to load LinkedIn posts. Please try again later.");
       } finally {
         setLoading(false);
       }
@@ -73,18 +60,6 @@ const Posts = () => {
 
   const dimensions = getIframeDimensions();
 
-  // Debug info component
-  const DebugInfo = () => (
-    <div style={{ padding: '20px', border: '1px solid #ccc', marginTop: '20px', background: '#f5f5f5' }}>
-      <h3>Debug Information</h3>
-      <p><strong>API Response:</strong> {JSON.stringify(apiResponse)}</p>
-      <p><strong>Loading:</strong> {loading.toString()}</p>
-      <p><strong>Error:</strong> {error || 'None'}</p>
-      <p><strong>Posts Count:</strong> {posts.length}</p>
-      <p><strong>Window Width:</strong> {windowWidth}px</p>
-    </div>
-  );
-
   // Render loading state
   if (loading) {
     return (
@@ -94,7 +69,6 @@ const Posts = () => {
             <div className="container">
               <h1 className="section-heading">LinkedIn Posts</h1>
               <p className="section-description">Loading posts...</p>
-              <DebugInfo />
             </div>
           </section>
         </div>
@@ -111,7 +85,6 @@ const Posts = () => {
             <div className="container">
               <h1 className="section-heading">LinkedIn Posts</h1>
               <p className="section-description">{error}</p>
-              <DebugInfo />
             </div>
           </section>
         </div>
@@ -130,7 +103,6 @@ const Posts = () => {
               <p className="section-description">
                 No LinkedIn posts available at the moment. Please check back later.
               </p>
-              <DebugInfo />
             </div>
           </section>
         </div>
@@ -163,7 +135,6 @@ const Posts = () => {
                 </div>
               ))}
             </div>
-            <DebugInfo />
           </div>
         </section>
       </div>
