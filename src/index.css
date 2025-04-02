@@ -478,6 +478,10 @@ button[type="submit"]:hover {
         width: 100%; /* Full width cards on mobile */
     }
 
+    .event-image {
+      padding: 2rem 0; /* Even more padding on mobile */
+    }
+
     .research-content {
         padding: 0 0.5rem; /* Further reduce padding for mobile */
     }
@@ -1015,14 +1019,34 @@ button[type="submit"]:hover {
     padding: 1.5rem;
   }
 }
-/* Event Cards Styling - Similar to placement.css */
+/* Page Container Fixes */
+.page-container {
+  width: 100%;
+  background-color: #000;
+  min-height: 100vh;
+  color: white;
+}
+
+.content-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Event Cards Styling - Fix for dark mode and padding */
 .events-grid {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: center; /* This centers the cards horizontally */
+  align-items: center; /* This centers vertically if needed */
   gap: 2rem;
-  width: 90%;
+  width: 100%; /* Changed from 90% to 100% for better centering */
   margin: 2rem auto;
+  padding: 0 1rem;
 }
 
 .event-card {
@@ -1034,6 +1058,11 @@ button[type="submit"]:hover {
   width: 340px;
   color: white;
   position: relative;
+  margin: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center content inside card */
+  text-align: center; /* Center text */
 }
 
 .event-card:hover {
@@ -1046,6 +1075,7 @@ button[type="submit"]:hover {
   height: 200px;
   object-fit: cover;
   transition: filter 0.3s ease;
+  padding: 1rem 0; /* Added top and bottom padding */
 }
 
 .event-card:hover .event-image {
@@ -1055,13 +1085,17 @@ button[type="submit"]:hover {
 .event-card-content {
   padding: 1.5rem;
   text-align: left;
+  background-color: #111;
+  color: white;
 }
 
+/* Force text color to be white */
 .event-card h3 {
   font-size: clamp(1.2rem, 3vw, 1.5rem);
   font-weight: bold;
   margin-bottom: 0.8rem;
   line-height: 1.3;
+  color: white;
 }
 
 .event-date {
@@ -1113,6 +1147,8 @@ button[type="submit"]:hover {
   width: 100%;
   padding: 4rem 0;
   text-align: center;
+  background-color: #000;
+  color: white;
 }
 
 .container-events {
@@ -1145,13 +1181,13 @@ button[type="submit"]:hover {
   color: rgba(255, 255, 255, 0.9);
 }
 
-/* Modal Styling */
+/* Modal Overlay - Keep this as is */
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
+  width: 100%;
+  height: 100%;
   background-color: rgba(0, 0, 0, 0.8);
   display: flex;
   justify-content: center;
@@ -1159,75 +1195,100 @@ button[type="submit"]:hover {
   z-index: 1000;
   padding: 1rem;
 }
+.modal-details h2 {
+  color: #fff; /* Pure white for main title */
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
 
+/* Modal Content - Change background to black */
 .modal-content {
-  background-color: #111;
+  background-color: #000; /* Changed from #111 to #000 */
   border-radius: 15px;
   width: 90%;
   max-width: 900px;
   max-height: 90vh;
   overflow-y: auto;
-  color: white;
+  color: #fff;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #333; /* Add subtle border */
 }
 
+/* Close Button - Remove background and style properly */
 .modal-close {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: transparent;
+  color: #fff !important; /* White color */
+  background: none !important;
   border: none;
-  color: white;
-  font-size: 1.5rem;
-  cursor: pointer;
-  z-index: 10;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2);
-  transition: background 0.3s;
+  font-size: 1rem;
+  font-weight: bold;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
 }
 
 .modal-close:hover {
-  background: rgba(255, 255, 255, 0.4);
+  opacity: 1;
+  color: #f64758 !important; /* Your accent color on hover */
 }
 
-.modal-body {
-  display: flex;
-  flex-direction: row;
-}
-
-.modal-left-column {
-  flex: 1;
-  max-width: 40%;
-}
-
+/* Modal Header - Adjust for new close button */
 .modal-header {
-  padding: 1rem;
+  color: #fff;
+  padding: 1.5rem 1.5rem 1rem; /* More padding at top */
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
+  border-bottom: 1px solid #333; /* Add subtle separation */
 }
 
-.event-type {
-  font-weight: bold;
-  color: white;
+/* Modal Body - Ensure dark background */
+.modal-body {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  padding: 1.5rem;
+  background-color: #000; /* Ensure black background */
 }
 
-.modal-image {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
+/* Left Column - Adjust for dark mode */
+.modal-left-column {
+  flex: 1;
+  max-width: 40%;
+  background-color: #000; /* Ensure black background */
 }
 
+/* Modal Details - Dark background */
 .modal-details {
+  color: #e0e0e0; 
   flex: 1;
   padding: 2rem;
+  background-color: #000; /* Ensure black background */
 }
 
+/* If you have any other modal sections, ensure they have black background */
+.modal-image-container,
+.modal-description,
+.modal-actions {
+  background-color: #000;
+  padding: 5px;
+}
+
+/* Adjust any text colors that might be too light */
+.event-meta,
+.modal-description {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+
+.modal-description {
+  color: #e0e0e0; /* Light grey */
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+/* Featured badge - make it stand out */
 .featured-badge {
   background-color: #f64758;
   color: white;
@@ -1237,12 +1298,19 @@ button[type="submit"]:hover {
   font-weight: bold;
   display: inline-block;
   margin-bottom: 1rem;
+  border: none; /* Remove any default borders */
 }
 
 .modal-organizer {
   color: #f64758;
   font-size: 1.1rem;
   margin-bottom: 1rem;
+}
+.event-type {
+  color: #fff !important; /* White text */
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .event-meta {
@@ -1253,9 +1321,13 @@ button[type="submit"]:hover {
 }
 
 .meta-item {
+  color: #bbb; /* Light grey */
   display: flex;
   align-items: center;
   gap: 0.5rem;
+}
+.meta-item svg {
+  fill: #bbb; /* Light grey icons */
 }
 
 .meta-icon {
@@ -1271,6 +1343,7 @@ button[type="submit"]:hover {
 .modal-actions {
   margin-top: 2rem;
 }
+
 
 .share-btn {
   background-color: #f64758;
@@ -1297,6 +1370,8 @@ button[type="submit"]:hover {
   align-items: center;
   min-height: 300px;
   text-align: center;
+  color: white;
+  background-color: #000;
 }
 
 .loading-spinner {
@@ -1343,6 +1418,7 @@ button[type="submit"]:hover {
   }
   
   .modal-image {
+    padding: 5px;
     max-height: 300px;
     object-fit: cover;
   }
@@ -1352,6 +1428,9 @@ button[type="submit"]:hover {
   .events-grid {
     gap: 1.5rem;
     width: 95%;
+  }
+  .event-image {
+    padding: 1.5rem 0; /* More padding on tablets */
   }
   
   .event-card {
@@ -1372,6 +1451,7 @@ button[type="submit"]:hover {
 @media (max-width: 480px) {
   .event-card {
     width: 95%;
+    margin: 0.5rem;
   }
   
   .modal-details {
@@ -1385,4 +1465,42 @@ button[type="submit"]:hover {
   .section-heading {
     margin: 2rem auto 1.5rem;
   }
+  
+  .content-container {
+    padding: 1rem;
+  }
+}
+
+/* Overrides for dark mode */
+body, html {
+  background-color: #000;
+  color: white;
+}
+
+/* Force dark background */
+.page-container,
+.content-container,
+.section-events,
+.event-card,
+.event-card-content {
+  background-color: #000 !important;
+}
+
+.card-content {
+  padding: 1.5rem;
+  width: 100%; /* Ensure full width */
+}
+
+/* Card specific dark background */
+.event-card {
+  background-color: #111 !important;
+}
+
+.event-card-content {
+  background-color: #111 !important;
+}
+
+/* Force dark background on any other containers */
+.container-events {
+  background-color: #000 !important;
 }

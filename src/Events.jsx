@@ -2,7 +2,6 @@ import './styles/imageslider.css';
 import React, { useState, useEffect } from "react";
 import ContactUs from "./contactus";
 import './index.css';
-import TopContributions from "./topcontributions";
 import axios from 'axios';
 import apiConfig from "./config/apiconfig";
 
@@ -29,26 +28,26 @@ const EventModal = ({ event, isOpen, onClose }) => {
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-        <button className="modal-close" onClick={onClose}>
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M18 6L6 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-        </button>
+      <button className="modal-close" onClick={onClose}>X</button>
         <div className="modal-body">
           <div className="modal-left-column">
             <div className="modal-header" style={{ backgroundColor: eventType.color }}>
               <div className="event-type">{eventType.text}</div>
             </div>
-            <img src={event.image_url || '/images/default-event.jpg'} alt={event.title} className="modal-image" />
+            <img
+              src={event.image_url || '/images/default-event.jpg'}
+              alt={event.title}
+              className="modal-image"
+              onError={(e) => { e.target.src = '/images/default-event.jpg'; }}
+            />
           </div>
           <div className="modal-details">
             {event.is_featured && <span className="featured-badge">Featured Event</span>}
-            <h2>{event.title}</h2>
+            <h2 >{event.title}</h2>
             <p className="modal-organizer"><strong>{event.organizer}</strong></p>
-            
             <div className="event-meta">
               <div className="meta-item">
+                {/* Date Icon */}
                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="meta-icon">
                   <path d="M19 4H5C3.89543 4 3 4.89543 3 6V20C3 21.1046 3.89543 22 5 22H19C20.1046 22 21 21.1046 21 20V6C21 4.89543 20.1046 4 19 4Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                   <path d="M16 2V6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -58,15 +57,14 @@ const EventModal = ({ event, isOpen, onClose }) => {
                 <span>{eventDate}</span>
               </div>
               <div className="meta-item">
+                {/* Location Icon */}
                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="meta-icon">
                   <path d="M12 22C12 22 20 18 20 12V5L12 2L4 5V12C4 18 12 22 12 22Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
                 <span>{event.location}</span>
               </div>
             </div>
-            
             <p className="modal-description">{event.description}</p>
-            
             <div className="modal-actions">
               <button className="share-btn" onClick={() => shareEvent(event)}>Share Event</button>
             </div>
@@ -77,19 +75,15 @@ const EventModal = ({ event, isOpen, onClose }) => {
   );
 };
 
-// Helper function to share event
 const shareEvent = (event) => {
   if (navigator.share) {
     navigator.share({
       title: event.title,
       text: `Check out this event: ${event.title}`,
       url: window.location.href,
-    })
-    .catch((error) => console.log('Error sharing', error));
+    }).catch((error) => console.log('Error sharing', error));
   } else {
-    // Fallback for browsers that don't support sharing
-    const url = window.location.href;
-    navigator.clipboard.writeText(url)
+    navigator.clipboard.writeText(window.location.href)
       .then(() => alert('Event link copied to clipboard!'))
       .catch(() => alert('Failed to copy link'));
   }
@@ -106,30 +100,22 @@ const EventsPage = () => {
 
   useEffect(() => {
     fetchEvents();
+    document.body.classList.add('dark-mode');
   }, []);
 
   const fetchEvents = async () => {
     try {
       setLoading(true);
-      
-      // Get all events and featured events
       const [eventsResponse, featuredResponse] = await Promise.all([
         axios.get(apiConfig.getUrl('api/events/')),
         axios.get(apiConfig.getUrl('api/events/featured/'))
       ]);
-      
-      // All regular events
+
       const allEvents = eventsResponse.data;
-      
-      // Featured events
       const featured = featuredResponse.data;
-      
-      // Filter out non-featured events for upcoming section
       const upcoming = allEvents.filter(event => !event.is_featured);
-      
-      // Sort upcoming events by date (closest first)
       upcoming.sort((a, b) => new Date(a.date) - new Date(b.date));
-      
+
       setEvents(allEvents);
       setUpcomingEvents(upcoming);
       setPastEvents(featured);
@@ -144,15 +130,14 @@ const EventsPage = () => {
   const openModal = (event) => {
     setSelectedEvent(event);
     setIsModalOpen(true);
-    document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    document.body.style.overflow = 'hidden';
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
-    document.body.style.overflow = 'auto'; // Restore scrolling
+    document.body.style.overflow = 'auto';
   };
 
-  // Display a loading state
   if (loading) {
     return (
       <div className="page-container">
@@ -166,7 +151,6 @@ const EventsPage = () => {
     );
   }
 
-  // Display an error state
   if (error) {
     return (
       <div className="page-container">
@@ -191,10 +175,11 @@ const EventsPage = () => {
             <div className="events-section-content">
               <div className="events-paragraphs">
                 <p>
-                  At the School of Technology, we believe that learning extends far beyond the classroom. Our diverse range of events offers students, faculty, and enthusiasts the opportunity to explore groundbreaking ideas, collaborate with industry leaders, and engage in hands-on experiences.
+                  At the School of Technology, we believe that learning extends far beyond the classroom.
+                  Our diverse range of events offers students, faculty, and enthusiasts the opportunity to explore groundbreaking ideas.
                 </p>
                 <p>
-                  From cutting-edge technology showcases to thought-provoking scientific discussions, our events foster innovation, creativity, and a spirit of discovery. Whether you're a curious learner or an experienced professional, there's always something exciting happening at SOT.
+                  From cutting-edge technology showcases to thought-provoking scientific discussions, there's always something exciting happening at SOT.
                 </p>
               </div>
             </div>
@@ -206,25 +191,26 @@ const EventsPage = () => {
         {upcomingEvents.length > 0 ? (
           <div className="events-grid">
             {upcomingEvents.map((event) => (
-              <div key={event.id} className="event-card">
-                <img 
-                  src={event.image_url || '/images/default-event.jpg'} 
-                  alt={event.title} 
-                  className="event-image" 
-                  onError={(e) => {e.target.src = '/images/default-event.jpg'}}
+              <div key={event.id} className="card" onClick={() => openModal(event)}>
+                <img
+                  src={event.image_url || '/images/default-event.jpg'}
+                  alt={event.title}
+                  className="event-image"
+                  onError={(e) => { e.target.src = '/images/default-event.jpg'; }}
                 />
-                <div className="event-card-content">
-                  <h3>{event.title}</h3>
+                <div className="card-content">
+                  <h4>{event.title}</h4>
                   <p className="event-date">
-                    {new Date(event.date).toLocaleDateString('en-US', {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric'
-                    })}
+                    {new Date(event.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
                   </p>
                   <p><strong>{event.organizer}</strong></p>
                   <p>{event.description.substring(0, 100)}...</p>
-                  <button className="details-btn" onClick={() => openModal(event)}>View Details</button>
+                  <button
+                    className="view-details-btn"
+                    onClick={(e) => { e.stopPropagation(); openModal(event); }}
+                  >
+                    View Details
+                  </button>
                 </div>
               </div>
             ))}
@@ -240,26 +226,27 @@ const EventsPage = () => {
         {pastEvents.length > 0 ? (
           <div className="events-grid">
             {pastEvents.map((event) => (
-              <div key={event.id} className="event-card">
+              <div key={event.id} className="card" onClick={() => openModal(event)}>
                 <span className="featured-tag">Featured</span>
-                <img 
-                  src={event.image_url || '/images/default-event.jpg'} 
-                  alt={event.title} 
-                  className="event-image" 
-                  onError={(e) => {e.target.src = '/images/default-event.jpg'}}
+                <img
+                  src={event.image_url || '/images/default-event.jpg'}
+                  alt={event.title}
+                  className="event-image"
+                  onError={(e) => { e.target.src = '/images/default-event.jpg'; }}
                 />
-                <div className="event-card-content">
-                  <h3>{event.title}</h3>
+                <div className="card-content">
+                  <h4>{event.title}</h4>
                   <p className="event-date">
-                    {new Date(event.date).toLocaleDateString('en-US', {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric'
-                    })}
+                    {new Date(event.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
                   </p>
                   <p><strong>{event.organizer}</strong></p>
                   <p>{event.description.substring(0, 100)}...</p>
-                  <button className="details-btn" onClick={() => openModal(event)}>View Details</button>
+                  <button
+                    className="view-details-btn"
+                    onClick={(e) => { e.stopPropagation(); openModal(event); }}
+                  >
+                    View Details
+                  </button>
                 </div>
               </div>
             ))}
@@ -272,11 +259,7 @@ const EventsPage = () => {
 
         {/* Event Modal */}
         {selectedEvent && (
-          <EventModal 
-            event={selectedEvent} 
-            isOpen={isModalOpen} 
-            onClose={closeModal} 
-          />
+          <EventModal event={selectedEvent} isOpen={isModalOpen} onClose={closeModal} />
         )}
 
         {/* Contact Us Section */}
