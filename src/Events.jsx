@@ -103,6 +103,13 @@ const EventsPage = () => {
     document.body.classList.add('dark-mode');
   }, []);
 
+  // Function to get event image path with cycling through available images
+  const getEventImagePath = (index) => {
+    // We have event3.jpg, event4.jpg, event5.jpg
+    const imageNumber = (index % 3) + 3; // This will cycle through 3, 4, 5
+    return `/images/event${imageNumber}.jpg`;
+  };
+
   const fetchEvents = async () => {
     try {
       setLoading(true);
@@ -115,6 +122,62 @@ const EventsPage = () => {
       const featured = featuredResponse.data;
       const upcoming = allEvents.filter(event => !event.is_featured);
       upcoming.sort((a, b) => new Date(a.date) - new Date(b.date));
+
+      // Add two more sample events to upcoming if needed
+      if (upcoming.length < 3) {
+        // Calculate how many additional events we need to add
+        const upcomingCount = upcoming.length;
+        
+        upcoming.push(
+          {
+            id: 'sample-1',
+            title: 'AI Research Workshop',
+            date: new Date().setDate(new Date().getDate() + 14),
+            organizer: 'Department of Computer Science',
+            description: 'Join us for an interactive workshop on the latest advances in artificial intelligence research. Learn about machine learning models, neural networks, and practical applications in various industries.',
+            location: 'Tech Building, Room 305',
+            image_url: getEventImagePath(upcomingCount) // Use the first available image
+          },
+          {
+            id: 'sample-2',
+            title: 'Robotics Symposium',
+            date: new Date().setDate(new Date().getDate() + 21),
+            organizer: 'Robotics Lab',
+            description: 'This symposium brings together experts in robotics to discuss cutting-edge developments in automation, machine vision, and human-robot interaction. Includes demonstrations of the latest robotic systems.',
+            location: 'Innovation Center, Main Hall',
+            image_url: getEventImagePath(upcomingCount + 1) // Use the next available image
+          }
+        );
+      }
+
+      // Add two more sample events to featured if needed
+      if (featured.length < 3) {
+        // Calculate how many additional events we need to add
+        const featuredCount = featured.length;
+        
+        featured.push(
+          {
+            id: 'featured-sample-1',
+            title: 'Annual Tech Fair',
+            date: new Date().setDate(new Date().getDate() + 30),
+            organizer: 'School of Technology',
+            description: 'Our annual technology fair showcases student projects, industry innovations, and research breakthroughs. Network with industry professionals and explore career opportunities in technology.',
+            location: 'Campus Square',
+            image_url: getEventImagePath(featuredCount), // Use the first available image
+            is_featured: true
+          },
+          {
+            id: 'featured-sample-2',
+            title: 'Cybersecurity Summit',
+            date: new Date().setDate(new Date().getDate() + 45),
+            organizer: 'Information Security Department',
+            description: 'Explore the latest trends in cybersecurity with experts from academia and industry. Topics include threat intelligence, secure coding practices, and emerging security technologies.',
+            location: 'Virtual Event',
+            image_url: getEventImagePath(featuredCount + 1), // Use the next available image
+            is_featured: true
+          }
+        );
+      }
 
       setEvents(allEvents);
       setUpcomingEvents(upcoming);
