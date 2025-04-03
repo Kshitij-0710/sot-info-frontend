@@ -74,7 +74,7 @@ const Placements = () => {
     const fetchPlacements = async () => {
       try {
         // Using the baseUrl from your API config
-        const response = await fetch(apiConfig.getUrl('/api/placements/top_placements/'));
+        const response = await fetch(apiConfig.getUrl('/api/placements/'));
         
         // Check if the response is ok
         if (!response.ok) {
