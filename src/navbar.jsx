@@ -181,11 +181,11 @@ const Navbar = () => {
               <Link to="/research" onClick={() => setDropdownOpen(false)}>Research</Link>
               <Link to="/achievements" onClick={() => setDropdownOpen(false)}>Achievements</Link>
               <Link to="/placements" onClick={() => setDropdownOpen(false)}>Placements</Link>
+              <Link to="/events" onClick={() => setDropdownOpen(false)}>Events</Link>
+              <Link to="/posts" onClick={() => setDropdownOpen(false)}>Posts</Link>
             </div>
           </div>
           
-          <Link to="/events" className="nav-link">Events</Link>
-          <Link to="/posts" className="nav-link">Posts</Link>
           <Link to="/contactpage" className="nav-link">Contact</Link>
           {isLoggedIn && <Link to="/forms" className="nav-link">Forms</Link>}
           
@@ -197,12 +197,9 @@ const Navbar = () => {
           {/* Mobile menu login/logout - only show logout option when logged in */}
           <div className="mobile-auth">
             {isLoggedIn && (
-              <>
-                <span className="user-name mobile-user-name">{getUserDisplayName()}</span>
-                <button onClick={handleLogout} className="logout-button mobile-logout">
-                  <FaSignOutAlt /> Logout
-                </button>
-              </>
+              <button onClick={handleLogout} className="logout-button mobile-logout">
+                <FaSignOutAlt /> Logout
+              </button>
             )}
           </div>
         </div>
@@ -212,7 +209,6 @@ const Navbar = () => {
       {isLoggedIn && (
         <div className="nav-right">
           <div className="user-menu">
-            <span className="user-name">{getUserDisplayName()}</span>
             <button onClick={handleLogout} className="logout-button">
               <FaSignOutAlt /> Logout
             </button>
