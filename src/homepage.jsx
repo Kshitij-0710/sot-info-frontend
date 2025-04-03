@@ -18,8 +18,8 @@ const ImageSlider = () => {
   const sliderContent = [
     {
       image: `${import.meta.env.BASE_URL}images/image.png`,
-      title: "SOT",
-      subtitle: "Fostering Innovation and Excellence"
+      title: "School Of Technology",
+      subtitle: "Offering innovative engineering programs designed to equip students with skills in emerging fields such as Data Science, Artificial Intelligence, Blockchain, IoT, and Cybersecurity"
     },
     {
       image: `${import.meta.env.BASE_URL}images/sos.png`,  // Assuming you have more images
