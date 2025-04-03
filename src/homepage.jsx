@@ -205,30 +205,7 @@ const PlacementHighlights = () => {
   }, []);
 
   // Hardcoded testimonial data as fallback
-  const hardcodedTestimonials = [
-    {
-      id: 1,
-      title: "Dream Opportunity at Google",
-      student: "Aisha Patel",
-      description: "The placement cell helped me refine my skills and connect with the right companies. The experience was invaluable!",
-      package: "24 LPA",
-      company: "Google",
-      date: "2024-05-15",
-      created_at: "2024-05-20T14:15:22Z",
-      top_2: true
-    },
-    {
-      id: 2,
-      title: "My Journey to Amazon",
-      student: "Raj Sharma",
-      description: "I secured my dream role thanks to the extensive preparation and industry connections provided by SOT.",
-      package: "21 LPA",
-      company: "Amazon",
-      date: "2024-05-10",
-      created_at: "2024-05-18T10:45:30Z",
-      top_2: true
-    }
-  ];
+  
 
   if (loading) {
     return <div className="loading">Loading placement data...</div>;
