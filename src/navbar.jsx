@@ -1,16 +1,56 @@
-import React, { useEffect, useState } from "react";
-import { FaBars, FaTimes } from "react-icons/fa";
-
+import React, { useEffect, useState, useRef } from "react";
+import { FaCaretDown, FaSignOutAlt, FaBars, FaTimes } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import Sidebar from "./components/Sidebar";
 import "./styles/homepage.css";
 
 const Navbar = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userData, setUserData] = useState(null);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const dropdownRef = useRef(null);
+  const mobileMenuRef = useRef(null);
   const navigate = useNavigate();
   const location = useLocation();
+
+  // Close dropdown and mobile menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+      
+      if (mobileMenuRef.current && 
+         !mobileMenuRef.current.contains(event.target) && 
+         !event.target.closest('.mobile-toggle')) {
+        setMobileMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    
+    // Also handle touch events for mobile devices
+    document.addEventListener("touchstart", handleClickOutside);
+    
+    // Close dropdown on window resize (helps with orientation changes)
+    const handleResize = () => {
+      setDropdownOpen(false);
+    };
+    
+    window.addEventListener("resize", handleResize);
+    
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  // Close dropdown on route change
+  useEffect(() => {
+    setDropdownOpen(false);
+    setMobileMenuOpen(false);
+  }, [location.pathname]);
 
   // Check auth status whenever the component mounts or location changes
   useEffect(() => {
@@ -89,7 +129,8 @@ const Navbar = () => {
 
     setIsLoggedIn(false);
     setUserData(null);
-    setMenuOpen(false);
+    setDropdownOpen(false);
+    setMobileMenuOpen(false);
     
     // Dispatch auth state changed event
     window.dispatchEvent(new Event("auth_state_changed"));
@@ -97,33 +138,86 @@ const Navbar = () => {
     navigate("/");
   };
 
+  const getUserDisplayName = () => {
+    if (!userData) return "User";
+    return userData.name || userData.email || "User";
+  };
+
   return (
-    <>
-      <nav className="navbar">
-        <div className="nav-left">
-          <button className="menu-button" onClick={() => setMenuOpen(prev => !prev)}>
-            {menuOpen ? <FaTimes /> : <FaBars />}
-          </button>
-          {!isLoggedIn && (
-            <Link to="/signup" className="login-link">Register/Login</Link>
-          )}
+    <nav className="navbar">
+      <div className="nav-left">
+        {/* Mobile Menu Toggle */}
+        <button 
+          className="mobile-toggle" 
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-label="Toggle navigation menu"
+        >
+          {mobileMenuOpen ? <FaTimes /> : <FaBars />}
+        </button>
+        
+        {/* Desktop Navigation Links */}
+        <div className={`nav-links ${mobileMenuOpen ? 'mobile-active' : ''}`} ref={mobileMenuRef}>
+          <Link to="/" className="nav-link">Home</Link>
+          
+          {/* Dropdown Menu */}
+          <div className={`dropdown ${dropdownOpen ? 'active' : ''}`} ref={dropdownRef}>
+            <button 
+              className="dropdown-toggle nav-link" 
+              onClick={() => setDropdownOpen(!dropdownOpen)}
+              aria-expanded={dropdownOpen}
+              aria-haspopup="true"
+            >
+              Resources <FaCaretDown className={dropdownOpen ? 'rotate' : ''} />
+            </button>
+            <div className="dropdown-menu" aria-label="Resources submenu">
+              <Link to="/projects" onClick={() => setDropdownOpen(false)}>Projects</Link>
+              <Link to="/research" onClick={() => setDropdownOpen(false)}>Research</Link>
+              <Link to="/achievements" onClick={() => setDropdownOpen(false)}>Achievements</Link>
+              <Link to="/placements" onClick={() => setDropdownOpen(false)}>Placements</Link>
+            </div>
+          </div>
+          
+          <Link to="/events" className="nav-link">Events</Link>
+          <Link to="/posts" className="nav-link">Posts</Link>
+          <Link to="/contactpage" className="nav-link">Contact</Link>
+          {isLoggedIn && <Link to="/forms" className="nav-link">Forms</Link>}
+          
+          {/* Mobile menu login/logout */}
+          <div className="mobile-auth">
+            {isLoggedIn ? (
+              <>
+                <span className="user-name mobile-user-name">{getUserDisplayName()}</span>
+                <button onClick={handleLogout} className="logout-button mobile-logout">
+                  <FaSignOutAlt /> Logout
+                </button>
+              </>
+            ) : (
+              <Link to="/signup" className="login-link mobile-login">Register/Login</Link>
+            )}
+          </div>
         </div>
+      </div>
 
-        <div className="logo">
-          <Link to="/">
-            <img src={`${import.meta.env.BASE_URL}images/logo.png`} alt="Logo" />
-          </Link>
-        </div>
-      </nav>
+      <div className="logo">
+        <Link to="/">
+          <img src={`${import.meta.env.BASE_URL}images/logo.png`} alt="Logo" />
+        </Link>
+      </div>
 
-      <Sidebar
-        isOpen={menuOpen}
-        onClose={() => setMenuOpen(false)}
-        isLoggedIn={isLoggedIn}
-        userData={userData}
-        handleLogout={handleLogout}
-      />
-    </>
+      {/* Desktop Auth */}
+      <div className="nav-right">
+        {isLoggedIn ? (
+          <div className="user-menu">
+            <span className="user-name">{getUserDisplayName()}</span>
+            <button onClick={handleLogout} className="logout-button">
+              <FaSignOutAlt /> Logout
+            </button>
+          </div>
+        ) : (
+          <Link to="/signup" className="login-link">Register/Login</Link>
+        )}
+      </div>
+    </nav>
   );
 };
 
