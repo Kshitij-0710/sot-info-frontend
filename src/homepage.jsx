@@ -308,29 +308,29 @@ const HomePage = () => {
           <ImageSlider />
         </div>
         <div className="content-container">
-        <PlacementHighlights />
-        <section className="section-research">
-  <div className="container-research">
-    <h2 className="section-heading">Research, Projects & Achievements</h2>
-    
-    <div className="research-section-content">
-      
-      {/* Content Paragraphs */}
-      <div className="research-paragraphs">
-        <p className="research-paragraph">
-          At SOT, both students and faculty are actively involved in research, hands-on projects, and academic achievements across various fields. From <strong>AI and cybersecurity</strong> to <strong>renewable energy</strong> and <strong>biomedical engineering</strong>, research here focuses on practical solutions and real-world impact.
-        </p>
-        
-        <p className="research-paragraph">
-          Faculty members contribute through publications, industry collaborations, and research initiatives, while students take on technical projects, competitions, and entrepreneurial ventures. Their combined efforts have led to patents, conference presentations, and awards, highlighting SOT's commitment to innovation and academic excellence.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
+          <PlacementHighlights />
+          <section className="section-research">
+            <div className="container-research">
+              <h2 className="section-heading">Research, Projects & Achievements</h2>
+              
+              <div className="research-section-content">
+                
+                {/* Content Paragraphs */}
+                <div className="research-paragraphs">
+                  <p className="research-paragraph">
+                    At SOT, both students and faculty are actively involved in research, hands-on projects, and academic achievements across various fields. From <strong>AI and cybersecurity</strong> to <strong>renewable energy</strong> and <strong>biomedical engineering</strong>, research here focuses on practical solutions and real-world impact.
+                  </p>
+                  
+                  <p className="research-paragraph">
+                    Faculty members contribute through publications, industry collaborations, and research initiatives, while students take on technical projects, competitions, and entrepreneurial ventures. Their combined efforts have led to patents, conference presentations, and awards, highlighting SOT's commitment to innovation and academic excellence.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
           <TopContributions />
-          <ContactUs />
         </div>
+        <ContactUs />
     </div>
   );
 };

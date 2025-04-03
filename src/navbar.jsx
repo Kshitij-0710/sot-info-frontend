@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { FaBars, FaTimes } from "react-icons/fa";
-
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import Sidebar from "./components/Sidebar";
+import { FaBars, FaSignOutAlt, FaTimes, FaChevronDown } from "react-icons/fa";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import "./styles/homepage.css";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userData, setUserData] = useState(null);
+  const [categoriesOpen, setCategoriesOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -97,33 +96,133 @@ const Navbar = () => {
     navigate("/");
   };
 
+  const getUserDisplayName = () => {
+    if (!userData) return "User";
+    return userData.name || userData.email || "User";
+  };
+
+  const toggleCategoriesDropdown = (e) => {
+    if (window.innerWidth <= 768) {
+      // For mobile view, don't prevent default to allow navigation
+      return;
+    }
+    e.preventDefault();
+    setCategoriesOpen(!categoriesOpen);
+  };
+
+  // Close categories dropdown when clicking outside
+  useEffect(() => {
+    const closeDropdown = () => setCategoriesOpen(false);
+    document.addEventListener('click', closeDropdown);
+    return () => document.removeEventListener('click', closeDropdown);
+  }, []);
+
+  // Stop propagation to prevent the document click listener from closing the dropdown
+  const handleCategoryClick = (e) => {
+    e.stopPropagation();
+  };
+
   return (
-    <>
-      <nav className="navbar">
-        <div className="nav-left">
-          <button className="menu-button" onClick={() => setMenuOpen(prev => !prev)}>
-            {menuOpen ? <FaTimes /> : <FaBars />}
-          </button>
-          {!isLoggedIn && (
-            <Link to="/signup" className="login-link">Register/Login</Link>
-          )}
-        </div>
+    <nav className="navbar">
+      <div className="logo">
+        <Link to="/">
+          <img src={`${import.meta.env.BASE_URL}images/logo.png`} alt="Logo" />
+        </Link>
+      </div>
 
-        <div className="logo">
-          <Link to="/">
-            <img src={`${import.meta.env.BASE_URL}images/logo.png`} alt="Logo" />
-          </Link>
-        </div>
-      </nav>
+      {/* Hamburger Icon */}
+      <div className="hamburger" onClick={() => setMenuOpen(true)}>
+        <FaBars />
+      </div>
 
-      <Sidebar
-        isOpen={menuOpen}
-        onClose={() => setMenuOpen(false)}
-        isLoggedIn={isLoggedIn}
-        userData={userData}
-        handleLogout={handleLogout}
-      />
-    </>
+      {/* Mobile Menu */}
+      <div className={`mobile-menu ${menuOpen ? "open" : ""}`}>
+        <div className="close-icon" onClick={() => setMenuOpen(false)}>
+          <FaTimes />
+        </div>
+        <Link to="/" onClick={() => setMenuOpen(false)}>Home</Link>
+        <div className="mobile-submenu">
+          <div className="mobile-submenu-header" onClick={(e) => {
+            e.stopPropagation();
+            setCategoriesOpen(!categoriesOpen);
+          }}>
+            Categories <FaChevronDown className={categoriesOpen ? "rotate-icon" : ""} />
+          </div>
+          <div className={`mobile-submenu-content ${categoriesOpen ? "open" : ""}`}>
+            <Link to="/projects" onClick={() => setMenuOpen(false)}>Projects</Link>
+            <Link to="/research" onClick={() => setMenuOpen(false)}>Research</Link>
+            <Link to="/achievements" onClick={() => setMenuOpen(false)}>Achievements</Link>
+          </div>
+        </div>
+        <Link to="/placements" onClick={() => setMenuOpen(false)}>Placements</Link>
+        <Link to="/contactpage" onClick={() => setMenuOpen(false)}>Contact</Link>
+        <Link to="/events" onClick={() => setMenuOpen(false)}>Events</Link>
+
+        {isLoggedIn ? (
+          <>
+            <Link to="/forms" onClick={() => setMenuOpen(false)}>Forms</Link>
+            <div className="user-dropdown">
+            <img 
+              src={`${import.meta.env.BASE_URL}images/pfp.jpeg`} 
+              alt="Profile" 
+              className="profile-img"
+            />
+              <div className="dropdown-content">
+                <span>Hello, {getUserDisplayName()}</span>
+                <button onClick={handleLogout} className="logout-button">
+                  <FaSignOutAlt /> Logout
+                </button>
+              </div>
+            </div>
+          </>
+        ) : (
+          <Link to="/signup" onClick={() => setMenuOpen(false)}>Register/Login</Link>
+        )}
+      </div>
+
+      {/* Desktop Menu */}
+      <div className="nav-links">
+        <Link to="/">Home</Link>
+        
+        {/* Categories Dropdown */}
+        <div className="categories-dropdown" onClick={handleCategoryClick}>
+          <a href="#" onClick={toggleCategoriesDropdown}>
+            Categories <FaChevronDown className={categoriesOpen ? "rotate-icon" : ""} />
+          </a>
+          <div className={`categories-dropdown-content ${categoriesOpen ? "open" : ""}`}>
+            <Link to="/projects">Projects</Link>
+            <Link to="/research">Research</Link>
+            <Link to="/achievements">Achievements</Link>
+            <Link to="/events">Events</Link>
+          </div>
+        </div>
+        
+        <Link to="/placements">Placements</Link>
+        <Link to="/contactpage">Contact</Link>
+        
+        
+        {isLoggedIn && <Link to="/forms">Forms</Link>}
+
+        {isLoggedIn ? (
+          <div className="user-dropdown">
+            <img 
+              src={`${import.meta.env.BASE_URL}images/pfp.jpeg`} 
+              alt="Profile" 
+              className="profile-img"
+            />
+
+            <div className="dropdown-content">
+              <span>Hello, <br></br>{getUserDisplayName()}</span>
+              <button onClick={handleLogout} className="logout-button">
+                <FaSignOutAlt /> Logout
+              </button>
+            </div>
+          </div>
+        ) : (
+          <Link to="/signup">Register/Login</Link>
+        )}
+      </div>
+    </nav>
   );
 };
 
