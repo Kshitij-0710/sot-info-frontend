@@ -193,16 +193,18 @@ const Navbar = () => {
             <Link to="/projects">Projects</Link>
             <Link to="/research">Research</Link>
             <Link to="/achievements">Achievements</Link>
+            <Link to="/events">Events</Link>
+
             
 
           </div>
         </div>
-        <Link to="/events">Events</Link>
+        <Link to="/posts">Posts</Link>
         <Link to="/placements">Placements</Link>
         <Link to="/contactpage">Contact</Link>
         
         
-        {isLoggedIn && <Link to="/forms">Forms</Link>}
+        {isLoggedIn && <Link to="/forms">My Work</Link>}
 
         {isLoggedIn ? (
           <div className="user-dropdown">
