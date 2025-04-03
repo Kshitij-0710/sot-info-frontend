@@ -66,7 +66,6 @@
 .stat-item h2 {
   font-size: clamp(1.5rem, 4vw, 2rem); /* Responsive font size */
   font-weight: bold;
-
 }
 
 .stat-item p {
@@ -128,152 +127,111 @@
   display: flex;
   flex-direction: column;
   align-items: center; 
-  gap: 1rem; 
-}
-
-.testimonials-section {
   width: 90%;
-  margin-top: 5rem;
-  text-align: center;
+  max-width: 1200px;
 }
 
 .testimonials-title {
   font-size: clamp(1.8rem, 5vw, 2.5rem); /* Responsive font size */
   font-weight: bold;
   margin-bottom: 2rem;
+  text-align: center;
 }
 
 .testimonials-container {
   display: flex;
   justify-content: center;
   gap: 2rem;
-  flex-wrap: wrap;
+  width: 100%;
+  flex-wrap: nowrap; /* Ensure cards stay side by side */
 }
 
+/* Add these styles to fix the testimonial cards */
+
+/* Override the layout of testimonial cards */
 .testimonial-card {
   display: flex;
-  align-items: center;
-  background: #111;
+  flex-direction: column;
+  background: #000000;
   padding: 1.5rem;
   border-radius: 12px;
-  max-width: 450px;
-  width: 100%;
+  flex: 1;
+  max-width: calc(50% - 1rem);
   box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
   transition: transform 0.3s;
 }
 
-.testimonial-card:hover {
-  transform: translateY(-5px);
+/* Header styles */
+.testimonial-header {
+  margin-bottom: 0.75rem;
 }
 
-.testimonial-image {
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-right: 1rem;
+.testimonial-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: white;
 }
 
+/* Content container */
 .testimonial-content {
   text-align: left;
+  flex: 1;
 }
 
+/* Quote text */
 .testimonial-quote {
-  font-size: clamp(0.9rem, 3vw, 1.1rem); /* Responsive font size */
+  font-size: clamp(0.9rem, 3vw, 1.1rem);
   font-style: italic;
   line-height: 1.5;
   color: rgba(255, 255, 255, 0.9);
 }
 
-.testimonial-name,
-.testimonial-company {
-  font-size: clamp(0.9rem, 3vw, 1rem); /* Responsive font size */
+/* Student info */
+.testimonial-details {
+  margin-top: 0.75rem;
+}
+
+.testimonial-name {
+  font-size: clamp(0.9rem, 3vw, 1rem);
   font-weight: bold;
   color: #f64758;
   margin-top: 0.5rem;
 }
 
-.next-arrow {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
+.testimonial-company {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-top: 0.25rem;
+}
+
+/* Package display */
+.testimonial-package-container {
+  margin-top: 0.75rem;
+}
+
+.testimonial-package {
+  display: inline-block;
   background: rgba(255, 255, 255, 0.2);
-  cursor: pointer;
-  margin: 1.5rem auto 0; 
-  transition: background 0.3s, transform 0.2s;
-}
-
-.next-arrow svg {
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 0.9rem;
   color: white;
-  font-size: 1.5rem;
 }
 
-.next-arrow:hover {
-  background: rgba(255, 255, 255, 0.4);
-  transform: scale(1.1);
-}
-
-/* Responsive Breakpoints */
-@media (max-width: 1200px) {
-  .placement-hero {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 4rem 2rem;
-  }
-
-  .placement-hero-content {
-    max-width: 100%;
-  }
-
-  .placement-stats {
-    max-width: 100%;
-    justify-content: center;
-  }
-
-  .testimonials-container {
-    flex-direction: column;
-    align-items: center;
-  }
-
+/* Responsive adjustments */
+@media (max-width: 992px) {
   .testimonial-card {
-    width: 90%;
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .testimonial-image {
-    margin-right: 0;
-    margin-bottom: 1rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .placement-hero {
-    padding: 3rem 1rem;
-  }
-
-  .stat-item {
-    min-height: 180px; /* Reduce height */
-    padding: 1.5rem;
-    width: 100%;
-    max-width: 200px; /* Adjust max width */
+    max-width: 100%;
   }
 }
 
 @media (max-width: 480px) {
-  .stat-item {
-    min-height: 150px; /* Further reduce height */
-    padding: 1rem;
-    max-width: 180px;
-    
+  .testimonial-card {
+    padding: 1.25rem;
   }
-
-  .testimonial-image {
-    width: 60px;
-    height: 60px;
+  
+  .testimonial-title {
+    font-size: 1.1rem;
   }
 }
