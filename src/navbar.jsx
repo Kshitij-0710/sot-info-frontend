@@ -1,56 +1,15 @@
-import React, { useEffect, useState, useRef } from "react";
-import { FaCaretDown, FaSignOutAlt, FaBars, FaTimes } from "react-icons/fa";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { FaBars, FaSignOutAlt, FaTimes, FaChevronDown } from "react-icons/fa";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import "./styles/homepage.css";
 
 const Navbar = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userData, setUserData] = useState(null);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const dropdownRef = useRef(null);
-  const mobileMenuRef = useRef(null);
+  const [categoriesOpen, setCategoriesOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-
-  // Close dropdown and mobile menu when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setDropdownOpen(false);
-      }
-      
-      if (mobileMenuRef.current && 
-         !mobileMenuRef.current.contains(event.target) && 
-         !event.target.closest('.mobile-toggle')) {
-        setMobileMenuOpen(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    
-    // Also handle touch events for mobile devices
-    document.addEventListener("touchstart", handleClickOutside);
-    
-    // Close dropdown on window resize (helps with orientation changes)
-    const handleResize = () => {
-      setDropdownOpen(false);
-    };
-    
-    window.addEventListener("resize", handleResize);
-    
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-      document.removeEventListener("touchstart", handleClickOutside);
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
-  // Close dropdown on route change
-  useEffect(() => {
-    setDropdownOpen(false);
-    setMobileMenuOpen(false);
-  }, [location.pathname]);
 
   // Check auth status whenever the component mounts or location changes
   useEffect(() => {
@@ -129,8 +88,7 @@ const Navbar = () => {
 
     setIsLoggedIn(false);
     setUserData(null);
-    setDropdownOpen(false);
-    setMobileMenuOpen(false);
+    setMenuOpen(false);
     
     // Dispatch auth state changed event
     window.dispatchEvent(new Event("auth_state_changed"));
@@ -143,78 +101,127 @@ const Navbar = () => {
     return userData.name || userData.email || "User";
   };
 
+  const toggleCategoriesDropdown = (e) => {
+    if (window.innerWidth <= 768) {
+      // For mobile view, don't prevent default to allow navigation
+      return;
+    }
+    e.preventDefault();
+    setCategoriesOpen(!categoriesOpen);
+  };
+
+  // Close categories dropdown when clicking outside
+  useEffect(() => {
+    const closeDropdown = () => setCategoriesOpen(false);
+    document.addEventListener('click', closeDropdown);
+    return () => document.removeEventListener('click', closeDropdown);
+  }, []);
+
+  // Stop propagation to prevent the document click listener from closing the dropdown
+  const handleCategoryClick = (e) => {
+    e.stopPropagation();
+  };
+
   return (
     <nav className="navbar">
-      <div className="nav-left">
-        {/* Logo moved to the left */}
-        <div className="logo">
-          <Link to="/">
-            <img src={`${import.meta.env.BASE_URL}images/logo.png`} alt="Logo" />
-          </Link>
-        </div>
-        
-        {/* Mobile Menu Toggle - moved after logo */}
-        <button 
-          className="mobile-toggle" 
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          aria-label="Toggle navigation menu"
-        >
-          {mobileMenuOpen ? <FaTimes /> : <FaBars />}
-        </button>
-        
-        {/* Desktop Navigation Links */}
-        <div className={`nav-links ${mobileMenuOpen ? 'mobile-active' : ''}`} ref={mobileMenuRef}>
-          <Link to="/" className="nav-link">Home</Link>
-          
-          {/* Dropdown Menu */}
-          <div className={`dropdown ${dropdownOpen ? 'active' : ''}`} ref={dropdownRef}>
-            <button 
-              className="dropdown-toggle nav-link" 
-              onClick={() => setDropdownOpen(!dropdownOpen)}
-              aria-expanded={dropdownOpen}
-              aria-haspopup="true"
-            >
-              Resources <FaCaretDown className={dropdownOpen ? 'rotate' : ''} />
-            </button>
-            <div className="dropdown-menu" aria-label="Resources submenu">
-              <Link to="/projects" onClick={() => setDropdownOpen(false)}>Projects</Link>
-              <Link to="/research" onClick={() => setDropdownOpen(false)}>Research</Link>
-              <Link to="/achievements" onClick={() => setDropdownOpen(false)}>Achievements</Link>
-              <Link to="/placements" onClick={() => setDropdownOpen(false)}>Placements</Link>
-              <Link to="/events" onClick={() => setDropdownOpen(false)}>Events</Link>
-              <Link to="/posts" onClick={() => setDropdownOpen(false)}>Posts</Link>
-            </div>
-          </div>
-          
-          <Link to="/contactpage" className="nav-link">Contact</Link>
-          {isLoggedIn && <Link to="/forms" className="nav-link">Forms</Link>}
-          
-          {/* Register/Login link moved here to be with other nav links */}
-          {!isLoggedIn && (
-            <Link to="/signup" className="nav-link">Register/Login</Link>
-          )}
-          
-          {/* Mobile menu login/logout - only show logout option when logged in */}
-          <div className="mobile-auth">
-            {isLoggedIn && (
-              <button onClick={handleLogout} className="logout-button mobile-logout">
-                <FaSignOutAlt /> Logout
-              </button>
-            )}
-          </div>
-        </div>
+      <div className="logo">
+        <Link to="/">
+          <img src={`${import.meta.env.BASE_URL}images/logo.png`} alt="Logo" />
+        </Link>
       </div>
 
-      {/* Desktop Auth - only show when logged in */}
-      {isLoggedIn && (
-        <div className="nav-right">
-          <div className="user-menu">
-            <button onClick={handleLogout} className="logout-button">
-              <FaSignOutAlt /> Logout
-            </button>
+      {/* Hamburger Icon */}
+      <div className="hamburger" onClick={() => setMenuOpen(true)}>
+        <FaBars />
+      </div>
+
+      {/* Mobile Menu */}
+      <div className={`mobile-menu ${menuOpen ? "open" : ""}`}>
+        <div className="close-icon" onClick={() => setMenuOpen(false)}>
+          <FaTimes />
+        </div>
+        <Link to="/" onClick={() => setMenuOpen(false)}>Home</Link>
+        <div className="mobile-submenu">
+          <div className="mobile-submenu-header" onClick={(e) => {
+            e.stopPropagation();
+            setCategoriesOpen(!categoriesOpen);
+          }}>
+            Categories <FaChevronDown className={categoriesOpen ? "rotate-icon" : ""} />
+          </div>
+          <div className={`mobile-submenu-content ${categoriesOpen ? "open" : ""}`}>
+            <Link to="/projects" onClick={() => setMenuOpen(false)}>Projects</Link>
+            <Link to="/research" onClick={() => setMenuOpen(false)}>Research</Link>
+            <Link to="/achievements" onClick={() => setMenuOpen(false)}>Achievements</Link>
           </div>
         </div>
-      )}
+        <Link to="/placements" onClick={() => setMenuOpen(false)}>Placements</Link>
+        <Link to="/contactpage" onClick={() => setMenuOpen(false)}>Contact</Link>
+        <Link to="/events" onClick={() => setMenuOpen(false)}>Events</Link>
+
+        {isLoggedIn ? (
+          <>
+            <Link to="/forms" onClick={() => setMenuOpen(false)}>Forms</Link>
+            <div className="user-dropdown">
+            <img 
+              src={`${import.meta.env.BASE_URL}images/pfp.jpeg`} 
+              alt="Profile" 
+              className="profile-img"
+            />
+              <div className="dropdown-content">
+                <span>Hello, {getUserDisplayName()}</span>
+                <button onClick={handleLogout} className="logout-button">
+                  <FaSignOutAlt /> Logout
+                </button>
+              </div>
+            </div>
+          </>
+        ) : (
+          <Link to="/signup" onClick={() => setMenuOpen(false)}>Register/Login</Link>
+        )}
+      </div>
+
+      {/* Desktop Menu */}
+      <div className="nav-links">
+        <Link to="/">Home</Link>
+        
+        {/* Categories Dropdown */}
+        <div className="categories-dropdown" onClick={handleCategoryClick}>
+          <a href="#" onClick={toggleCategoriesDropdown}>
+            Categories <FaChevronDown className={categoriesOpen ? "rotate-icon" : ""} />
+          </a>
+          <div className={`categories-dropdown-content ${categoriesOpen ? "open" : ""}`}>
+            <Link to="/projects">Projects</Link>
+            <Link to="/research">Research</Link>
+            <Link to="/achievements">Achievements</Link>
+            <Link to="/events">Events</Link>
+          </div>
+        </div>
+        
+        <Link to="/placements">Placements</Link>
+        <Link to="/contactpage">Contact</Link>
+        
+        
+        {isLoggedIn && <Link to="/forms">Forms</Link>}
+
+        {isLoggedIn ? (
+          <div className="user-dropdown">
+            <img 
+              src={`${import.meta.env.BASE_URL}images/pfp.jpeg`} 
+              alt="Profile" 
+              className="profile-img"
+            />
+
+            <div className="dropdown-content">
+              <span>Hello, <br></br>{getUserDisplayName()}</span>
+              <button onClick={handleLogout} className="logout-button">
+                <FaSignOutAlt /> Logout
+              </button>
+            </div>
+          </div>
+        ) : (
+          <Link to="/signup">Register/Login</Link>
+        )}
+      </div>
     </nav>
   );
 };
