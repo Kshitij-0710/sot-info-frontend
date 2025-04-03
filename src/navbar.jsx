@@ -146,7 +146,14 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="nav-left">
-        {/* Mobile Menu Toggle */}
+        {/* Logo moved to the left */}
+        <div className="logo">
+          <Link to="/">
+            <img src={`${import.meta.env.BASE_URL}images/logo.png`} alt="Logo" />
+          </Link>
+        </div>
+        
+        {/* Mobile Menu Toggle - moved after logo */}
         <button 
           className="mobile-toggle" 
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -182,41 +189,36 @@ const Navbar = () => {
           <Link to="/contactpage" className="nav-link">Contact</Link>
           {isLoggedIn && <Link to="/forms" className="nav-link">Forms</Link>}
           
-          {/* Mobile menu login/logout */}
+          {/* Register/Login link moved here to be with other nav links */}
+          {!isLoggedIn && (
+            <Link to="/signup" className="nav-link">Register/Login</Link>
+          )}
+          
+          {/* Mobile menu login/logout - only show logout option when logged in */}
           <div className="mobile-auth">
-            {isLoggedIn ? (
+            {isLoggedIn && (
               <>
                 <span className="user-name mobile-user-name">{getUserDisplayName()}</span>
                 <button onClick={handleLogout} className="logout-button mobile-logout">
                   <FaSignOutAlt /> Logout
                 </button>
               </>
-            ) : (
-              <Link to="/signup" className="login-link mobile-login">Register/Login</Link>
             )}
           </div>
         </div>
       </div>
 
-      <div className="logo">
-        <Link to="/">
-          <img src={`${import.meta.env.BASE_URL}images/logo.png`} alt="Logo" />
-        </Link>
-      </div>
-
-      {/* Desktop Auth */}
-      <div className="nav-right">
-        {isLoggedIn ? (
+      {/* Desktop Auth - only show when logged in */}
+      {isLoggedIn && (
+        <div className="nav-right">
           <div className="user-menu">
             <span className="user-name">{getUserDisplayName()}</span>
             <button onClick={handleLogout} className="logout-button">
               <FaSignOutAlt /> Logout
             </button>
           </div>
-        ) : (
-          <Link to="/signup" className="login-link">Register/Login</Link>
-        )}
-      </div>
+        </div>
+      )}
     </nav>
   );
 };

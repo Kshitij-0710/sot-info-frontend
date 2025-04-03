@@ -31,6 +31,7 @@
     display: flex;
     align-items: center;
     gap: 1.5rem;
+    margin-left: auto;
   }
   
   .nav-link {
@@ -73,6 +74,7 @@
     cursor: pointer;
     padding: 0.5rem;
     transition: all 0.3s ease;
+    margin-left: 1rem;
   }
   
   .mobile-toggle:hover {
@@ -113,6 +115,11 @@
     color: #fc3c5b;
   }
   
+  /* Special style to remove the underline for dropdown toggle */
+  .dropdown-toggle::after {
+    display: none;
+  }
+  
   /* Rotate the dropdown icon when active */
   .dropdown-toggle .rotate {
     transform: rotate(180deg);
@@ -143,16 +150,7 @@
   
   /* Add a subtle arrow at the top of dropdown */
   .dropdown-menu::before {
-    content: '';
-    position: absolute;
-    top: -5px;
-    left: 20px;
-    width: 10px;
-    height: 10px;
-    background: rgba(30, 30, 30, 0.98);
-    transform: rotate(45deg);
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    border-left: 1px solid rgba(255, 255, 255, 0.05);
+    display: none;
   }
   
   @keyframes dropdownFade {
@@ -321,6 +319,7 @@
       align-items: center;
       justify-content: center;
       z-index: 1002;
+      margin-left: auto;
     }
     
     /* Mobile menu styles */
@@ -340,6 +339,7 @@
       box-shadow: 5px 0 20px rgba(0, 0, 0, 0.3);
       transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       overflow-y: auto;
+      margin-left: 0;
     }
     
     .nav-links.mobile-active {
