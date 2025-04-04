@@ -326,8 +326,9 @@ const EventsPage = () => {
         )}
 
         {/* Contact Us Section */}
-        <ContactUs />
+        
       </div>
+      <ContactUs />
     </div>
   );
 };
