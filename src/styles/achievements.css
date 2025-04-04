@@ -1,3 +1,5 @@
+/* achievements.css */
+
 .achievements-page-container {
     width: 100%;
     display: flex;
@@ -402,7 +404,7 @@
   }
   
   .refresh-button {
-    margin-top: -25px;
+
     background: none;
     border: none;
     font-size: 18px;

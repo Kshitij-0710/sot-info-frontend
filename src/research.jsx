@@ -557,8 +557,9 @@ const ResearchPage = () => {
             )}
           </div>
         </div>
-        <ContactUs />
+       
       </div>
+      <ContactUs />
 
       <style jsx>{`
       .error-message {

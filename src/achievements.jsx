@@ -466,46 +466,46 @@ const AchievementsPage = () => {
   }
 
   return (
-    <div className="achievements-page-container">
+    <div className="page-container">
       <style>{premiumLoaderStyles}</style>
-      <section className="achievements-hero">
-        <div className="achievements-hero-content">
-          <h1 className="achievements-hero-title">Achievements at School of Technology</h1>
-          <p className="achievements-hero-description">
+      <section className="placement-hero">
+        <div className="placement-hero-content">
+          <h1 className="hero-title">Achievements at School of Technology</h1>
+          <p className="hero-description">
             Our students and faculty have received numerous accolades and recognitions for their 
             outstanding work in various domains. These achievements reflect the quality of education, 
             research, and innovation at our institution and inspire others to pursue excellence.
           </p>
         </div>
-        <div className="achievements-stats">
-          <div className="achievements-stat-item">
+        <div className="placement-stats">
+          <div className="stat-item">
             <h2>{achievements.length}</h2>
             <p>Total Achievements</p>
           </div>
-          <div className="achievements-stat-item">
+          <div className="stat-item">
             <h2>{studentAchievementsCount}</h2>
             <p>Student Achievements</p>
           </div>
-          <div className="achievements-stat-item">
+          <div className="stat-item">
             <h2>{facultyAchievementsCount}</h2>
             <p>Faculty Achievements</p>
           </div>
-          <div className="achievements-stat-item">
+          <div className="stat-item">
             <h2>25+</h2>
             <p>Industry Collaborations</p>
           </div>
         </div>
       </section>
-      <div className="achievements-content-container">
-        <div className="achievements-section">
-          <div className="achievements-content">
+      <div className="content-container">
+        <div className="research-section">
+          <div className="research-content">
             <h2>Achievements at SOT</h2>
             <p>The School of Technology takes pride in the achievements of its students, faculty, and alumni. These achievements span across various domains including academic excellence, research breakthroughs, innovation, entrepreneurship, and community service.</p>
             <p>Our community members regularly participate in and win competitions, secure research grants, publish in prestigious journals, receive awards, and contribute significantly to their fields. These accomplishments enhance the reputation of our institution and create opportunities for future generations.</p>
           </div>
         </div>
-        <div className="achievements-section">
-          <div className="achievements-content">
+        <div className="contributions-section">
+          <div className="research-content">
             <div className="header-with-refresh">
               <h2>Notable Achievements</h2>
               <button onClick={refreshData} className="refresh-button" title="Refresh achievements">
@@ -605,8 +605,9 @@ const AchievementsPage = () => {
             )}
           </div>
         </div>
-        <ContactUs />
+        
       </div>
+      <ContactUs />
     </div>
   );
 };

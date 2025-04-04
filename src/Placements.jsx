@@ -1,24 +1,43 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { FaArrowRight } from "react-icons/fa";
+import apiConfig from "./config/apiconfig";
 import ContactUs from "./contactus";
 import "./index.css"; // Load index.css first
 import "./styles/Placements.css"; // Load placement.css after, so it overrides index.css
-import apiConfig from "./config/apiconfig";
 
-// Ensure consistent styling with index.css for the hero banner
-const bannerStyles = {
-  placementHero: {
-    minHeight: "350px",
-    height: "auto",
-    padding: "4rem 8rem"
+// Hardcoded testimonials as fallback
+const hardcodedTestimonials = [
+  {
+    id: 1,
+    title: "Placement 1",
+    student: "Sajay Raj",
+    batch: "BTech 2024",
+    company: "Open AI",
+    description: "I got placed in openAI as ceo",
+    date: "2025-01-04",
+    package: "1000.00"
   },
-  statItem: {
-    height: "180px",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center"
+  {
+    id: 2,
+    title: "Placement 2",
+    student: "jhdadav mayur",
+    batch: "BTech 2024",
+    company: "Jhadav Enterprises",
+    description: "I ALSO GOT 24LPA",
+    date: "2025-03-19",
+    package: "24.00"
+  },
+  {
+    id: 3,
+    title: "Placement 3",
+    student: "Student 3",
+    batch: "BTech 2024",
+    company: "Microsoft",
+    description: "The placement cell helped me secure my dream job!",
+    date: "2024-07-10",
+    package: "22.00"
   }
-};
+];
 
 // Default company logos
 const companyLogos = [
@@ -26,40 +45,6 @@ const companyLogos = [
   { name: "Microsoft", src: "https://img.icons8.com/fluency/96/microsoft.png" },
   { name: "Amazon", src: "https://img.icons8.com/color/96/amazon.png" },
   { name: "Meta", src: "https://img.icons8.com/color/96/facebook-new.png" },
-];
-
-// Hardcoded testimonials as fallback
-const hardcodedTestimonials = [
-  {
-    id: 1,
-    title: "Success Story 1",
-    student: "Student 1",
-    batch: "BTech 2024",
-    company: "Google",
-    description: "The placement cell helped me refine my skills and connect with the right companies. The experience was invaluable!",
-    date: "2023-05-15",
-    package: "24 LPA"
-  },
-  {
-    id: 2,
-    title: "Success Story 2",
-    student: "Student 2",
-    batch: "BTech 2024",
-    company: "Amazon",
-    description: "The placement cell helped me refine my skills and connect with the right companies. The experience was invaluable!",
-    date: "2023-06-20",
-    package: "18 LPA"
-  },
-  {
-    id: 3,
-    title: "Success Story 3",
-    student: "Student 3",
-    batch: "BTech 2024",
-    company: "Microsoft",
-    description: "The placement cell helped me refine my skills and connect with the right companies. The experience was invaluable!",
-    date: "2023-07-10",
-    package: "22 LPA"
-  }
 ];
 
 const Placements = () => {
@@ -139,21 +124,17 @@ const Placements = () => {
               <h2>100%</h2>
               <p>Placement Track</p>
             </div>
-            <div className="stat-item" style={bannerStyles.statItem}>
+            <div className="stat-item">
               <h2>24.00</h2>
               <p>Highest CTC</p>
             </div>
-            <div className="stat-item" style={bannerStyles.statItem}>
+            <div className="stat-item">
               <h2>11.5</h2>
               <p>Top 20% Avg. CTC</p>
             </div>
-            <div className="stat-item" style={bannerStyles.statItem}>
+            <div className="stat-item">
               <h2>8.6</h2>
               <p>Overall Avg. CTC</p>
-            </div>
-            <div className="stat-item" style={bannerStyles.statItem}>
-              <h2>40+</h2>
-              <p>Corporates for Internships</p>
             </div>
           </div>
         </section>
@@ -181,30 +162,31 @@ const Placements = () => {
                 .slice(currentIndex, currentIndex + testimonialsPerPage)
                 .map((testimonial) => (
                   <div key={testimonial.id} className="testimonial-card">
-                  <div className="testimonial-header">
-                    <h3 className="testimonial-title">{testimonial.title}</h3>
-                  </div>
-                  <div className="testimonial-content">
-                    <p className="testimonial-quote">"{testimonial.description}"</p>
-                    <div className="testimonial-details">
-                      <h4 className="testimonial-name">{testimonial.student}</h4>
-                      <p className="testimonial-company">
-                        <strong>{testimonial.company}</strong>
-                      </p>
-                      <p className="testimonial-date">
-                        Placed on: {new Date(testimonial.date).toLocaleDateString()}
-                      </p>
-                      <div className="testimonial-package-container">
-                        <p className="testimonial-package">{testimonial.package}</p>
+                    <div className="testimonial-header">
+                      <h3 className="testimonial-title">{testimonial.title}</h3>
+                    </div>
+                    <div className="testimonial-content">
+                      <p className="testimonial-quote">"{testimonial.description}"</p>
+                      <div className="testimonial-details">
+                        <h4 className="testimonial-name">{testimonial.student}</h4>
+                        <p className="testimonial-company">{testimonial.company}</p>
+                        <p className="testimonial-date">
+                          Placed on: {new Date(testimonial.date).toLocaleDateString()}
+                        </p>
+                        <div className="testimonial-package-container">
+                          <p className="testimonial-package">{testimonial.package}</p>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
+                  
                 ))}
-              <div className="next-arrow" onClick={nextTestimonials}>
+                <div className="next-arrow" onClick={nextTestimonials}>
                 <FaArrowRight />
               </div>
+              
             </div>
+            
           ) : (
             <div className="no-data">No placement data available</div>
           )}

@@ -1,9 +1,9 @@
-import './styles/imageslider.css';
-import React, { useState, useEffect } from "react";
+import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import apiConfig from "./config/apiconfig";
 import ContactUs from "./contactus";
 import './index.css';
-import axios from 'axios';
-import apiConfig from "./config/apiconfig";
+import './styles/imageslider.css';
 
 // Modal Component for event details
 const EventModal = ({ event, isOpen, onClose }) => {
