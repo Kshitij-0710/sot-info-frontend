@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './styles/posts.css';
+import React, { useEffect, useState } from 'react';
 import apiConfig from "./config/apiconfig";
+import './styles/posts.css';
 
 const Posts = () => {
   const [posts, setPosts] = useState([]);
@@ -15,7 +15,6 @@ const Posts = () => {
       try {
         setLoading(true);
         const response = await axios.get(apiConfig.getUrl("/api/linkedin-embeds/"));
-        
         if (response.data && response.data.embed_urls) {
           setPosts(response.data.embed_urls);
         } else {
@@ -28,7 +27,6 @@ const Posts = () => {
         setLoading(false);
       }
     };
-
     fetchPosts();
   }, []);
 
@@ -37,7 +35,6 @@ const Posts = () => {
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
     };
-
     window.addEventListener('resize', handleResize);
     return () => {
       window.removeEventListener('resize', handleResize);
@@ -47,13 +44,10 @@ const Posts = () => {
   // Calculate dimensions based on screen size
   const getIframeDimensions = () => {
     if (windowWidth <= 768) {
-      // Mobile: full width, shorter height
       return { width: '100%', height: 350 };
     } else if (windowWidth <= 1024) {
-      // Tablet: half width, medium height
       return { width: '100%', height: 400 };
     } else {
-      // Desktop: fixed width, taller height
       return { width: '100%', height: 450 };
     }
   };
@@ -67,8 +61,11 @@ const Posts = () => {
         <div className="content-container">
           <section className="posts-section">
             <div className="container">
-              <h1 className="section-heading">LinkedIn Posts</h1>
-              <p className="section-description">Loading posts...</p>
+              <h1 className="section-heading">Our <span className="highlight">Insights</span></h1>
+              <div className="loading-container">
+                <div className="loading-spinner"></div>
+                <p className="loading-text">Loading posts...</p>
+              </div>
             </div>
           </section>
         </div>
@@ -83,8 +80,14 @@ const Posts = () => {
         <div className="content-container">
           <section className="posts-section">
             <div className="container">
-              <h1 className="section-heading">LinkedIn Posts</h1>
-              <p className="section-description">{error}</p>
+              <h1 className="section-heading">Our <span className="highlight">Insights</span></h1>
+              <div className="error-container">
+                <div className="error-icon">!</div>
+                <p className="error-message">{error}</p>
+                <button className="retry-button" onClick={() => window.location.reload()}>
+                  Try Again
+                </button>
+              </div>
             </div>
           </section>
         </div>
@@ -99,10 +102,14 @@ const Posts = () => {
         <div className="content-container">
           <section className="posts-section">
             <div className="container">
-              <h1 className="section-heading">LinkedIn Posts</h1>
-              <p className="section-description">
-                No LinkedIn posts available at the moment. Please check back later.
-              </p>
+              <h1 className="section-heading">Our <span className="highlight">Insights</span></h1>
+              <div className="empty-container">
+                <div className="empty-icon">📝</div>
+                <p className="empty-message">
+                  No LinkedIn posts available at the moment. 
+                  <span className="empty-submessage">Check back soon for fresh insights.</span>
+                </p>
+              </div>
             </div>
           </section>
         </div>
@@ -115,23 +122,32 @@ const Posts = () => {
       <div className="content-container">
         <section className="posts-section">
           <div className="container">
-            <h1 className="section-heading">LinkedIn Posts</h1>
+            <div className="section-header">
+              <div className="header-decoration"></div>
+              <h1 className="section-heading">Our <span className="highlight">Insights</span></h1>
+              <div className="header-decoration"></div>
+            </div>
             <p className="section-description">
-              Stay updated with our latest announcements, achievements, and insights shared on LinkedIn.
+              Stay updated with our latest announcements, achievements, and expert insights shared on LinkedIn.
             </p>
-            
             <div className="posts-grid">
               {posts.map((postUrl, index) => (
                 <div key={index} className="post-item">
-                  <iframe 
-                    src={postUrl}
-                    height={dimensions.height}
-                    width={dimensions.width}
-                    frameBorder="0"
-                    allowFullScreen=""
-                    title={`LinkedIn post ${index + 1}`}
-                    className="linkedin-iframe"
-                  ></iframe>
+                  <div className="post-header">
+                    <div className="post-badge">{index + 1}</div>
+                    <div className="post-accent"></div>
+                  </div>
+                  <div className="post-content">
+                    <iframe
+                      src={postUrl}
+                      height={dimensions.height}
+                      width={dimensions.width}
+                      frameBorder="0"
+                      allowFullScreen=""
+                      title={`LinkedIn post ${index + 1}`}
+                      className="linkedin-iframe"
+                    ></iframe>
+                  </div>
                 </div>
               ))}
             </div>
