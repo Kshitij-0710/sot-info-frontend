@@ -1,8 +1,6 @@
 # SOT Info Frontend
 
-A modern, responsive frontend application for the School of Technology information portal. Built with React and designed to provide an intuitive user experience for students, faculty, and staff.
-
-![SOT Info Portal](https://via.placeholder.com/800x400?text=SOT+Info+Portal)
+A modern, responsive frontend application for the School of Technology & Sciences information portal. Built with React and designed to provide an intuitive user experience for students, faculty, and staff.
 
 ## Features
 
