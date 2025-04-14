@@ -6,11 +6,11 @@ A modern, responsive frontend application for the School of Technology & Science
 
 - **Responsive Design**: Works seamlessly across desktop, tablet, and mobile devices
 - **Interactive Dashboard**: Real-time updates and notifications
-- **Course Management**: Browse, search, and enroll in courses
+- **Course Management**: Browse, search, and add Project , Research etc.
 - **User Profiles**: Personalized student and faculty profiles
-- **Resource Library**: Access to learning materials and documentation
+- **Resource Library**: Access to documentation
 - **Event Calendar**: Stay updated with school events and deadlines
-- **Integrated Communication**: Direct messaging and announcements
+- **Integrated Communication**: Announcements
 
 ## Tech Stack
 
@@ -74,70 +74,7 @@ The optimized build will be created in the `build` directory.
 
 ## API Integration
 
-The frontend connects to the SOT Backend API for data retrieval and updates. Configure the API endpoint in the `.env.local` file:
-
-```
-REACT_APP_API_BASE_URL=http://api.example.com/v1
-```
-
-## Testing
-
-Run the test suite:
-
-```bash
-npm test
-# or
-yarn test
-```
-
-For coverage reports:
-
-```bash
-npm run test:coverage
-# or
-yarn test:coverage
-```
-
-## Deployment
-
-### Using Docker
-
-1. Build the Docker image:
-   ```bash
-   docker build -t sot-frontend:latest .
-   ```
-
-2. Run the container:
-   ```bash
-   docker run -p 80:80 sot-frontend:latest
-   ```
-
-### Manual Deployment
-
-For manual deployment to a web server, copy the contents of the `build` directory to your web server's public directory.
-
-## Project Structure
-
-```
-├── public/              # Static files
-├── src/
-│   ├── assets/          # Images, fonts, etc.
-│   ├── components/      # Reusable UI components
-│   ├── config/          # Configuration files
-│   ├── context/         # React context definitions
-│   ├── hooks/           # Custom React hooks
-│   ├── layouts/         # Page layout components
-│   ├── pages/           # Page components
-│   ├── services/        # API and external service integrations
-│   ├── store/           # Redux store configuration
-│   ├── styles/          # Global styles and themes
-│   ├── utils/           # Utility functions
-│   ├── App.js           # Main application component
-│   └── index.js         # Application entry point
-├── .env.example         # Example environment variables
-├── package.json         # Dependencies and scripts
-└── README.md            # This documentation
-```
+The frontend connects to the SOT Backend API for data retrieval and updates. Configure the API endpoint in the `api_config.js` file:
 
 ## Code Standards
 
@@ -154,9 +91,6 @@ For manual deployment to a web server, copy the contents of the `build` director
 4. Push to the branch: `git push origin feature/your-feature-name`
 5. Submit a pull request
 
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
 
 ## Contact
 
