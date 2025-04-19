@@ -4,8 +4,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { FaArrowRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-import ContactUs from "./contactus";
 import apiConfig from "./config/apiconfig";
+import ContactUs from "./contactus";
 import './index.css';
 import TopContributions from "./topcontributions";
 

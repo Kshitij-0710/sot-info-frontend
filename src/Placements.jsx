@@ -181,7 +181,7 @@ const Placements = () => {
                   </div>
                   
                 ))}
-                <div className="next-arrow" onClick={nextTestimonials}>
+                <div className="next-arrow-placement" onClick={nextTestimonials}>
                 <FaArrowRight />
               </div>
               
