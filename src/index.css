@@ -556,7 +556,119 @@ button[type="submit"]:hover {
   border-bottom: 2px solid #444;
   color: #f64758; /* Match the red heading color to maintain design consistency */
 }
+.project-description {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  width: 100%;
+}
 
+/* Adjust column widths to accommodate the new documents column */
+.projects-table th:first-child,
+.projects-table td:first-child {
+  width: 20%;
+}
+
+.projects-table th:nth-child(2),
+.projects-table td:nth-child(2) {
+  width: 20%;
+}
+
+.projects-table th:nth-child(3),
+.projects-table td:nth-child(3) {
+  width: 40%;
+}
+
+.projects-table th:nth-child(4),
+.projects-table td:nth-child(4) {
+  width: 20%;
+}
+
+/* Document link styling */
+.document-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  background-color: #2a2a2a;
+  color: white;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  border: 1px solid #444;
+  white-space: nowrap;
+}
+
+.document-link:hover {
+  background-color: #f64758;
+  border-color: #f64758;
+}
+
+.document-icon {
+  margin-right: 6px;
+  font-size: 16px;
+}
+
+.no-document {
+  color: #888;
+  font-style: italic;
+  font-size: 14px;
+}
+
+.mobile-document-container {
+  display: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .projects-table th:nth-child(4),
+  .projects-table td:nth-child(4) {
+    display: none;
+  }
+  
+  /* Restore original column widths for mobile */
+  .projects-table th:first-child,
+  .projects-table td:first-child,
+  .projects-table th:nth-child(2),
+  .projects-table td:nth-child(2),
+  .projects-table th:nth-child(3),
+  .projects-table td:nth-child(3) {
+    width: auto;
+  }
+  
+  .mobile-document-container {
+    display: block;
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 1px solid #444;
+  }
+  
+  .mobile-document-link {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 8px;
+    background-color: #2a2a2a;
+    color: white;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 13px;
+    transition: all 0.2s ease;
+    border: 1px solid #444;
+  }
+  
+  .mobile-document-link:hover {
+    background-color: #f64758;
+    border-color: #f64758;
+  }
+  
+  .mobile-no-document {
+    display: block;
+    color: #888;
+    font-style: italic;
+    font-size: 13px;
+  }
+}
 .research-table td,
 .projects-table td {
   padding: 15px 20px;
