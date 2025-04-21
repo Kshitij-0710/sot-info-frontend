@@ -512,28 +512,65 @@ const ResearchPage = () => {
             ) : (
               <>
                 <table className="research-table">
-                  <thead>
-                    <tr>
-                      <th>Project Name</th>
-                      <th>Authors/Developers</th>
-                      <th>Description</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {currentProjects.map((project, index) => (
-                      <tr key={project.id || index} className={`project-row ${project.user_type?.toLowerCase()}`}>
-                        <td>{project.title}</td>
-                        <td>
-                          {project.user?.name ||
-                            (project.user_type === 'STUDENT' ? 'Student' :
-                              project.user_type === 'FACULTY' ? 'Faculty' : 'Admin')}
-                          {project.team_members && `, ${project.team_members}`}
-                        </td>
-                        <td>{project.description}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+  <thead>
+    <tr>
+      <th>Project Name</th>
+      <th>Authors/Developers</th>
+      <th>Description</th>
+      <th>Documents</th>
+    </tr>
+  </thead>
+  <tbody>
+    {currentProjects.map((project, index) => (
+      <tr key={project.id || index} className={`project-row ${project.user_type?.toLowerCase()}`}>
+        <td>{project.title}</td>
+        <td>
+          {project.user?.name ||
+            (project.user_type === 'STUDENT' ? 'Student' :
+              project.user_type === 'FACULTY' ? 'Faculty' : 'Admin')}
+          {project.team_members && `, ${project.team_members}`}
+        </td>
+        <td>
+  <div className="description-container">
+    <span className="research-description">{project.description}</span>
+    <div className="description-tooltip">
+      {project.description}
+    </div>
+  </div>
+  {/* Mobile-only document link that appears below description */}
+  <div className="mobile-document-container">
+    {project.document ? (
+      <a 
+        href={project.document} 
+        target="_blank" 
+        rel="noopener noreferrer"
+        className="mobile-document-link"
+      >
+        <span className="document-icon">📄</span> View Document
+      </a>
+    ) : (
+      <span className="mobile-no-document">No file uploaded</span>
+    )}
+  </div>
+</td>
+        <td>
+          {project.document ? (
+            <a 
+              href={project.document} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="document-link"
+            >
+              <span className="document-icon">📄</span> View Document
+            </a>
+          ) : (
+            <span className="no-document">No file uploaded</span>
+          )}
+        </td>
+      </tr>
+    ))}
+  </tbody>
+</table>
 
                 {/* Pagination Controls */}
                 {totalPages > 1 && (
@@ -579,6 +616,203 @@ const ResearchPage = () => {
         margin-top: 15px;
         cursor: pointer;
       }
+       /* Replace the existing project-description CSS with this */
+.research-description {
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Limit to 2 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 2.8em; /* Approximately 2 lines of text */
+  line-height: 1.4;
+  font-size: 0.9rem;
+  width: 100%;
+}
+
+/* Add tooltip for seeing full description on hover */
+.description-container {
+  position: relative;
+}
+
+.description-container:hover .description-tooltip {
+  display: block;
+}
+
+.description-tooltip {
+  display: none;
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  background-color: #333;
+  color: white;
+  padding: 10px;
+  border-radius: 4px;
+  z-index: 100;
+  width: 250px;
+  white-space: normal;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  font-size: 14px;
+  line-height: 1.4;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+/* Add a little arrow at the bottom of the tooltip */
+.description-tooltip:after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 20px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #333 transparent transparent transparent;
+}
+
+
+/* Add tooltip for seeing full description on hover */
+.description-container {
+  position: relative;
+}
+
+.description-container:hover .description-tooltip {
+  display: block;
+}
+
+.description-tooltip {
+  display: none;
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  background-color: #333;
+  color: white;
+  padding: 10px;
+  border-radius: 4px;
+  z-index: 100;
+  width: 250px;
+  white-space: normal;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  font-size: 14px;
+  line-height: 1.4;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+/* Add a little arrow at the bottom of the tooltip */
+.description-tooltip:after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 20px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #333 transparent transparent transparent;
+}
+
+/* Adjust column widths to accommodate the new documents column */
+.research-table th:first-child,
+.research-table td:first-child {
+  width: 20%;
+}
+
+.research-table th:nth-child(2),
+.research-table td:nth-child(2) {
+  width: 20%;
+}
+
+.research-table th:nth-child(3),
+.research-table td:nth-child(3) {
+  width: 40%;
+}
+
+.research-table th:nth-child(4),
+.research-table td:nth-child(4) {
+  width: 20%;
+}
+
+/* Document link styling */
+.document-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  background-color: #2a2a2a;
+  color: white;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  border: 1px solid #444;
+  white-space: nowrap;
+}
+
+.document-link:hover {
+  background-color: #f64758;
+  border-color: #f64758;
+}
+
+.document-icon {
+  margin-right: 6px;
+  font-size: 16px;
+}
+
+.no-document {
+  color: #888;
+  font-style: italic;
+  font-size: 14px;
+}
+
+.mobile-document-container {
+  display: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .research-table th:nth-child(4),
+  .research-table td:nth-child(4) {
+    display: none;
+  }
+  
+  /* Restore original column widths for mobile */
+  .research-table th:first-child,
+  .research-table td:first-child,
+  .research-table th:nth-child(2),
+  .research-table td:nth-child(2),
+  .research-table th:nth-child(3),
+  .research-table td:nth-child(3) {
+    width: auto;
+  }
+  
+  .mobile-document-container {
+    display: block;
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 1px solid #444;
+  }
+  
+  .mobile-document-link {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 8px;
+    background-color: #2a2a2a;
+    color: white;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 13px;
+    transition: all 0.2s ease;
+    border: 1px solid #444;
+  }
+  
+  .mobile-document-link:hover {
+    background-color: #f64758;
+    border-color: #f64758;
+  }
+  
+  .mobile-no-document {
+    display: block;
+    color: #888;
+    font-style: italic;
+    font-size: 13px;
+  }
+}
       
       .header-with-refresh {
         display: flex;
