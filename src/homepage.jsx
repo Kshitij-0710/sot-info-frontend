@@ -4,10 +4,14 @@ import React, { useEffect, useRef, useState } from "react";
 import { FaArrowRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
+import { Document, Page, pdfjs } from 'react-pdf';
+
 import apiConfig from "./config/apiconfig";
 import ContactUs from "./contactus";
 import './index.css';
 import TopContributions from "./topcontributions";
+// Import the PDF file
+import chroniclesPdf from './chronicles.pdf';
 
 const ImageSlider = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -197,15 +201,12 @@ const PlacementHighlights = () => {
         setLoading(false);
         
         // Fallback to hardcoded data if API call fails
-        setTestimonials(hardcodedTestimonials);
+        setTestimonials([]);
       }
     };
 
     fetchPlacements();
   }, []);
-
-  // Hardcoded testimonial data as fallback
-  
 
   if (loading) {
     return <div className="loading">Loading placement data...</div>;
@@ -267,16 +268,285 @@ const PlacementHighlights = () => {
         </div>
         
         <div className="view-more-container">
-  <Link to="/placements" className="view-more-link">
-    View All Placement Details <FaArrowRight className="arrow-icon" />
-  </Link>
-</div>
+          <Link to="/placements" className="view-more-link">
+            View All Placement Details <FaArrowRight className="arrow-icon" />
+          </Link>
         </div>
-
+      </div>
     </section>
   );
 };
 
+// PDF Preview Component - Simple and Reliable Implementation
+const ChroniclesPreview = () => {
+  const [numPages, setNumPages] = useState(null);
+  const [pageNumber, setPageNumber] = useState(1);
+  const [isHovered, setIsHovered] = useState(false);
+
+  // Set up PDF.js worker
+  useEffect(() => {
+    pdfjs.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.js';
+  }, []);
+  
+
+  function onDocumentLoadSuccess({ numPages }) {
+    setNumPages(numPages);
+  }
+
+  function changePage(offset) {
+    setPageNumber(prevPageNumber => {
+      const newPageNumber = prevPageNumber + offset;
+      return Math.min(Math.max(1, newPageNumber), numPages);
+    });
+  }
+
+  function previousPage() {
+    changePage(-1);
+  }
+
+  function nextPage() {
+    changePage(1);
+  }
+
+  // CSS Styles for the component
+  const styles = {
+    section: {
+      padding: '40px 0',
+      backgroundColor: '#000000'
+    },
+    container: {
+      maxWidth: '1200px',
+      margin: '0 auto',
+      padding: '0 20px',
+      textAlign: 'center'
+    },
+    heading: {
+      fontSize: '28px',
+      fontWeight: 'bold',
+      marginBottom: '30px',
+      color: '#ffffff'
+    },
+    previewCard: {
+      width: '500px', // Wider to accommodate PDF preview
+      margin: '0 auto',
+      backgroundColor: '#111111',
+      boxShadow: '0 4px 8px rgba(255,255,255,0.1)',
+      borderRadius: '4px',
+      overflow: 'hidden',
+      transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+      cursor: 'pointer'
+    },
+    previewCardHover: {
+      transform: 'translateY(-5px)',
+      boxShadow: '0 6px 12px rgba(255,255,255,0.2)'
+    },
+    previewTop: {
+      padding: '15px',
+      backgroundColor: '#1a1a1a',
+      textAlign: 'center'
+    },
+    pdfTitle: {
+      margin: '0 0 5px',
+      fontSize: '18px',
+      fontWeight: 'bold',
+      color: '#ffffff'
+    },
+    pdfSubtitle: {
+      margin: '0',
+      fontSize: '14px',
+      color: '#aaaaaa'
+    },
+    downloadBar: {
+      backgroundColor: '#e03747',
+      color: 'white',
+      padding: '12px 20px',
+      textAlign: 'center',
+      fontWeight: 'bold',
+      fontSize: '14px',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: '8px'
+    },
+    pdfContainer: {
+      padding: '10px',
+      backgroundColor: '#222222',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center'
+    },
+    controls: {
+      display: 'flex',
+      justifyContent: 'space-between',
+      width: '100%',
+      padding: '10px 0',
+      alignItems: 'center'
+    },
+    pageControls: {
+      display: 'flex',
+      gap: '10px',
+      alignItems: 'center'
+    },
+    button: {
+      backgroundColor: '#e03747',
+      color: 'white',
+      border: 'none',
+      borderRadius: '4px',
+      padding: '5px 10px',
+      cursor: 'pointer',
+      fontSize: '14px',
+      transition: 'background-color 0.2s',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center'
+    },
+    buttonDisabled: {
+      backgroundColor: '#555555',
+      cursor: 'not-allowed'
+    },
+    pageInfo: {
+      fontSize: '14px',
+      fontWeight: 'bold',
+      color: '#ffffff'
+    },
+    documentContainer: {
+      border: '1px solid #333333',
+      borderRadius: '4px',
+      overflow: 'hidden',
+      width: '100%',
+      maxHeight: '500px',
+      display: 'flex',
+      justifyContent: 'center',
+      backgroundColor: '#333333'
+    }
+  };
+
+  return (
+    <section style={styles.section} className="chronicles-section">
+      <div style={styles.container} className="chronicles-container">
+        <h2 style={styles.heading} className="section-heading">Latest Chronicles</h2>
+        
+        <div 
+          style={{
+            ...styles.previewCard,
+            ...(isHovered ? styles.previewCardHover : {})
+          }}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
+          <div style={styles.previewTop}>
+            <h3 style={styles.pdfTitle}>
+              SOT Chronicles
+            </h3>
+            
+            <p style={styles.pdfSubtitle}>
+              Latest Edition
+            </p>
+          </div>
+          
+          <div style={styles.pdfContainer}>
+            <div style={styles.controls}>
+              <div style={styles.pageControls}>
+                <button 
+                  type="button" 
+                  disabled={pageNumber <= 1} 
+                  onClick={previousPage}
+                  style={{
+                    ...styles.button,
+                    ...(pageNumber <= 1 ? styles.buttonDisabled : {})
+                  }}
+                >
+                  <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    width="16" 
+                    height="16" 
+                    viewBox="0 0 24 24" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    strokeWidth="2" 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round"
+                  >
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                  </svg>
+                </button>
+                <p style={styles.pageInfo}>
+                  Page {pageNumber} of {numPages || '--'}
+                </p>
+                <button 
+                  type="button"
+                  disabled={pageNumber >= numPages} 
+                  onClick={nextPage}
+                  style={{
+                    ...styles.button,
+                    ...(pageNumber >= numPages ? styles.buttonDisabled : {})
+                  }}
+                >
+                  <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    width="16" 
+                    height="16" 
+                    viewBox="0 0 24 24" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    strokeWidth="2" 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round"
+                  >
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            
+            <div style={styles.documentContainer}>
+              <Document
+                file={chroniclesPdf}
+                onLoadSuccess={onDocumentLoadSuccess}
+                loading={<div style={{color: '#ffffff', padding: '20px'}}>Loading PDF...</div>}
+                error={<div style={{color: '#e03747', padding: '20px'}}>Failed to load PDF!</div>}
+              >
+                <Page 
+                  pageNumber={pageNumber} 
+                  width={450}
+                  renderTextLayer={false}
+                  renderAnnotationLayer={false}
+                />
+              </Document>
+            </div>
+          </div>
+          
+          <a 
+            href={chroniclesPdf}
+            download="chronicles.pdf"
+            style={{
+              ...styles.downloadBar,
+              textDecoration: 'none',
+              color: 'white'
+            }}
+          >
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              width="16" 
+              height="16" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              strokeWidth="2" 
+              strokeLinecap="round" 
+              strokeLinejoin="round"
+            >
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            Download PDF
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+};
 
 const HomePage = () => {
   return (
@@ -291,8 +561,6 @@ const HomePage = () => {
               <h2 className="section-heading">Research, Projects & Achievements</h2>
               
               <div className="research-section-content">
-                
-                {/* Content Paragraphs */}
                 <div className="research-paragraphs">
                   <p className="research-paragraph">
                     At SOT, both students and faculty are actively involved in research, hands-on projects, and academic achievements across various fields. From <strong>AI and cybersecurity</strong> to <strong>renewable energy</strong> and <strong>biomedical engineering</strong>, research here focuses on practical solutions and real-world impact.
@@ -305,6 +573,7 @@ const HomePage = () => {
               </div>
             </div>
           </section>
+          <ChroniclesPreview />
           <TopContributions />
         </div>
         <ContactUs />
