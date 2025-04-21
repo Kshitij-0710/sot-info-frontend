@@ -107,14 +107,14 @@ const Placements = () => {
       <div className="placements-container">
         <section className="placement-hero">
           <div className="placement-hero-content">
-            <h1 className="hero-title">B.Tech Placement Highlights</h1>
+            <h1 className="hero-title">B.Tech and B.Sc Placement Highlights</h1>
             <p className="hero-description">
-              Woxsen's B.Tech program stands out for its cutting-edge facilities,
+              Woxsen's B.Tech and B.Sc program stands out for its cutting-edge facilities,
               including the AI & Robotics studio, where students immerse
               themselves in hands-on projects. Workshops for skill development and
               mentorship opportunities at the Trade Tower further enhance their
               learning journey. With a steadfast dedication to industry relevance
-              and practical learning, Woxsen ensures that B.Tech graduates are
+              and practical learning, Woxsen ensures that B.Tech and B.Sc graduates are
               equipped to excel in today's dynamic tech sector, positioning them
               as top choices for leading recruiters.
             </p>

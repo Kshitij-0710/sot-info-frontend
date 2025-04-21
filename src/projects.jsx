@@ -415,7 +415,7 @@ const ProjectsPage = () => {
     <div className="page-container">
         <section className="placement-hero">
           <div className="placement-hero-content">
-            <h1 className="hero-title">Projects at School of Technology</h1>
+            <h1 className="hero-title">Projects at School of Technology and Sciences</h1>
             <p className="hero-description">
               Our students engage in a wide range of innovative projects spanning software development, 
               hardware design, data analysis, and more. These projects provide practical experience 
@@ -445,8 +445,8 @@ const ProjectsPage = () => {
         <div className="content-container">
           <div className="research-section">
             <div className="research-content">
-              <h2>Projects at SOT</h2>
-              <p>At the School of Technology, projects form an integral part of our curriculum. Students engage in a wide range of projects, from individual assignments to collaborative ventures, covering diverse areas such as software development, hardware design, data analysis, and more.</p>
+              <h2>Projects at SOT and SOS</h2>
+              <p>At the School of Technology and School of Sciences, projects form an integral part of our curriculum. Students engage in a wide range of projects, from individual assignments to collaborative ventures, covering diverse areas such as software development, hardware design, data analysis, and more.</p>
               <p>These projects provide practical experience and help students apply theoretical knowledge to real-world problems. Many projects are developed in collaboration with industry partners, ensuring relevance and exposure to current industry practices and challenges.</p>
             </div>
           </div>

@@ -23,7 +23,7 @@ const ImageSlider = () => {
     },
     {
       image: `${import.meta.env.BASE_URL}images/sos.png`,  // Assuming you have more images
-      title: "Leading Research and Development",
+      title: "School of Sciences",
       subtitle: "Advancing Technology Through Collaborative Innovation"
     },
     {

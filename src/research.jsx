@@ -417,7 +417,7 @@ const ResearchPage = () => {
     <div className="page-container">
       <section className="placement-hero">
         <div className="placement-hero-content">
-          <h1 className="hero-title">Research at School of Technology</h1>
+          <h1 className="hero-title">Research at School of technology and School of Sciences</h1>
           <p className="hero-description">
             Our faculty and students engage in cutting-edge research across various domains including
             artificial intelligence, cybersecurity, IoT, cloud computing, and robotics. We address
@@ -447,8 +447,8 @@ const ResearchPage = () => {
       <div className="content-container">
         <div className="research-section">
           <div className="research-content">
-            <h2>Research at SOT</h2>
-            <p>Research at the School of Technology spans various domains, including artificial intelligence, cybersecurity, IoT, cloud computing, robotics, and more. Our faculty and students are engaged in cutting-edge research that addresses current technological challenges and contributes to academic knowledge.</p>
+            <h2>Research at SOT and SOS</h2>
+            <p>Research at the School of technology and School of Sciences spans various domains, including artificial intelligence, cybersecurity, IoT, cloud computing, robotics, and more. Our faculty and students are engaged in cutting-edge research that addresses current technological challenges and contributes to academic knowledge.</p>
             <p>Our research initiatives are supported by state-of-the-art laboratories, research grants, and collaborations with industry and academic partners. The emphasis on research enriches our academic environment and provides students with opportunities to engage in meaningful research projects.</p>
           </div>
         </div>

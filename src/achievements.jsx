@@ -470,7 +470,7 @@ const AchievementsPage = () => {
       <style>{premiumLoaderStyles}</style>
       <section className="placement-hero">
         <div className="placement-hero-content">
-          <h1 className="hero-title">Achievements at School of Technology</h1>
+          <h1 className="hero-title">Achievements at School of technology and School of Sciences and School of Sciences</h1>
           <p className="hero-description">
             Our students and faculty have received numerous accolades and recognitions for their 
             outstanding work in various domains. These achievements reflect the quality of education, 
@@ -499,8 +499,8 @@ const AchievementsPage = () => {
       <div className="content-container">
         <div className="research-section">
           <div className="research-content">
-            <h2>Achievements at SOT</h2>
-            <p>The School of Technology takes pride in the achievements of its students, faculty, and alumni. These achievements span across various domains including academic excellence, research breakthroughs, innovation, entrepreneurship, and community service.</p>
+            <h2>Achievements at SOT and SOS</h2>
+            <p>The School of technology and School of Sciences and School of Sciences takes pride in the achievements of its students, faculty, and alumni. These achievements span across various domains including academic excellence, research breakthroughs, innovation, entrepreneurship, and community service.</p>
             <p>Our community members regularly participate in and win competitions, secure research grants, publish in prestigious journals, receive awards, and contribute significantly to their fields. These accomplishments enhance the reputation of our institution and create opportunities for future generations.</p>
           </div>
         </div>

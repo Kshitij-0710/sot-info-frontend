@@ -16,12 +16,18 @@ const ContactUs = () => {
               <p>
                 <FaEnvelope className="icon" />{" "}
                 <a href="mailto:office.sot@woxsen.edu.in">
-                  office.sot@woxsen.edu.in
-                </a>
+                  School Of Technology: office.sot@woxsen.edu.in
+                </a> 
+                
               </p>
               <p>
-                <FaPhoneAlt className="icon" /> 2909180302983
+                <FaEnvelope className="icon" />{" "}
+                <a href="mailto:office.sos@woxsen.edu.in">
+                  School Of Sciences: office.sos@woxsen.edu.in
+                </a> 
+                
               </p>
+              
               <p>
                 <FaMapMarkerAlt className="icon" /> Woxsen University, India
               </p>

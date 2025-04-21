@@ -153,7 +153,7 @@ const EventsPage = () => {
             id: 'featured-sample-1',
             title: 'Annual Tech Fair',
             date: new Date().setDate(new Date().getDate() + 30),
-            organizer: 'School of Technology',
+            organizer: 'School of technology and School of Sciences',
             description: 'Our annual technology fair showcases student projects, industry innovations, and research breakthroughs. Network with industry professionals and explore career opportunities in technology.',
             location: 'Campus Square',
             image_url: getEventImagePath(featuredCount),
@@ -244,11 +244,11 @@ const EventsPage = () => {
         <section className="section-description-container">
           <div className="section-description">
             <p>
-              At the School of Technology, we believe that learning extends far beyond the classroom.
+              At the School of technology and School of Sciences, we believe that learning extends far beyond the classroom.
               Our diverse range of events offers students, faculty, and enthusiasts the opportunity to explore groundbreaking ideas.
             </p>
             <p>
-              From cutting-edge technology showcases to thought-provoking scientific discussions, there's always something exciting happening at SOT.
+              From cutting-edge technology showcases to thought-provoking scientific discussions, there's always something exciting happening at SOST.
             </p>
           </div>
         </section>
