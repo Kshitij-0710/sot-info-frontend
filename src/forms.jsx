@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import apiConfig from "./config/apiconfig";
 import "./index.css";
 import './styles/forms.css';
+// Add new styles for improved UI components
+
 
 const Forms = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -11,6 +13,7 @@ const Forms = () => {
   const [showForm, setShowForm] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [formToDelete, setFormToDelete] = useState(null);
+  const [selectedFile, setSelectedFile] = useState(null);
 
   // Form data state matching Django model fields
   const [formData, setFormData] = useState({
@@ -23,7 +26,8 @@ const Forms = () => {
     from_date: "",
     to_date: "",
     category: "",
-    is_ongoing: false
+    is_ongoing: false,
+    document: null
   });
 
   // Get user data from localStorage
@@ -99,6 +103,15 @@ const Forms = () => {
     // Handle checkbox inputs
     if (type === 'checkbox') {
       setFormData({ ...formData, [name]: checked });
+      return;
+    }
+
+    // Handle file inputs
+    if (type === 'file') {
+      if (e.target.files && e.target.files[0]) {
+        setSelectedFile(e.target.files[0]);
+        setFormData({ ...formData, document: e.target.files[0] });
+      }
       return;
     }
 
@@ -196,22 +209,48 @@ const Forms = () => {
         throw new Error('No authentication token found. Please log in again.');
       }
 
-      // Format data properly for backend - convert string inputs to arrays
-      const submissionData = {
-        ...formData,
-        tech_stack: stringToArray(formData.tech_stack),
-        achivements: stringToArray(formData.achivements),
-        // If to_date is empty and is_ongoing is checked, don't send to_date
-        to_date: formData.is_ongoing ? null : formData.to_date || null
-      };
+      // Use FormData for multipart/form-data to handle file uploads
+      const formDataToSubmit = new FormData();
+      
+      // Add all text fields
+      formDataToSubmit.append('title', formData.title);
+      formDataToSubmit.append('description', formData.description);
+      formDataToSubmit.append('team_members', formData.team_members);
+      formDataToSubmit.append('projecturl', formData.projecturl);
+      formDataToSubmit.append('category', formData.category);
+      formDataToSubmit.append('from_date', formData.from_date);
+      formDataToSubmit.append('is_ongoing', formData.is_ongoing);
+      
+      // If to_date is empty and is_ongoing is checked, don't send to_date
+      if (!formData.is_ongoing && formData.to_date) {
+        formDataToSubmit.append('to_date', formData.to_date);
+      }
+      
+      // Add arrays - convert strings to arrays first
+      const techStackArray = stringToArray(formData.tech_stack);
+      const achievementsArray = stringToArray(formData.achivements);
+      
+      // For arrays, we need to append each item individually with the same key
+      techStackArray.forEach(tech => {
+        formDataToSubmit.append('tech_stack', tech);
+      });
+      
+      achievementsArray.forEach(achievement => {
+        formDataToSubmit.append('achivements', achievement);
+      });
+      
+      // Add file if selected
+      if (selectedFile) {
+        formDataToSubmit.append('document', selectedFile);
+      }
 
       const response = await fetch(apiConfig.getUrl('api/forms/'), {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
+          // Don't set Content-Type when using FormData - the browser will set it automatically with boundary
         },
-        body: JSON.stringify(submissionData)
+        body: formDataToSubmit
       });
 
       if (!response.ok) {
@@ -246,8 +285,10 @@ const Forms = () => {
         from_date: "",
         to_date: "",
         category: "",
-        is_ongoing: false
+        is_ongoing: false,
+        document: null
       });
+      setSelectedFile(null);
       
       setShowForm(false);
       fetchForms(); // Refresh the forms list
@@ -287,6 +328,20 @@ const Forms = () => {
     ));
   };
 
+  // Render document link if available
+  const renderDocumentLink = (form) => {
+    if (form.document) {
+      return (
+        <div className="document-link">
+          <a href={form.document} target="_blank" rel="noopener noreferrer">
+            View Document
+          </a>
+        </div>
+      );
+    }
+    return null;
+  };
+
   // Safely render achievements
   const renderAchievements = (achievements) => {
     if (!achievements) return null;
@@ -318,7 +373,7 @@ const Forms = () => {
     );
   }
 
-  return (
+return (
     <div className="forms-wrapper">
     <div className="forms-container">
       <h2>Research, Projects & Achievements</h2>
@@ -359,6 +414,7 @@ const Forms = () => {
                   <div className="tech-stack">
                     {renderTechStack(form.tech_stack)}
                   </div>
+                  {renderDocumentLink(form)}
                 </div>
               ))}
             </div>
@@ -367,7 +423,7 @@ const Forms = () => {
           )}
         </div>
       ) : (
-        <form onSubmit={handleSubmit} className="entry-form">
+        <form onSubmit={handleSubmit} className="entry-form" encType="multipart/form-data">
           <h3>Add New Entry</h3>
           
           <div className="form-group">
@@ -451,6 +507,39 @@ const Forms = () => {
             <small>Example: Won first prize, Published paper</small>
           </div>
 
+          <div className="form-group file-upload-container">
+            <label>Document Upload (PDF, DOC, etc.):</label>
+            <div className="custom-file-upload">
+              <input 
+                type="file" 
+                id="document-upload"
+                name="document" 
+                onChange={handleChange} 
+                accept=".pdf,.doc,.docx,.ppt,.pptx,.xlsx,.xls,.txt,.zip"
+                className="file-input"
+              />
+              <label htmlFor="document-upload" className="file-label">
+                <span className="file-icon">📎</span>
+                <span className="file-text">
+                  {selectedFile ? selectedFile.name : "Choose a file"}
+                </span>
+              </label>
+              {selectedFile && (
+                <button 
+                  type="button" 
+                  className="file-clear-btn"
+                  onClick={() => {
+                    setSelectedFile(null);
+                    setFormData({...formData, document: null});
+                  }}
+                >
+                  ✕
+                </button>
+              )}
+            </div>
+            <small>Upload supporting documents (max 10MB)</small>
+          </div>
+
           <div className="form-group">
             <label>From Date:</label>
             <input 
@@ -462,14 +551,24 @@ const Forms = () => {
             />
           </div>
 
-          <div className="form-group">
+          <div className="form-group toggle-switch-container">
             <label>Is this an ongoing project/research?</label>
-            <input 
-              type="checkbox" 
-              name="is_ongoing" 
-              checked={formData.is_ongoing} 
-              onChange={handleChange} 
-            />
+            <div className="toggle-switch">
+              <input 
+                type="checkbox" 
+                id="is-ongoing-toggle"
+                name="is_ongoing" 
+                checked={formData.is_ongoing} 
+                onChange={handleChange}
+                className="toggle-input" 
+              />
+              <label htmlFor="is-ongoing-toggle" className="toggle-label">
+                <span className="toggle-inner"></span>
+                <span className="toggle-switch-status">
+                  {formData.is_ongoing ? "Yes" : "No"}
+                </span>
+              </label>
+            </div>
           </div>
 
           {!formData.is_ongoing && (
