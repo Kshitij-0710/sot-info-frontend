@@ -158,14 +158,14 @@ const AchievementsPage = () => {
   // Filter achievements based on activeFilter and search query
   const filteredAchievements = achievements.filter(achievement => {
     // User type filter
-    const matchesUserType = 
-      activeFilter === "all" || 
-      (activeFilter === "student" && achievement.user_type === "STUDENT") || 
+    const matchesUserType =
+      activeFilter === "all" ||
+      (activeFilter === "student" && achievement.user_type === "STUDENT") ||
       (activeFilter === "faculty" && achievement.user_type === "FACULTY");
 
     // Search query filter (case-insensitive)
-    const matchesSearch = 
-      searchQuery === "" || 
+    const matchesSearch =
+      searchQuery === "" ||
       achievement.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       achievement.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
       (achievement.user?.name && achievement.user.name.toLowerCase().includes(searchQuery.toLowerCase()));
@@ -186,7 +186,7 @@ const AchievementsPage = () => {
   const getPageNumbers = () => {
     const maxVisiblePages = 5;
     let pageNumbers = [];
-    
+
     if (totalPages <= maxVisiblePages) {
       // If total pages are less than or equal to max visible, show all
       for (let i = 1; i <= totalPages; i++) {
@@ -211,16 +211,16 @@ const AchievementsPage = () => {
       // Show first page, ellipsis, current page and neighbors, ellipsis, last page
       pageNumbers.push(1);
       pageNumbers.push('...');
-      
+
       // Add current page and neighbors
       for (let i = currentPage - 1; i <= currentPage + 1; i++) {
         pageNumbers.push(i);
       }
-      
+
       pageNumbers.push('...');
       pageNumbers.push(totalPages);
     }
-    
+
     return pageNumbers;
   };
 
@@ -253,9 +253,9 @@ const AchievementsPage = () => {
       </div>
     );
   };
-  
+
   const FullscreenLoader = () => <PremiumLoader />;
-  
+
   const premiumLoaderStyles = `
   .premium-loader-container {
     position: fixed;
@@ -439,18 +439,175 @@ const AchievementsPage = () => {
       flex-direction: row;
     }
   }
-  `;
+    /* Single line description with ellipsis */
+.achivement-description {
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Limit to 2 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 2.8em; /* Approximately 2 lines of text */
+  line-height: 1.4;
+  font-size: 0.9rem;
+  width: 100%;
+}
+
+/* Adjust column widths to accommodate the new documents column */
+.achievements-table th:first-child,
+.achievements-table td:first-child {
+  width: 20%;
+}
+
+.achievements-table th:nth-child(2),
+.achievements-table td:nth-child(2) {
+  width: 20%;
+}
+
+.achievements-table th:nth-child(3),
+.achievements-table td:nth-child(3) {
+  width: 40%;
+}
+
+.achievements-table th:nth-child(4),
+.achievements-table td:nth-child(4) {
+  width: 20%;
+}
+
+/* Document link styling */
+.document-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  background-color: #2a2a2a;
+  color: white;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  border: 1px solid #444;
+  white-space: nowrap;
+}
+
+.document-link:hover {
+  background-color: #f64758;
+  border-color: #f64758;
+}
+
+.document-icon {
+  margin-right: 6px;
+  font-size: 16px;
+}
+
+.no-document {
+  color: #888;
+  font-style: italic;
+  font-size: 14px;
+}
+
+.mobile-document-container {
+  display: none;
+}
+
+/* Tooltip for description */
+.description-container {
+  position: relative;
+}
+
+.description-container:hover .description-tooltip {
+  display: block;
+}
+
+.description-tooltip {
+  display: none;
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  background-color: #333;
+  color: white;
+  padding: 10px;
+  border-radius: 4px;
+  z-index: 100;
+  width: 250px;
+  white-space: normal;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  font-size: 14px;
+  line-height: 1.4;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+/* Add a little arrow at the bottom of the tooltip */
+.description-tooltip:after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 20px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #333 transparent transparent transparent;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .achievements-table th:nth-child(4),
+  .achievements-table td:nth-child(4) {
+    display: none;
+  }
   
+  /* Restore original column widths for mobile */
+  .achievements-table th:first-child,
+  .achievements-table td:first-child,
+  .achievements-table th:nth-child(2),
+  .achievements-table td:nth-child(2),
+  .achievements-table th:nth-child(3),
+  .achievements-table td:nth-child(3) {
+    width: auto;
+  }
+  
+  .mobile-document-container {
+    display: block;
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 1px solid #444;
+  }
+  
+  .mobile-document-link {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 8px;
+    background-color: #2a2a2a;
+    color: white;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 13px;
+    transition: all 0.2s ease;
+    border: 1px solid #444;
+  }
+  
+  .mobile-document-link:hover {
+    background-color: #f64758;
+    border-color: #f64758;
+  }
+  
+  .mobile-no-document {
+    display: block;
+    color: #888;
+    font-style: italic;
+    font-size: 13px;
+  }
+}
+  `;
+
   // Loading state
   if (loading) {
     return (
       <>
-      <style>{premiumLoaderStyles}</style>
-      <FullscreenLoader />
+        <style>{premiumLoaderStyles}</style>
+        <FullscreenLoader />
       </>
     );
   }
-  
+
   // Error state
   if (error) {
     return (
@@ -472,8 +629,8 @@ const AchievementsPage = () => {
         <div className="placement-hero-content">
           <h1 className="hero-title">Achievements at School of technology and School of Sciences and School of Sciences</h1>
           <p className="hero-description">
-            Our students and faculty have received numerous accolades and recognitions for their 
-            outstanding work in various domains. These achievements reflect the quality of education, 
+            Our students and faculty have received numerous accolades and recognitions for their
+            outstanding work in various domains. These achievements reflect the quality of education,
             research, and innovation at our institution and inspire others to pursue excellence.
           </p>
         </div>
@@ -513,40 +670,40 @@ const AchievementsPage = () => {
               </button>
             </div>
             <p>Below are some of the notable achievements by our students and faculty. These achievements demonstrate excellence, innovation, and dedication to advancing knowledge and solving real-world problems.</p>
-            
-           
-            
+
+
+
             {/* Filter toggle buttons */}
             <div className="filter-toggle-container">
-              <button 
+              <button
                 className={`filter-toggle-button ${activeFilter === "all" ? "active" : ""}`}
                 onClick={() => handleFilterChange("all")}
               >
                 All Achievements
               </button>
-              <button 
+              <button
                 className={`filter-toggle-button ${activeFilter === "student" ? "active" : ""}`}
                 onClick={() => handleFilterChange("student")}
               >
                 Student Achievements
               </button>
-              <button 
+              <button
                 className={`filter-toggle-button ${activeFilter === "faculty" ? "active" : ""}`}
                 onClick={() => handleFilterChange("faculty")}
               >
                 Faculty Achievements
               </button>
             </div>
-             {/* Search Container */}
-             <div className="search-container">
-              <input 
-                type="text" 
+            {/* Search Container */}
+            <div className="search-container">
+              <input
+                type="text"
                 placeholder="Search achievements..."
                 className="search-input"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
-              <button 
+              <button
                 className="search-button"
                 onClick={handleSearch}
               >
@@ -565,6 +722,7 @@ const AchievementsPage = () => {
                       <th>Achievement Title</th>
                       <th>Achieved By</th>
                       <th>Description</th>
+                      <th>Documents</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -577,7 +735,43 @@ const AchievementsPage = () => {
                               achievement.user_type === 'FACULTY' ? 'Faculty' : 'Admin')}
                           {achievement.team_members && `, ${achievement.team_members}`}
                         </td>
-                        <td>{achievement.description}</td>
+                        <td>
+                          <div className="description-container">
+                            <span className="achivement-description">{achievement.description}</span>
+                            <div className="description-tooltip">
+                              {achievement.description}
+                            </div>
+                          </div>
+                          {/* Mobile-only document link that appears below description */}
+                          <div className="mobile-document-container">
+                            {achievement.document ? (
+                              <a
+                                href={achievement.document}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="mobile-document-link"
+                              >
+                                <span className="document-icon">📄</span> View Document
+                              </a>
+                            ) : (
+                              <span className="mobile-no-document">No file uploaded</span>
+                            )}
+                          </div>
+                        </td>
+                        <td>
+                          {achievement.document ? (
+                            <a
+                              href={achievement.document}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="document-link"
+                            >
+                              <span className="document-icon">📄</span> View Document
+                            </a>
+                          ) : (
+                            <span className="no-document">No file uploaded</span>
+                          )}
+                        </td>
                       </tr>
                     ))}
                   </tbody>
@@ -588,15 +782,15 @@ const AchievementsPage = () => {
                   <div className="pagination-container">
                     <div className="pagination">
                       {getPageNumbers().map((number, index) => (
-                        number === '...' ? 
-                        <span key={`ellipsis-${index}`} className="pagination-ellipsis">...</span> :
-                        <button
-                          key={number}
-                          onClick={() => paginate(number)}
-                          className={`page-btn ${currentPage === number ? 'active' : ''}`}
-                        >
-                          {number}
-                        </button>
+                        number === '...' ?
+                          <span key={`ellipsis-${index}`} className="pagination-ellipsis">...</span> :
+                          <button
+                            key={number}
+                            onClick={() => paginate(number)}
+                            className={`page-btn ${currentPage === number ? 'active' : ''}`}
+                          >
+                            {number}
+                          </button>
                       ))}
                     </div>
                   </div>
@@ -605,7 +799,7 @@ const AchievementsPage = () => {
             )}
           </div>
         </div>
-        
+
       </div>
       <ContactUs />
     </div>
