@@ -518,22 +518,37 @@ const ProjectsPage = () => {
                         <th>Project Name</th>
                         <th>Authors</th>
                         <th>Description</th>
+                        <th>Documents</th>
                       </tr>
                     </thead>
                     <tbody>
-                      {currentProjects.map((project, index) => (
-                        <tr key={project.id || index}>
-                          <td>{project.title}</td>
-                          <td>
-                            {project.user?.name || 
-                              (project.user_type === 'STUDENT' ? 'Student' : 
-                               project.user_type === 'FACULTY' ? 'Faculty' : 'Admin')}
-                            {project.team_members && `, ${project.team_members}`}
-                          </td>
-                          <td>{project.description}</td>
-                        </tr>
-                      ))}
-                    </tbody>
+  {currentProjects.map((project, index) => (
+    <tr key={project.id || index}>
+      <td>{project.title}</td>
+      <td>
+        {project.user?.name || 
+          (project.user_type === 'STUDENT' ? 'Student' : 
+           project.user_type === 'FACULTY' ? 'Faculty' : 'Admin')}
+        {project.team_members && `, ${project.team_members}`}
+      </td>
+      <td>{project.description}</td>
+      <td>
+        {project.document ? (
+          <a 
+            href={project.document} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="document-link"
+          >
+            <span className="document-icon">📄</span> View Document
+          </a>
+        ) : (
+          <span className="no-document">No file uploaded</span>
+        )}
+      </td>
+    </tr>
+  ))}
+</tbody>
                   </table>
                   
                   {/* Pagination Controls */}
@@ -570,7 +585,55 @@ const ProjectsPage = () => {
             border-radius: 8px;
             color: #dc3545;
           }
-          
+          /* Description single-line styling */
+.project-description {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 300px;
+  display: block;
+}
+
+.description-container {
+  position: relative;
+}
+
+.description-container:hover .description-tooltip {
+  display: block;
+}
+
+.description-tooltip {
+  display: none;
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  background-color: #333;
+  color: white;
+  padding: 10px;
+  border-radius: 4px;
+  z-index: 100;
+  width: 250px;
+  white-space: normal;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.description-tooltip:after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 20px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #333 transparent transparent transparent;
+}
+
+@media (max-width: 768px) {
+  .project-description {
+    max-width: 200px;
+  }
+}
           .retry-button {
             padding: 8px 16px;
             background: #dc3545;
