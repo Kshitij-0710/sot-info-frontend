@@ -1504,3 +1504,100 @@ body, html {
 .container-events {
   background-color: #000 !important;
 }
+
+/* Chronicles Preview Section */
+.chronicles-section {
+  padding: 4rem 0;
+  background-color: #000;
+}
+
+.chronicles-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.chronicles-preview {
+  position: relative;
+  width: 300px;
+  margin: 2rem auto;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s ease;
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.chronicles-preview:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 12px rgba(255, 255, 255, 0.2);
+}
+
+.chronicles-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 1rem;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.chronicles-preview:hover .chronicles-overlay {
+  opacity: 1;
+}
+
+/* Ensure PDF content is visible */
+.react-pdf__Page {
+  background-color: white;
+  border-radius: 4px;
+}
+
+.react-pdf__Document {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Loading and Error Messages for Chronicles */
+.loading-message,
+.error-message {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+  color: #fff;
+  background-color: #222;
+  border-radius: 4px;
+  padding: 1rem;
+  text-align: center;
+  gap: 1rem;
+}
+
+.error-message {
+  color: #ff4444;
+  background-color: rgba(255, 68, 68, 0.1);
+  border: 1px solid #ff4444;
+}
+
+.retry-button {
+  background-color: #f64758;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+}
+
+.retry-button:hover {
+  background-color: #e03747;
+}
