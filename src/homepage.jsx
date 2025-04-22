@@ -12,6 +12,8 @@ import './index.css';
 import TopContributions from "./topcontributions";
 // Import the PDF file
 import chroniclesPdf from './chronicles.pdf';
+// Import the January PDF
+import januaryPdf from './january.pdf';
 
 const ImageSlider = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -279,37 +281,8 @@ const PlacementHighlights = () => {
 
 // PDF Preview Component - Simple and Reliable Implementation
 const ChroniclesPreview = () => {
-  const [numPages, setNumPages] = useState(null);
-  const [pageNumber, setPageNumber] = useState(1);
-  const [isHovered, setIsHovered] = useState(false);
-
-  // Set up PDF.js worker
-  useEffect(() => {
-    pdfjs.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.js';
-  }, []);
-  
-
-  function onDocumentLoadSuccess({ numPages }) {
-    setNumPages(numPages);
-  }
-
-  function changePage(offset) {
-    setPageNumber(prevPageNumber => {
-      const newPageNumber = prevPageNumber + offset;
-      return Math.min(Math.max(1, newPageNumber), numPages);
-    });
-  }
-
-  function previousPage() {
-    changePage(-1);
-  }
-
-  function nextPage() {
-    changePage(1);
-  }
-
-  // CSS Styles for the component
-  const styles = {
+  // Common styles for PDF viewers
+  const commonStyles = {
     section: {
       padding: '40px 0',
       backgroundColor: '#000000'
@@ -326,8 +299,16 @@ const ChroniclesPreview = () => {
       marginBottom: '30px',
       color: '#ffffff'
     },
+    previewsContainer: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      justifyContent: 'center',
+      gap: '30px',
+      margin: '0 auto',
+      maxWidth: '1200px'
+    },
     previewCard: {
-      width: '500px', // Wider to accommodate PDF preview
+      width: '450px', // Slightly smaller for side-by-side
       margin: '0 auto',
       backgroundColor: '#111111',
       boxShadow: '0 4px 8px rgba(255,255,255,0.1)',
@@ -421,127 +402,171 @@ const ChroniclesPreview = () => {
     }
   };
 
-  return (
-    <section style={styles.section} className="chronicles-section">
-      <div style={styles.container} className="chronicles-container">
-        <h2 style={styles.heading} className="section-heading">Latest Chronicles</h2>
+  // Component for each PDF preview (reusable)
+  const PdfPreview = ({ pdfFile, title, subtitle, description }) => {
+    const [numPages, setNumPages] = useState(null);
+    const [pageNumber, setPageNumber] = useState(1);
+    const [isHovered, setIsHovered] = useState(false);
+
+    function onDocumentLoadSuccess({ numPages }) {
+      setNumPages(numPages);
+    }
+
+    function changePage(offset) {
+      setPageNumber(prevPageNumber => {
+        const newPageNumber = prevPageNumber + offset;
+        return Math.min(Math.max(1, newPageNumber), numPages);
+      });
+    }
+
+    function previousPage() {
+      changePage(-1);
+    }
+
+    function nextPage() {
+      changePage(1);
+    }
+
+    return (
+      <div 
+        style={{
+          ...commonStyles.previewCard,
+          ...(isHovered ? commonStyles.previewCardHover : {})
+        }}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        <div style={commonStyles.previewTop}>
+          <h3 style={commonStyles.pdfTitle}>
+            {title}
+          </h3>
+          
+          <p style={commonStyles.pdfSubtitle}>
+            {subtitle}
+          </p>
+        </div>
         
-        <div 
-          style={{
-            ...styles.previewCard,
-            ...(isHovered ? styles.previewCardHover : {})
-          }}
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-        >
-          <div style={styles.previewTop}>
-            <h3 style={styles.pdfTitle}>
-              SOT Chronicles
-            </h3>
-            
-            <p style={styles.pdfSubtitle}>
-              Latest Edition
-            </p>
-          </div>
-          
-          <div style={styles.pdfContainer}>
-            <div style={styles.controls}>
-              <div style={styles.pageControls}>
-                <button 
-                  type="button" 
-                  disabled={pageNumber <= 1} 
-                  onClick={previousPage}
-                  style={{
-                    ...styles.button,
-                    ...(pageNumber <= 1 ? styles.buttonDisabled : {})
-                  }}
-                >
-                  <svg 
-                    xmlns="http://www.w3.org/2000/svg" 
-                    width="16" 
-                    height="16" 
-                    viewBox="0 0 24 24" 
-                    fill="none" 
-                    stroke="currentColor" 
-                    strokeWidth="2" 
-                    strokeLinecap="round" 
-                    strokeLinejoin="round"
-                  >
-                    <polyline points="15 18 9 12 15 6"></polyline>
-                  </svg>
-                </button>
-                <p style={styles.pageInfo}>
-                  Page {pageNumber} of {numPages || '--'}
-                </p>
-                <button 
-                  type="button"
-                  disabled={pageNumber >= numPages} 
-                  onClick={nextPage}
-                  style={{
-                    ...styles.button,
-                    ...(pageNumber >= numPages ? styles.buttonDisabled : {})
-                  }}
-                >
-                  <svg 
-                    xmlns="http://www.w3.org/2000/svg" 
-                    width="16" 
-                    height="16" 
-                    viewBox="0 0 24 24" 
-                    fill="none" 
-                    stroke="currentColor" 
-                    strokeWidth="2" 
-                    strokeLinecap="round" 
-                    strokeLinejoin="round"
-                  >
-                    <polyline points="9 18 15 12 9 6"></polyline>
-                  </svg>
-                </button>
-              </div>
-            </div>
-            
-            <div style={styles.documentContainer}>
-              <Document
-                file={chroniclesPdf}
-                onLoadSuccess={onDocumentLoadSuccess}
-                loading={<div style={{color: '#ffffff', padding: '20px'}}>Loading PDF...</div>}
-                error={<div style={{color: '#e03747', padding: '20px'}}>Failed to load PDF!</div>}
+        <div style={commonStyles.pdfContainer}>
+          <div style={commonStyles.controls}>
+            <div style={commonStyles.pageControls}>
+              <button 
+                type="button" 
+                disabled={pageNumber <= 1} 
+                onClick={previousPage}
+                style={{
+                  ...commonStyles.button,
+                  ...(pageNumber <= 1 ? commonStyles.buttonDisabled : {})
+                }}
               >
-                <Page 
-                  pageNumber={pageNumber} 
-                  width={450}
-                  renderTextLayer={false}
-                  renderAnnotationLayer={false}
-                />
-              </Document>
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  width="16" 
+                  height="16" 
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  strokeWidth="2" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round"
+                >
+                  <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+              </button>
+              <p style={commonStyles.pageInfo}>
+                Page {pageNumber} of {numPages || '--'}
+              </p>
+              <button 
+                type="button"
+                disabled={pageNumber >= numPages} 
+                onClick={nextPage}
+                style={{
+                  ...commonStyles.button,
+                  ...(pageNumber >= numPages ? commonStyles.buttonDisabled : {})
+                }}
+              >
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  width="16" 
+                  height="16" 
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  strokeWidth="2" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round"
+                >
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </button>
             </div>
           </div>
           
-          <a 
-            href={chroniclesPdf}
-            download="chronicles.pdf"
-            style={{
-              ...styles.downloadBar,
-              textDecoration: 'none',
-              color: 'white'
-            }}
-          >
-            <svg 
-              xmlns="http://www.w3.org/2000/svg" 
-              width="16" 
-              height="16" 
-              viewBox="0 0 24 24" 
-              fill="none" 
-              stroke="currentColor" 
-              strokeWidth="2" 
-              strokeLinecap="round" 
-              strokeLinejoin="round"
+          <div style={commonStyles.documentContainer}>
+            <Document
+              file={pdfFile}
+              onLoadSuccess={onDocumentLoadSuccess}
+              loading={<div style={{color: '#ffffff', padding: '20px'}}>Loading PDF...</div>}
+              error={<div style={{color: '#e03747', padding: '20px'}}>Failed to load PDF!</div>}
             >
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-              <polyline points="7 10 12 15 17 10"></polyline>
-              <line x1="12" y1="15" x2="12" y2="3"></line>
-            </svg>
-            Download PDF
-          </a>
+              <Page 
+                pageNumber={pageNumber} 
+                width={400}
+                renderTextLayer={false}
+                renderAnnotationLayer={false}
+              />
+            </Document>
+          </div>
+        </div>
+        
+        <a 
+          href={pdfFile}
+          download={title.toLowerCase().replace(/\s+/g, '_') + '.pdf'}
+          style={{
+            ...commonStyles.downloadBar,
+            textDecoration: 'none',
+            color: 'white'
+          }}
+        >
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            width="16" 
+            height="16" 
+            viewBox="0 0 24 24" 
+            fill="none" 
+            stroke="currentColor" 
+            strokeWidth="2" 
+            strokeLinecap="round" 
+            strokeLinejoin="round"
+          >
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          Download PDF
+        </a>
+      </div>
+    );
+  };
+
+  return (
+    <section style={commonStyles.section} className="chronicles-section">
+      <div style={commonStyles.container} className="chronicles-container">
+        <h2 style={commonStyles.heading} className="section-heading">Publications</h2>
+        
+        <div style={commonStyles.previewsContainer}>
+          <PdfPreview 
+            pdfFile={chroniclesPdf}
+            title="SOST Chronicles"
+            subtitle="Latest Edition"
+            description="The latest edition of our flagship publication"
+          />
+          
+          <PdfPreview 
+            pdfFile={januaryPdf}
+            title="SOST Chronicles"
+            subtitle="January Edition"
+            description="January edition with exclusive content"
+          />
         </div>
       </div>
     </section>
