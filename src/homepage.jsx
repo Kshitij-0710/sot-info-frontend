@@ -13,7 +13,7 @@ import TopContributions from "./topcontributions";
 // Import the PDF file
 import chroniclesPdf from './chronicles.pdf';
 // Import the January PDF
-import januaryPdf from './january.pdf';
+import januaryPdf from './January.pdf';
 
 const ImageSlider = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
