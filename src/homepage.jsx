@@ -707,6 +707,7 @@ const HomePage = () => {
         </div>
         <div className="content-container">
           <PlacementHighlights />
+          <ChroniclesPreview />
           <section className="section-research">
             <div className="container-research">
               <h2 className="section-heading">Research, Projects & Achievements</h2>
@@ -724,7 +725,7 @@ const HomePage = () => {
               </div>
             </div>
           </section>
-          <ChroniclesPreview />
+          
           <TopContributions />
         </div>
         <ContactUs />
