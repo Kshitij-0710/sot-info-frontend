@@ -3,18 +3,25 @@ import "./styles/faculty.css";
 
 const facultyData = [
   {
-    name: "Dr. A. P. J. Kalam",
-    designation: "Professor of Computer Science",
-    department: "CSE",
-    email: "apjkalam@example.com",
-    image: `${import.meta.env.BASE_URL}images/faculty1.jpg`,
+    name: "Dr. Peplluis Esteva de la Rosa",
+    designation: "Executive Dean - School of Technology",
+    department: "Blockchain & DeFi Expert",
+    email: "peplluis.esteva@woxsen.edu.in",
+    image: "images/dean_sot.webp",
   },
   {
-    name: "Dr. Jane Doe",
-    designation: "Assistant Professor",
-    department: "ECE",
-    email: "janedoe@example.com",
-    image: `${import.meta.env.BASE_URL}images/faculty2.jpg`,
+    name: "Dr. Amogh Deshmukh",
+    designation: "Assistant Dean - Student Affairs",
+    department: "Associate Professor - School of Technology",
+    email: "amogh.deshmukh@woxsen.edu.in",
+    image: "/images/dr_amogh.webp",
+  },
+  {
+    name: "Dr. Daya Shankar",
+    designation: "Dean - School of Sciences",
+    department: "School of Sciences",
+    email: "daya.shankar@woxsen.edu.in",
+    image: "/images/dean_sos.webp",
   },
   // Add more as needed
 ];
@@ -34,7 +41,9 @@ const FacultyPage = () => {
             <h3>{faculty.name}</h3>
             <p>{faculty.designation}</p>
             <p>{faculty.department}</p>
-            <p>{faculty.email}</p>
+            <p className="faculty-email">
+              <a href={`mailto:${faculty.email}`}>{faculty.email}</a>
+            </p>
           </div>
         ))}
       </div>
