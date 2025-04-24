@@ -469,8 +469,8 @@ return (
               name="team_members" 
               value={formData.team_members} 
               onChange={handleChange} 
-              required 
             />
+            <small>Optional: Leave blank if no team members</small>
           </div>
 
           <div className="form-group">
