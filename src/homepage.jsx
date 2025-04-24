@@ -293,12 +293,12 @@ const ChroniclesPreview = () => {
   const pdfFiles = {
     chronicles: {
       file: chroniclesPdf,
-      title: 'SOT Chronicles',
+      title: 'SCITECH Chronicles',
       subtitle: 'Latest Edition'
     },
     january: {
       file: januaryPdf,
-      title: 'SOT Chronicles',
+      title: 'SCITECH Chronicles',
       subtitle: 'January Edition'
     }
   };
@@ -715,11 +715,11 @@ const HomePage = () => {
               <div className="research-section-content">
                 <div className="research-paragraphs">
                   <p className="research-paragraph">
-                    At SOT, both students and faculty are actively involved in research, hands-on projects, and academic achievements across various fields. From <strong>AI and cybersecurity</strong> to <strong>renewable energy</strong> and <strong>biomedical engineering</strong>, research here focuses on practical solutions and real-world impact.
+                    At SOST, both students and faculty are actively involved in research, hands-on projects, and academic achievements across various fields. From <strong>AI and cybersecurity</strong> to <strong>renewable energy</strong> and <strong>biomedical engineering</strong>, research here focuses on practical solutions and real-world impact.
                   </p>
                   
                   <p className="research-paragraph">
-                    Faculty members contribute through publications, industry collaborations, and research initiatives, while students take on technical projects, competitions, and entrepreneurial ventures. Their combined efforts have led to patents, conference presentations, and awards, highlighting SOT's commitment to innovation and academic excellence.
+                    Faculty members contribute through publications, industry collaborations, and research initiatives, while students take on technical projects, competitions, and entrepreneurial ventures. Their combined efforts have led to patents, conference presentations, and awards, highlighting SOST's commitment to innovation and academic excellence.
                   </p>
                 </div>
               </div>
