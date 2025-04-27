@@ -1,3 +1,4 @@
+// All imports unchanged
 import React, { useEffect, useState } from "react";
 import { FaBars, FaSignOutAlt, FaTimes, FaChevronDown } from "react-icons/fa";
 import { Link, useNavigate, useLocation } from "react-router-dom";
@@ -11,53 +12,36 @@ const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Check auth status whenever the component mounts or location changes
   useEffect(() => {
     checkAuthStatus();
-    
-    // Check for token expiration
     const checkTokenExpiration = () => {
       const tokenExpiry = localStorage.getItem('token_expiry');
       if (tokenExpiry) {
         const expiryTime = parseInt(tokenExpiry, 10);
         const currentTime = new Date().getTime();
-        
         if (currentTime > expiryTime) {
-          // Token has expired, log the user out
           handleLogout();
           console.log('Token expired, user logged out automatically');
         }
       }
     };
-    
-    // Check token expiration immediately
     checkTokenExpiration();
-    
-    // Set interval to check expiration every minute
     const interval = setInterval(checkTokenExpiration, 60000);
-    
-    // Listen for storage events (login/logout in other tabs)
     window.addEventListener("storage", checkAuthStatus);
-    
-    // Custom event for login state changes
     window.addEventListener("auth_state_changed", checkAuthStatus);
-    
     return () => {
       window.removeEventListener("storage", checkAuthStatus);
       window.removeEventListener("auth_state_changed", checkAuthStatus);
       clearInterval(interval);
     };
-  }, [location.pathname]); // Re-run when route changes
+  }, [location.pathname]);
 
   const checkAuthStatus = () => {
     const token = localStorage.getItem("access_token") || localStorage.getItem("token");
     const tokenExpiry = localStorage.getItem("token_expiry");
-    
-    // Check if token exists and hasn't expired
     if (token && tokenExpiry) {
       const expiryTime = parseInt(tokenExpiry, 10);
       const currentTime = new Date().getTime();
-      
       if (currentTime <= expiryTime) {
         setIsLoggedIn(true);
         const userStr = localStorage.getItem("user");
@@ -70,7 +54,6 @@ const Navbar = () => {
           }
         }
       } else {
-        // Token expired
         handleLogout();
       }
     } else {
@@ -85,14 +68,10 @@ const Navbar = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("token_expiry");
     localStorage.removeItem("user");
-
     setIsLoggedIn(false);
     setUserData(null);
     setMenuOpen(false);
-    
-    // Dispatch auth state changed event
     window.dispatchEvent(new Event("auth_state_changed"));
-    
     navigate("/");
   };
 
@@ -102,22 +81,17 @@ const Navbar = () => {
   };
 
   const toggleCategoriesDropdown = (e) => {
-    if (window.innerWidth <= 768) {
-      // For mobile view, don't prevent default to allow navigation
-      return;
-    }
+    if (window.innerWidth <= 768) return;
     e.preventDefault();
     setCategoriesOpen(!categoriesOpen);
   };
 
-  // Close categories dropdown when clicking outside
   useEffect(() => {
     const closeDropdown = () => setCategoriesOpen(false);
     document.addEventListener('click', closeDropdown);
     return () => document.removeEventListener('click', closeDropdown);
   }, []);
 
-  // Stop propagation to prevent the document click listener from closing the dropdown
   const handleCategoryClick = (e) => {
     e.stopPropagation();
   };
@@ -130,12 +104,10 @@ const Navbar = () => {
         </Link>
       </div>
 
-      {/* Hamburger Icon */}
       <div className="hamburger" onClick={() => setMenuOpen(true)}>
         <FaBars />
       </div>
 
-      {/* Mobile Menu */}
       <div className={`mobile-menu ${menuOpen ? "open" : ""}`}>
         <div className="close-icon" onClick={() => setMenuOpen(false)}>
           <FaTimes />
@@ -152,21 +124,21 @@ const Navbar = () => {
             <Link to="/projects" onClick={() => setMenuOpen(false)}>Projects</Link>
             <Link to="/research" onClick={() => setMenuOpen(false)}>Research</Link>
             <Link to="/achievements" onClick={() => setMenuOpen(false)}>Achievements</Link>
+            <Link to="/faculty" onClick={() => setMenuOpen(false)}>Faculty</Link> {/* ✅ New link */}
           </div>
         </div>
         <Link to="/placements" onClick={() => setMenuOpen(false)}>Placements</Link>
         <Link to="/contactpage" onClick={() => setMenuOpen(false)}>Contact</Link>
         <Link to="/events" onClick={() => setMenuOpen(false)}>Events</Link>
-
         {isLoggedIn ? (
           <>
             <Link to="/forms" onClick={() => setMenuOpen(false)}>Forms</Link>
             <div className="user-dropdown">
-            <img 
-              src={`${import.meta.env.BASE_URL}images/pfp.jpeg`} 
-              alt="Profile" 
-              className="profile-img"
-            />
+              <img 
+                src={`${import.meta.env.BASE_URL}images/pfp.jpeg`} 
+                alt="Profile" 
+                className="profile-img"
+              />
               <div className="dropdown-content">
                 <span>Hello, {getUserDisplayName()}</span>
                 <button onClick={handleLogout} className="logout-button">
@@ -180,11 +152,8 @@ const Navbar = () => {
         )}
       </div>
 
-      {/* Desktop Menu */}
       <div className="nav-links">
         <Link to="/">Home</Link>
-        
-        {/* Categories Dropdown */}
         <div className="categories-dropdown" onClick={handleCategoryClick}>
           <a href="#" onClick={toggleCategoriesDropdown}>
             Categories <FaChevronDown className={categoriesOpen ? "rotate-icon" : ""} />
@@ -194,18 +163,13 @@ const Navbar = () => {
             <Link to="/research">Research</Link>
             <Link to="/achievements">Achievements</Link>
             <Link to="/events">Events</Link>
-
-            
-
+            <Link to="/faculty">Faculty</Link> {/* ✅ New link */}
           </div>
         </div>
         <Link to="/posts">Posts</Link>
         <Link to="/placements">Placements</Link>
         <Link to="/contactpage">Contact</Link>
-        
-        
         {isLoggedIn && <Link to="/forms">My Work</Link>}
-
         {isLoggedIn ? (
           <div className="user-dropdown">
             <img 
@@ -213,9 +177,8 @@ const Navbar = () => {
               alt="Profile" 
               className="profile-img"
             />
-
             <div className="dropdown-content">
-              <span>Hello, <br></br>{getUserDisplayName()}</span>
+              <span>Hello, <br />{getUserDisplayName()}</span>
               <button onClick={handleLogout} className="logout-button">
                 <FaSignOutAlt /> Logout
               </button>
