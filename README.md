@@ -95,5 +95,5 @@ The frontend connects to the SOT Backend API for data retrieval and updates. Con
 ## Contact
 
 For questions or support, please contact:
-- Email: sot-support@example.com
+- Email: sost@woxsen.edu.in
 - Issue Tracker: GitHub Issues
