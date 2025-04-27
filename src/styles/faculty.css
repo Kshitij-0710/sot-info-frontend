@@ -1,4 +1,4 @@
-/* Enhanced faculty.css - black background with #f64758 highlights and animations */
+/* faculty.css - modified for 4 cards per row */
 
 .faculty-page {
   padding: 3rem 2rem;
@@ -19,9 +19,24 @@
 .faculty-grid {
   display: grid;
   gap: 2rem;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   justify-items: center;
+  transition: all 0.5s ease; /* <-- smooth layout transition */
 }
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .faculty-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .faculty-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 
 .faculty-card {
   background-color: #1a1a1a;
@@ -44,7 +59,7 @@
 .faculty-image {
   width: 100%;
   height: 350px;
-  object-fit:cover;
+  object-fit: cover;
   object-position: center;
   background-color: #000;
   border-radius: 1rem;
@@ -60,7 +75,6 @@
   margin-bottom: 0.5rem;
 }
 
-/* Clickable Email */
 .faculty-card a {
   text-decoration: none;
   color: #ccc;
@@ -72,7 +86,6 @@
   text-decoration: underline;
 }
 
-/* HOD Highlight Badge */
 .faculty-card.hod::before {
   content: "HOD";
   position: absolute;
@@ -87,7 +100,6 @@
   box-shadow: 0 0 10px rgba(246, 71, 88, 0.5);
 }
 
-/* Fade In Animation */
 @keyframes fadeInUp {
   from {
     opacity: 0;
