@@ -110,3 +110,191 @@
     transform: translateY(0);
   }
 }
+
+.faculty-modal-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.faculty-modal {
+  background-color: #1a1a1a;
+  padding: 2rem;
+  border-radius: 1rem;
+  width: 90%;
+  max-width: 800px;
+  color: #f0f0f0;
+  position: relative;
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  animation: fadeInUp 0.5s ease;
+  box-shadow: 0 0 25px rgba(246, 71, 88, 0.3);
+}
+
+.modal-image-wrapper {
+  flex: 1 1 300px;
+  max-width: 300px;
+}
+
+.modal-image {
+  width: 100%;
+  height: auto;
+  border-radius: 1rem;
+  border: 3px solid #f64758;
+  object-fit: cover;
+  object-position: center;
+  background-color: #000;
+}
+
+.modal-content {
+  flex: 2 1 400px;
+  overflow-y: auto;
+  max-height: 70vh;
+}
+
+.modal-section {
+  margin-top: 1rem;
+}
+
+.modal-section ul {
+  padding-left: 1.2rem;
+  margin-top: 0.5rem;
+}
+
+.modal-section li {
+  margin-bottom: 0.3rem;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px; right: 15px;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: #f64758;
+  cursor: pointer;
+}
+
+/* Scrollbar Styling */
+.modal-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+  background: #1a1a1a;
+  border-radius: 10px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+  background-color: #f64758;
+  border-radius: 10px;
+  border: 2px solid #1a1a1a;
+}
+
+.modal-content {
+  scrollbar-width: thin;
+  scrollbar-color: #f64758 #1a1a1a;
+}
+
+.filter-bar {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.filter-bar button {
+  background-color: #1a1a1a;
+  color: #f0f0f0;
+  border: 2px solid #f64758;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filter-bar button:hover,
+.filter-bar button.active {
+  background-color: #f64758;
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .faculty-modal {
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem;
+    max-height: 90vh;
+  }
+
+  .modal-image-wrapper {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .modal-image {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .modal-content {
+    max-height: 50vh;
+    overflow-y: auto;
+    width: 100%;
+  }
+
+  .close-btn {
+    top: 8px;
+    right: 12px;
+    font-size: 1.8rem;
+  }
+}
+
+@keyframes modalFadeOutScale {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+}
+
+.faculty-modal.closing {
+  animation: modalFadeOutScale 0.3s ease forwards;
+}
+
+.search-bar {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.search-bar input {
+  width: 300px;
+  max-width: 90vw;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  border: 2px solid #f64758;
+  font-size: 1rem;
+  color: #f0f0f0;
+  background-color: #1a1a1a;
+  transition: border-color 0.3s ease;
+}
+
+.search-bar input::placeholder {
+  color: #bbb;
+}
+
+.search-bar input:focus {
+  outline: none;
+  border-color: #ff5964;
+}
