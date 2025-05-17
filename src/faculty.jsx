@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import facultyData from "./data/facultyData.json";
 import "./styles/faculty.css";
 
@@ -8,6 +8,14 @@ const FacultyPage = () => {
   const [selectedSchool, setSelectedSchool] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
 
+  const modalRef = useRef(null);
+
+  useEffect(() => {
+    if (selectedFaculty && modalRef.current) {
+      modalRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }, [selectedFaculty]);
+
   const closeModal = () => {
     setIsClosing(true);
     setTimeout(() => {
@@ -16,7 +24,6 @@ const FacultyPage = () => {
     }, 300);
   };
 
-  // Filter faculty by school and search term
   const filteredFaculty = facultyData
     .filter(
       (faculty) =>
@@ -27,7 +34,6 @@ const FacultyPage = () => {
       faculty.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
-  // Helper to render content as array
   const renderList = (data) => {
     if (!data) return null;
     const items = Array.isArray(data)
@@ -48,7 +54,6 @@ const FacultyPage = () => {
     <div className="faculty-page">
       <h1 className="faculty-title">Meet Our Faculty</h1>
 
-      {/* School Filter */}
       <div className="filter-bar">
         {["All", "School of Technology", "School of Sciences"].map((school) => (
           <button
@@ -61,7 +66,6 @@ const FacultyPage = () => {
         ))}
       </div>
 
-      {/* Search Bar */}
       <div className="search-bar">
         <input
           type="text"
@@ -71,7 +75,6 @@ const FacultyPage = () => {
         />
       </div>
 
-      {/* Faculty Grid */}
       <div className="faculty-grid">
         {filteredFaculty.map((faculty, index) => (
           <div
@@ -90,12 +93,12 @@ const FacultyPage = () => {
         ))}
       </div>
 
-      {/* Modal */}
       {selectedFaculty && (
         <div className="faculty-modal-overlay" onClick={closeModal}>
           <div
             className={`faculty-modal ${isClosing ? "closing" : ""}`}
             onClick={(e) => e.stopPropagation()}
+            ref={modalRef}
           >
             <button className="close-btn" onClick={closeModal}>
               ×
@@ -109,9 +112,16 @@ const FacultyPage = () => {
               />
             </div>
 
-            <div className="modal-content">
+            {/* Mobile-only name/designation block */}
+            <div className="modal-header-mobile">
               <h2>{selectedFaculty.name}</h2>
               <h4>{selectedFaculty.designation}</h4>
+            </div>
+
+            <div className="modal-content">
+              {/* Desktop-only name/designation */}
+              <h2 className="modal-header-desktop">{selectedFaculty.name}</h2>
+              <h4 className="modal-header-desktop">{selectedFaculty.designation}</h4>
 
               {selectedFaculty.education && (
                 <div className="modal-section">

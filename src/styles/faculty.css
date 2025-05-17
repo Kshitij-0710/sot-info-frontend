@@ -21,10 +21,9 @@
   gap: 2rem;
   grid-template-columns: repeat(4, 1fr);
   justify-items: center;
-  transition: all 0.5s ease; /* <-- smooth layout transition */
+  transition: all 0.5s ease;
 }
 
-/* Responsive */
 @media (max-width: 1024px) {
   .faculty-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -36,7 +35,6 @@
     grid-template-columns: 1fr;
   }
 }
-
 
 .faculty-card {
   background-color: #1a1a1a;
@@ -111,6 +109,7 @@
   }
 }
 
+/* Modal Styling */
 .faculty-modal-overlay {
   position: fixed;
   top: 0; left: 0;
@@ -121,6 +120,7 @@
   align-items: center;
   z-index: 1000;
   padding: 1rem;
+  overflow-y: auto;
 }
 
 .faculty-modal {
@@ -174,7 +174,8 @@
 
 .close-btn {
   position: absolute;
-  top: 10px; right: 15px;
+  top: 10px;
+  right: 15px;
   background: none;
   border: none;
   font-size: 2rem;
@@ -186,30 +187,27 @@
 .modal-content::-webkit-scrollbar {
   width: 8px;
 }
-
 .modal-content::-webkit-scrollbar-track {
   background: #1a1a1a;
   border-radius: 10px;
 }
-
 .modal-content::-webkit-scrollbar-thumb {
   background-color: #f64758;
   border-radius: 10px;
   border: 2px solid #1a1a1a;
 }
-
 .modal-content {
   scrollbar-width: thin;
   scrollbar-color: #f64758 #1a1a1a;
 }
 
+/* Filter bar */
 .filter-bar {
   display: flex;
   gap: 1rem;
   justify-content: center;
   margin-bottom: 2rem;
 }
-
 .filter-bar button {
   background-color: #1a1a1a;
   color: #f0f0f0;
@@ -219,35 +217,70 @@
   cursor: pointer;
   transition: all 0.3s ease;
 }
-
 .filter-bar button:hover,
 .filter-bar button.active {
   background-color: #f64758;
   color: #fff;
 }
 
+/* Show name + designation under image on mobile */
+.modal-header-mobile {
+  display: none;
+  text-align: center;
+  padding: 0.5rem 1rem 0;
+  color: #f0f0f0;
+}
+.modal-header-mobile h2 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #f64758;
+  margin-bottom: 0.2rem;
+}
+.modal-header-mobile h4 {
+  font-size: 1rem;
+  font-weight: normal;
+  color: #ccc;
+  margin-bottom: 0.5rem;
+}
+
+/* Mobile Responsive Modal Fix */
 @media (max-width: 768px) {
   .faculty-modal {
     flex-direction: column;
-    align-items: center;
-    padding: 1.5rem;
+    padding: 1rem;
     max-height: 90vh;
+    overflow-y: auto;
   }
 
   .modal-image-wrapper {
-    max-width: 100%;
     width: 100%;
+    max-width: 100%;
+    max-height: 300px;
+    margin-bottom: 0.5rem;
   }
 
   .modal-image {
-    max-width: 100%;
+    width: 100%;
     height: auto;
+    object-fit: contain;
+  }
+
+  .modal-header-mobile {
+    display: block;
   }
 
   .modal-content {
-    max-height: 50vh;
-    overflow-y: auto;
+    max-height: unset;
     width: 100%;
+    padding-top: 0;
+  }
+
+  .modal-header-desktop {
+    display: none;
+  }
+
+  .faculty-modal-overlay {
+    align-items: flex-start;
   }
 
   .close-btn {
@@ -257,6 +290,30 @@
   }
 }
 
+@media (max-width: 768px) {
+  .faculty-modal-overlay {
+    align-items: flex-start;
+    overflow-y: auto;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  .faculty-modal {
+    flex-direction: column;
+    max-height: unset;
+    width: 100%;
+    margin: auto;
+  }
+
+  .modal-content {
+    max-height: unset;
+    overflow-y: visible;
+    padding-bottom: 1rem;
+  }
+}
+
+
+/* Closing animation */
 @keyframes modalFadeOutScale {
   from {
     opacity: 1;
@@ -267,7 +324,6 @@
     transform: scale(0.8);
   }
 }
-
 .faculty-modal.closing {
   animation: modalFadeOutScale 0.3s ease forwards;
 }
@@ -277,7 +333,6 @@
   justify-content: center;
   margin-bottom: 1.5rem;
 }
-
 .search-bar input {
   width: 300px;
   max-width: 90vw;
@@ -289,11 +344,9 @@
   background-color: #1a1a1a;
   transition: border-color 0.3s ease;
 }
-
 .search-bar input::placeholder {
   color: #bbb;
 }
-
 .search-bar input:focus {
   outline: none;
   border-color: #ff5964;
