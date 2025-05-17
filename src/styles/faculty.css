@@ -245,10 +245,6 @@
 
 /* Mobile Responsive Modal Fix */
 @media (max-width: 768px) {
-  .modal-header-desktop {
-    display: none;
-  }
-
   .faculty-modal {
     flex-direction: column;
     padding: 1rem;
@@ -374,4 +370,18 @@
   color: #ccc;
   font-weight: 500;
   margin: 0;
+}
+
+/* Hide desktop header on mobile */
+@media (max-width: 768px) {
+  .modal-header-desktop {
+    display: none;
+  }
+}
+
+/* Hide mobile header on desktop */
+@media (min-width: 769px) {
+  .modal-header-mobile {
+    display: none;
+  }
 }
