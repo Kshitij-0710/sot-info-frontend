@@ -1,0 +1,979 @@
+[
+  {
+    "name": "Dr. Peplluis Esteva de la Rosa",
+    "imageURL": "/images/faculty/1.png",
+    "designation": "Executive Dean - School of Technology",
+    "education": [
+      "MBA, University of Girona 2002",
+      "PhD of Informatics (AI), Autonomous University of Barcelona 1993"
+    ],
+    "specialization": [
+      "Blockchain",
+      "Intelligent agents",
+      "Virtual currencies",
+      "Digital preservation and their applications"
+    ],
+    "research": [
+      "Computational Entanglement in Decentralised Artificial Intelligence",
+      "Decentralised Ledger Technologies"
+    ],
+    "courses_taught": [
+      "Blockchain",
+      "Artificial Intelligence",
+      "Automatic Control",
+      "Robotics",
+      "Electronics",
+      "Software Fundamentals",
+      "Industrial Informatics",
+      "Intelligent Agents",
+      "Decentralised Artificial Intelligence",
+      "Systems Engineering"
+    ],
+    "teaching_experience": "32 years",
+    "research_experience": "36 years"
+  },
+  {
+    "name": "Dr. Daya Shankar",
+    "imageURL": "/images/faculty/2.png",
+    "designation": "Dean - School of Sciences",
+    "education": [
+      "Ph.D., IIT Guwahati, Assam"
+    ],
+    "specialization": [
+      "Mechanical Engineering",
+      "Fluid and Thermal Engineering",
+      "Medical Imaging",
+      "AI in healthcare",
+      "Computer-Aided Detection (CADe) and Diagnosis (CADx)",
+      "NLP in Imaging",
+      "Renewable and Green energy"
+    ],
+    "research": [
+      "Non-linear Dynamics",
+      "Thermal Engineering",
+      "Heat Transfer",
+      "Nuclear Reactor Thermal Hydraulics",
+      "Application of AI in Mechanical systems",
+      "CFD and FEM",
+      "Fluid Dynamics",
+      "Solar Technology",
+      "AI in Medical Imaging"
+    ],
+    "courses_taught": [
+      "Integrating Machine Learning Models into Web Applications",
+      "Engineering Drawing",
+      "AI in Medical Imaging",
+      "Computer-Aided Design (CAD)",
+      "CADe",
+      "CADx",
+      "Thermal Hydraulics",
+      "Computational Fluid Dynamics"
+    ]
+  },
+  {
+    "name": "Dr. Beauty Pandey",
+    "designation": "Associate Dean – School of Sciences",
+    "education": [
+      "Post Ph.D. (DST Women Scientist) IIT Madras",
+      "Ph.D. IIT-ISM Dhanbad",
+      "M.Phil. IIT-ISM Dhanbad"
+    ],
+    "specialization": "Material Sc., Nanophysics, Engineering Physics, Thermodynamics, Mechanics & Renewable Energy",
+    "research": "Solar Energy, Photocatalysis, Composites, Nanostructures, Nanotechnology & Experimental Material Sc.",
+    "imageURL": "/images/faculty/3.png"
+  },
+  {
+    "name": "Prof. Amogh Deshmukh",
+    "designation": "Assistant Dean – Student Affairs -School of Technology",
+    "education": [
+      "Pursuing PHD in Cybersecurity",
+      "B. Tech Computer Science and Engineering, VTU",
+      "M.Tech, JNTUH",
+      "12th Centreville High School, USA."
+    ],
+    "specialization": "Computer Networks & Information Security",
+    "research": "Cybersecurity, intrusion detection, and machine learning applications for securing IoT systems. Security frameworks, CNN-based intrusion detection, and integrating security into agile software development.",
+    "courses_taught": "Penetration Testing, Ethical Hacking, Software Testing, OOPS Using C++, JAVA, Web Technologies, Python, C, Full Stack Development (MERN), Operating Systems, Computer Networks, Data Structures, Computer Organization and Architecture, Machine Learning.",
+    "years of teaching experience": "10",
+    "years of research experience": "4",
+    "imageURL": "/images/faculty/4.png"
+  },
+  {
+    "name": "Dr. Sarah Mariam Roy",
+    "designation": "Assistant Dean – Academics",
+    "education": [
+      "M.Phil and Ph.D in English and Comparative Literature"
+    ],
+    "specialization": "English Language and Literature; Communication Skills; Translation Studies",
+    "research": "Relevance Theory, Comunicative Paradigm, Communication Analysis, Comparative Translation Studies",
+    "courses_taught": "English Language and Literature, Translation Studies, Communication Skills, Business Communication",
+    "years of teaching experience": "5",
+    "imageURL": "/images/faculty/5.png"
+  },
+  {
+    "name": "Dr. Jubrin Monday Abdullahi",
+    "designation": "Asst. Profesor/Head International Relations",
+    "education": [
+      "B.Sc., M.Sc., University of Ilorin Nigeria",
+      "Ph.D. Computer Science(2018) FUT Minna Nigeria."
+    ],
+    "specialization": "Computer Science",
+    "research": "Cyber Secure Computing, Privacy-Preserving Computation, Machine Learning, Post-Quantum Cryptographic Algorithms, Blockchain, E- Learning & E-Proctoring.",
+    "courses_taught": "CTPS (Computational Thinking and Problem Solving with Python), SSD (Software System Design, Object-Oriented Programming with Java, Computer Architecture and Organisation, Compiler Design and Construction, Algorithm Design and Complexity Analysis.",
+    "years of teaching experience": "20 Years",
+    "years of research experience": "10 Years",
+    "imageURL": "/images/faculty/6.png"
+  },
+  {
+    "name": "Dr Amit Swamy",
+    "designation": "Associate Professor, School of Technology",
+    "education": [
+      "University of Hull, East Yorkshire, UK PhD in Mechanical (Medical) Engineering University of Hull, East Yorkshire, UK",
+      "Post Graduate research training certificate in Mechanical Engineering"
+    ],
+    "specialization": "Mechanical and Medical Engineering Robotics, AI, and Machine Learning Applications Biomechanics and Biomedical Engineering Sustainable Engineering and Smart Manufacturing",
+    "research": "Applied interdisciplinary research in medical and engineering,applications,Machine Learning and AI applications in healthcare and industry Robotics, biomechanics, and smart materials,Energy systems, sustainability, and Industry 4.0/5.0 solutions Computational modeling and optimization techniques",
+    "courses_taught": "Mechanical and Industrial Engineering (Various UG and PG Courses),AI in Mechanical and Industrial Engineering Robotics, Mechatronics, and Swarm Intelligence,Biomedical Engineering (Biomechanics, Smart Implants),Advanced Manufacturing & Industry 4.0",
+    "imageURL": "/images/faculty/7.png"
+  },
+  {
+    "name": "Dr. Ramakrishna Madaka",
+    "designation": "Assistant Dean – Student Affairs",
+    "education": [
+      "Post Ph.D. (Senior Project Scientist, Post-Doc), IIT Madras",
+      "Ph.D. IIT Guwahati",
+      "MTech. IIT Kharagpur"
+    ],
+    "specialization": "Photovoltaics, Semiconductors, Thin films, Solid State Materials",
+    "research": "Tandem and Hetero junction silicon solar cells, Inorganic-Organic solar cells, Flexible solar cells, Passivating contacts, Transition metal Oxides, Si based solar cells, Simulation of devices",
+    "imageURL": "/images/faculty/8.png"
+  },
+  {
+    "name": "Dr. Dipak Kumar Sahoo",
+    "designation": "Assistant Dean – Academic Affairs",
+    "education": [
+      "Post Ph.D. (Post-Doc), IIT Bombay",
+      "Ph.D. National Institute of Science education and research (NISER) Bhubaneswar"
+    ],
+    "specialization": "Physical Chemistry and Spectroscopy",
+    "research": "Photophysical studies of fluorogenic molecules, Drug-protein interactions, protein-solvent interactions and dynamics, non- covalent interactions in nucleobases and nucleic acids, Ionic liquids",
+    "imageURL": "/images/faculty/9.png"
+  },
+  {
+    "name": "Dr S Bhanu Prakash",
+    "designation": "Assistant Professor, School of Technology",
+    "education": [
+      "PhD in Electrical, DIT University",
+      "M. Tech in Power Electronics, JNTU Hyderabad",
+      "B. Tech in Electrical & Electronics Engineering, JNTU Hyderabad."
+    ],
+    "specialization": "Power Electronics & Drives, Renewable Energy - Solar PV system",
+    "research": "Mitigation of Solar PV Power Generation Fluctuations, Energy Storage System-Supercapacitors, Solar PV waste management",
+    "courses_taught": "Basic Electrical & Electronics Engineering, Engineering Concepts in IoT",
+    "years of teaching experience": "14 years",
+    "years of research experience": "5 years",
+    "imageURL": "/images/faculty/10.png"
+  },
+  {
+    "name": "Dr. Brundaban Mishra",
+    "designation": "Assistant Professor, School of Technology",
+    "education": [
+      "Postdoc in South Asian Studies from Kyoto University Japan as a JSPS Fellow",
+      "Ph. D in Indian History from Jawaharlal Nehru University, New Delhi, India"
+    ],
+    "specialization": "South Asian History, Indian History, Cultural Anthropology, Global and Legal History",
+    "research": "State Formation, Question of Legitimacy, Social Transformation, Vernacular Language Policy, Politics of Identity, Tribal Studies, History of Princely State’s",
+    "courses_taught": "World Civilization, South Asian History, History of Art and Architecture, International Relations, research Methodology in Social Sciences, Indian Knowledge System, Understanding India.",
+    "Years of Experience in Teaching": "12 Year",
+    "Years of Experience in research": "10 Year",
+    "imageURL": "/images/faculty/11.png"
+  },
+  {
+    "name": "Dr. Syed Javeed",
+    "designation": "Assistant Professor, School of Technology",
+    "education": [
+      "Ph.D."
+    ],
+    "specialization": "Computer Science",
+    "research": "Machine Learning, Data Mining, Feature Selection/ Feature Engineering Models, Predictive Analytics, Application Domain: Healthcare",
+    "courses_taught": "DSA (Data Structures and Algorithms with Python), CTPS (Computational Thinking and Problem Solving with Python), OS (Operating Systems), Machine Learning, Predictive Analytics, Python Automation, Data Mining, DBMS, R, etc.",
+    "years of teaching experience": "13 Years",
+    "years of research experience": "7 Years",
+    "imageURL": "/images/faculty/12.png"
+  },
+  {
+    "name": "Prof. Vaishali Thakur",
+    "designation": "Assistant Professor, School of Technology",
+    "education": [
+      "MTech"
+    ],
+    "specialization": "Information Security and Cyber Forensic",
+    "research": "Cyber security, Digital Forensic, Malware Analysis, Vulnerability Assessment and Penetration Testing, Network Security, Intrusion detection and prevention system.",
+    "courses_taught": "Cloud Computing, Network Security, Cryptography, Malware Analysis.",
+    "years of teaching experience": "10 Months",
+    "imageURL": "/images/faculty/13.png"
+  },
+  {
+    "name": "Dr. Segun Emmauel Ibitoye",
+    "designation": "Assistant Professor IR Coordinator- School of Technology",
+    "education": [
+      "B.Eng., M.Eng., University of Ilorin, Nigeria",
+      "Ph.D., University of Johannesburg, South Africa"
+    ],
+    "specialization": "Mechanical Engineering (Production)",
+    "research": "Biomass Energy Conversion, Material Characterization, Mechanical Engineering Design, Modelling and Simulation.",
+    "courses_taught": "Computational Thinking and Problem Solving with Python, OOPs with JAVA",
+    "years of teaching experience": "10 Years",
+    "years of research experience": "7",
+    "imageURL": "/images/faculty/14.png"
+  },
+  {
+    "name": "Prof. Venkata Satya Madhav M",
+    "designation": "Professor of Practice, School of Technology",
+    "education": [
+      "Ph.D Scholar - XLRI, LCM-IIM-Ahmedabad ",
+      "MBA (Strategy and Finance - GLIM, IIT SSB-USA)",
+      "PG - JNTU, MS (Electronics) - (ANU)",
+      "Six Sigma Black Belt - GE"
+    ],
+    "specialization": "Fin Tech and Investment Banking, GEN AI, Blockchain and LLM",
+    "research": "Leadership and General Management",
+    "courses_taught": "Data Mining, Data Analytics, Data Visualization, CFA Level 1, 2, Risk Management, Digital Marketing, Product Management and Fin Tech",
+    "Years of Teaching experience": "3",
+    "years of research experience": "2",
+    "Year of Industry experience": "25",
+    "imageURL": "/images/faculty/15.png"
+  },
+  {
+    "name": "Prof. Sandeep Dasari",
+    "designation": "Assistant Professor, School of Technology",
+    "education": [
+      "M. tech (Ph.D)"
+    ],
+    "specialization": "Computer Science",
+    "research": "Cyber security, machine learning, Big Data, Federated Learning",
+    "courses_taught": "Software engineering, Database management Systems, Web technologies, Data Structures",
+    "years of teaching experience": "3",
+    "years of research experience": "4",
+    "imageURL": "/images/faculty/16.png"
+  },
+  {
+    "name": "Dr. Bhargav Prajwal Pathri",
+    "designation": "Associate Professor, School of Technology",
+    "education": [
+      "Master's in automotive engineering, Coventry University",
+      "Ph.D. in Mechanical Engineering From MNIT Jaipur"
+    ],
+    "specialization": "Mechanical",
+    "research": "Robotics, Rapid Prototyping, Swarm Robotics, Manufacturing, 3D Bio-Printing, Automobile",
+    "courses_taught": "Autonomous Mobile Robots, Operations research, Industrial Engineering, CAD/CAM, Computers Networks. Cyber Threat Intelligence",
+    "years of teaching experience": "13",
+    "years of research experience": "11",
+    "imageURL": "/images/faculty/17.png"
+  },
+  {
+    "name": "Prof. Vuppula Roopa",
+    "designation": "Assistant Professor, School of Technology",
+    "education": [
+      "Ph.D in NIT Warangal",
+      "MTech in JNTUHCEH"
+    ],
+    "specialization": "Electronics and Communication Engineering, Wireless Communications, Blockchain, Artificial Intelligence",
+    "research": "Blockchain, Artificial Intelligence, 6G wireless networks",
+    "courses_taught": "DBMS, Computer Networks",
+    "years of teaching experience": "1",
+    "years of research experience": "6",
+    "imageURL": "/images/faculty/18.png"
+  },
+  {
+    "name": "Dr. Ajit Kumar",
+    "designation": "Assistant Professor, School of Technology",
+    "education": [
+      "Ph. D"
+    ],
+    "specialization": "Electronics Engineering",
+    "research": "Thin film and semiconductor technology, memory and sensor",
+    "courses_taught": "Discrete Mathematics, OOPS",
+    "years of teaching experience": "1",
+    "years of research experience": "6",
+    "imageURL": "/images/faculty/19.png"
+  },
+  {
+    "name": "Dr. Ajin R Nair",
+    "designation": "Assistant Professor, School of Technology",
+    "education": [
+      "Ph.D."
+    ],
+    "specialization": "Wireless Communications",
+    "research": "Applications of Artificial Intelligence and Machine Learning in Wireless Communications and Bioinformatics",
+    "courses_taught": "Wireless Communications, Digital Signal Processing, Digital VLSI System Design, Analog Electronics, Optical Communication, Basics of Electronics Engineering.",
+    "years of teaching experience": "11",
+    "years of research experience": "8.5",
+    "imageURL": "/images/faculty/20.png"
+  },
+  {
+    "name": "Dr. Abhaya Kumar Pradhan",
+    "designation": "Assistant Professor, School of Technology",
+    "education": [
+      "Ph.D. Computer Science, AI Lab, SCIS, University of Hyderabad",
+      "NET-JRF Qualified"
+    ],
+    "specialization": "Computer Science",
+    "research": "Social Media Data Analytics, NLP, Big Data, Graph Algorithms, ML/DL, Semantic Embeddings, LLMs",
+    "courses_taught": "Data Structures and Algorithms, Design and Analysis of Algorithms, Social Media Analytics, Text Analysis, NLP",
+    "years of teaching experience": "2.5 Years",
+    "years of research experience": "7 Years",
+    "imageURL": "/images/faculty/21.png"
+  },
+  {
+    "name": "Dr. Dharmendra Kr Mishra",
+    "designation": "Assistant Professor, School of Technology",
+    "education": [
+      "PhD Linguistics and Phonetics"
+    ],
+    "specialization": "Rhetoric and Public Speaking, Pragmatics, communication Skills",
+    "research": "Rhetor ic of war, politeness, communication ",
+    "courses_taught": "Communication  Skills for Engineers ",
+    "Years of  Years of Teaching experience": "1.5",
+    "years of research experience": "5.5",
+    "imageURL": "/images/faculty/22.png"
+  },
+  {
+    "name": "Dr. Anand Kakarla",
+    "designation": "Assistant Professor, School of Technology",
+    "education": [
+      "Ph. D (IIT Hyd)"
+    ],
+    "specialization": "Electrical Engineering (signal processing)",
+    "research": "Low-cost IOT, Graphh Neural Networks, Explainable AI",
+    "courses_taught": "Data Structures and Algorithms, Python, Machine Learning, Reinforcement Learning",
+    "years of teaching experience": "1 year",
+    "years of research experience": "9 years",
+    "imageURL": "/images/faculty/23.png"
+  },
+  {
+    "name": "Prof. Meher Gayatri Devi Tiwari",
+    "designation": "Assistant Professor, School of Technology",
+    "education": [
+      "PhD Scholar - (Vellore Institute of Technology, Vellore, Tamil Nadu, India)",
+      "M.Tech - Cyber Security (Vellore Institute of Technology, Vellore, Tamil Nadu, India)",
+      "B. Tech -Information Technology (SRM Institute of Science and Technology, Chennai, Tamil Nadu, India)"
+    ],
+    "specialization": "Cyber Security, Blockchain and Visual Cryptography",
+    "research": "Visual Cryptography and Blockchain",
+    "courses_taught": "Cryptography and Network Security, Computer Organization and Architecture, Malware Analysis, Multimedia Security, IDS/IPS, Software System Design, Basic Python, Object Oriented Programming, C++, Data Structures and Algorithms.",
+    "years of teaching experience": "3 Years and 7 Months",
+    "imageURL": "/images/faculty/24.png"
+  },
+  {
+    "name": "Dr. T Santhosh Kumar",
+    "designation": "HOD Assistant Professor - School of Sciences",
+    "education": [
+      "Post Ph.D. (Post-Doc) Sun Yat-Sen University, China & IIT-ISM Dhanbad",
+      "Ph.D. IIT Guwahati"
+    ],
+    "specialization": "Experimental Condensed Matter Physics",
+    "research": "High and low loss materials (Dielectric Resonators), Energy storage materials, Oxide thin films, ferroelectrics, antiferroelectric, Advanced ceramics, Electrocaloric effect",
+    "imageURL": "/images/faculty/25.png"
+  },
+  {
+    "name": "Dr. Vishal Anand",
+    "designation": "Assistant Professor - School of Sciences",
+    "education": "Scientific Assistant, Pannon Egyetem - University of Pannonia, Hungary, Europe; Institute Postdoctoral Fellow (IIT Roorkee); Ph.D., IIT Indore, Indore",
+    "specialization": "Bioprocess Engineering, Environmental Biotechnology",
+    "research": "Experimental Biofuels and Bioenergy: Waste-to-Energy Production, Algal Biorefinery; Metabolomics, CO2 sequestration; Wastewater treatment; Bioremediation",
+    "courses_taught": "Biochemistry, Fundamental of Life Science, Environmental Science, Genomics, Microbiology Biology, Cell Biology Publication",
+    "imageURL": "/images/faculty/26.png"
+  },
+  {
+    "name": "Dr Amit Kumar Singh,HOD",
+    "designation": "HOD Assistant Professor - School of Sciences",
+    "education": [
+      "M.Tech (Biotechnology) - West Bengal University of Technology",
+      "Ph.D. (Nanotechnology) - IIT Guwahati",
+      "Postdoctoral Scientist - George Mason University, USA"
+    ],
+    "specialization": "Nanobiotechnology ",
+    "research": "Micro(nano)robotics, Water treatment, Active Therapeutics",
+    "courses_taught": "Microbiology, Environmental Studies, Cell Biology",
+    "imageURL": "/images/faculty/27.png"
+  },
+  {
+    "name": "Dr. Sudarshana Santhosh Kumar K",
+    "designation": "Assistant Professor – School of Sciences",
+    "education": [
+      "B.Sc (Chemistry, Microbiology,Botany) SriKrishnadevaraya University",
+      "M.Sc (Organic Chemistry) Acharya Nagarjuna University",
+      "M.Ed ( education), Acharya Nagarjuna University",
+      "PhD - Organic Chemistry (SichuanUniversity-China)"
+    ],
+    "specialization": "Organic-supramolecular chemistry",
+    "research": "Host-Guest Complexation controlled by light, Metal ion extraction, Rotaxanes, Molecular Interlocked Machines",
+    "courses_taught": "Engineering chemistry, organic chemistry",
+    "imageURL": "/images/faculty/28.png"
+  },
+  {
+    "name": "Dr. Srikar Thota",
+    "designation": "Assistant Professor – School of Sciences",
+    "education": [
+      "BHMS - HKES Homoeopathic Medical College & Hospital SYMBIOSIS INTERNATIONAL UNIVERSITY",
+      "Pgdems, Emergency medicine Pgdems, Emergency medicine  D octor of Medicine - MD, Homeopathic Medicine/Homeopathy Doctor of Medicine - MD, Homeopathic"
+    ],
+    "specialization": "Biotechnology",
+    "Course taught": "Biotechnology",
+    "imageURL": "/images/faculty/29.png"
+  },
+  {
+    "name": "Dr. Suman Chirra",
+    "designation": "HOD Assistant Professor – School of Sciences",
+    "education": [
+      "Post Ph.D.: PDF, NCKU Taiwan",
+      "Ph.D.: Materials Chemistry, NIT Warangal",
+      "M.Sc.: Organic Chemistry, Osmania University, Hyderabad"
+    ],
+    "specialization": "Materials Chemistry, Catalysis and Organic Chemistry",
+    "research": "Porous materials, Photocatalysis, Metal-organic frameworks, CO2 Reduction and Hydrogen Generation",
+    "courses_taught": "Advanced Coordination Chemistry, Organic Functional Groups, Analytical Chemistry, Organic Spectroscopy",
+    "imageURL": "/images/faculty/30.png"
+  },
+  {
+    "name": "Dr. Ram Soorat",
+    "designation": "Assistant Professor – School of Sciences",
+    "education": [
+      "PhD (Physics) University of Hyderabad, Telangana State, India",
+      "M.Sc Physics -Dr R M L Avadh University Faizabad, UP, India",
+      "B.Sc Physics, Mathematics- Dr R M L Avadh University Faizabad, UP, India"
+    ],
+    "specialization": "Quantum Optics, Quantum random number generators, Quantum key distribution",
+    "research": "Quantum Optics, Quantum information, Quantum cryptography, Quantum Teleportation, Quantum error correction, Quantum random number generators, Quantum computing",
+    "imageURL": "/images/faculty/31.png"
+  },
+  {
+    "name": "Prof. Kamil Reza Khondakar",
+    "designation": "Assistant Professor – School of Sciences",
+    "education": [
+      "PhD"
+    ],
+    "specialization": "Biomedical Engineering",
+    "research": "Lab on chip, Biosensors, Sustainability, Healthcare technologies",
+    "courses_taught": "Applied Physics",
+    "imageURL": "/images/faculty/32.png"
+  },
+  {
+    "name": "Dr. Amlan Kanti Halder",
+    "designation": "Assistant Professor – School of Sciences",
+    "education": [
+      "PhD (Mathematics), Pondicherry University",
+      "NBHM (DAE)-Post Doctoral Fellow"
+    ],
+    "research": "Integrable Systems, Dynamical systems, Mathematical Modelling",
+    "courses_taught": "Discrete Mathematics",
+    "imageURL": "/images/faculty/33.png"
+  },
+  {
+    "name": "Dr. Venkata Narayan Pappula",
+    "designation": "Assistant Professor – School of Sciences",
+    "education": [
+      "Post Doc, RUDN, Moscow",
+      "PhD, CSIR- CSMCRI, Gujarat",
+      "MSc, Pondicherry Central University"
+    ],
+    "specialization": "Organic Chemistry, Green Chemistry",
+    "research": "Drug design and synthesis, Medicinal Chemistry, Biomass conversion, Renewable Nano materials, Natural products",
+    "courses_taught": "Chemistry for Sustainable Future, Environmental sciences",
+    "imageURL": "/images/faculty/34.png"
+  },
+  {
+    "name": "Dr. Soumyadip Patra",
+    "designation": "Assistant Professor – School of Sciences",
+    "education": [
+      "BSc chemistry - St. Xavier's college, Kolkata",
+      "MSc - IIT, Dhanbad",
+      "Phd - IIT, Indore"
+    ],
+    "specialization": "Chemistry",
+    "Course taught": "Chemistry",
+    "imageURL": "/images/faculty/35.png"
+  },
+  {
+    "name": "Dr. Bidisha Roy",
+    "designation": "Assistant Professor – School of Sciences",
+    "education": [
+      "B.Sc in Physics from Presidency College, University ofCalcutta",
+      "M.Sc in Physics from IIT Bombay",
+      "PhD from 'The Graduate School and University Center of the City University of New York"
+    ],
+    "specialization": "Light- matter interactions in quantum systems. Fundamental and applied nano-scale physics. Excitonic, photonic, plasmonic, and hybrid quantum systems.",
+    "courses_taught": "Applied Physics",
+    "imageURL": "/images/faculty/36.png"
+  },
+  {
+    "name": "Dr. Basu Bhattacharjee",
+    "designation": "Assistant Professor - School of Sciences",
+    "education": [
+      "B.Tech in Biotechnology from KIIT University, Bhubaneswar",
+      "M.Tech in Biotechnology from KIIT University, Bhubaneswar",
+      "PhD in Biotechnology from IIT Guwahati",
+      "Post Doctoral research Associate from IIT Hyderabad"
+    ],
+    "Specilization": "Antimicrobial resistance, antimicrobial peptides, Nanoparticle/Hydrogel mediated drug delivery, Photothermal therapy",
+    "research": "Antimicrobial Resistance, Antimicrobials, Drug Delivery, Hydrogels, Wound healing.",
+    "courses_taught": "Biochemistry",
+    "imageURL": "/images/faculty/37.png"
+  },
+  {
+    "name": "Mr. Krishna Vamshi Ganduri",
+    "designation": "Teaching Assistant, School of Technology",
+    "education": [
+      "PhD Scholar Robotics - Woxsen University",
+      "Masters in MCCCAE (MSME - Hyderabad,Telangana, India)",
+      "M.Tech - Thermal Engineering (CMR Technical Campus, Hyderabad, Telangana, India)B. Tech",
+      "- Mechaical Engineering (Adams Engineering college, Palvoncha, Telangana, India)"
+    ],
+    "specialization": "Robotics, Mechanical",
+    "research": "Mechatronics, Robotics, Swarm Robots, Digital Twin, IOT, Automation, UAV.",
+    "courses_taught": "IOT, Full stack, CAD, CAM, FEA, Robotics, Multibody dynamics, Robot Kinematics, Mobile Robots, Swarm Intelligence, Algorithms, UAV-AI",
+    "years of teaching experience": "5 ",
+    "years of research experience": "4",
+    "imageURL": "/images/faculty/38.png"
+  },
+  {
+    "name": "Ms. Sarawathi Nayakanti                      Teacher Assistant",
+    "designation": "Teacher Assistant, School of Technology",
+    "education": [
+      "PhD Scholar(Pursuing) - (Woxsen University, Hyderabad, India)",
+      "M.Tech. Power Electronics - (PRRMEC,Shabad,Telangana)",
+      "B.Tech. (EEE.) (BRECW, Saidabad, Telangana)"
+    ],
+    "specialization": "Machine Learning",
+    "research": "Multi agent systems",
+    "courses_taught": "System Software and Design, Computational thinking and Problem solving, OOPs, Automata",
+    "years of teaching experience": "10 Years",
+    "years of research experience": "1",
+    "imageURL": "/images/faculty/39.png"
+  },
+  {
+    "name": "Ms. Bharathi Gamgula",
+    "designation": "Assistant Teacher, School of Technology",
+    "education": [
+      "Pursuing PhD, M.Sc, M.Phil "
+    ],
+    "specialization ": "Physics ( Spl Electronics)",
+    "research": "Renewable Energy",
+    "courses_taught": "Physics, Electronics, Internet of Things.",
+    "years of teaching experience": "16",
+    "years of research experience": "2",
+    "imageURL": "/images/faculty/40.png"
+  },
+  {
+    "name": "MS. Navitha Peddagolla",
+    "designation": "Teaching Assistant, School of Technology",
+    "education": [
+      "PhD Scholar(Pursuing) - (Woxsen University, Hyderabad, India)",
+      "M.tech:CSE(Ellinki ,Hyderabad,Telangana)",
+      "B.Tech:CSE (Turbomachinery Institute of Science and Technology,Hyderabad Tealangana)"
+    ],
+    "specialization": "Computer Science Engineering",
+    "research": "Machine learning",
+    "courses_taught": "Software System Design, Computers Networks, Theory of Automata",
+    "years of teaching experience": "1.5",
+    "years of research experience": "1",
+    "imageURL": "/images/faculty/41.png"
+  },
+  {
+    "name": "Ms. Shaik Sajeera Begum",
+    "designation": "Teaching Assistant, School of Technology",
+    "education": [
+      "Pursuing PhD (Data Science),MCA(JNTU-GV VIZIANAGARAM)"
+    ],
+    "specialization": "Data Science",
+    "research": "Healthcare",
+    "courses_taught": "Computational Thinking and Problem Solving",
+    "years of teaching experience": "1.5",
+    "years of research experience": "1.5",
+    "imageURL": "/images/faculty/42.png"
+  },
+  {
+    "name": "Mr. Srikanth Kummari",
+    "designation": "Teaching Assistant, School of Technology",
+    "education": [
+      "Phd scholar(Pursuing) at woxsen university",
+      "Deploma(Mechanical engineering)",
+      "B.E. / B.Tech(Mechanical engineering)",
+      "Mtech (Advanced manufacturing systems)"
+    ],
+    "specialization": "Advanced manufacturing systems,and IOT",
+    "research": "IOT,drones,and communication",
+    "courses_taught": "Oops(1st years),IOT(3rd and 1st years),SSD(1st years),Blockchain(3rd years) and cyber threat intelligence(3rd Years)",
+    "years of teaching experience": "(2024 to 2025) 1 year",
+    "years of research experience": "1 Year",
+    "imageURL": "/images/faculty/43.png"
+  },
+  {
+    "name": "Ms. Hima Bindu",
+    "designation": "Teaching Assistant, School of Technology",
+    "education": "pursuing PHD,B.Tech,M.Tech",
+    "specialization": "Machine Learning(Electrical)",
+    "research ": "Smart grid, RES, Micro grid",
+    "courses_taught": "Basic electrical and electronics engineering, Data Structure, power system, Digital Design, Internet of Things Theory, PSOC, Electrical circuit.",
+    "years of teaching experience": "10 Years",
+    "years of research experience": "1 Year",
+    "imageURL": "/images/faculty/44.png"
+  },
+  {
+    "name": "Ms. Kurma Sahithi",
+    "designation": "Teaching Assistant, School of Technology",
+    "education": [
+      "PhD Scholar (Pursuing) - (Woxsen University, Hyderabad, India)",
+      "M.E. Embedded systems - (Stanley college of engineering and technology for women, Abids, Hyderabad)",
+      "B.E.(ECE.) (Stanley college of engineering and technology for women, Abids, Hyderabad)"
+    ],
+    "specialization": "IoT, Machinelearning",
+    "research": "IoT, Agriculture",
+    "courses_taught": "System Software and Design, Machine Learning",
+    "years of teaching experience": "07 Months",
+    "years of research experience": "07 Months",
+    "imageURL": "/images/faculty/45.png"
+  },
+  {
+    "name": "Ms. Nayani Manasa",
+    "designation": "Teaching Assistant, School of Technology",
+    "education": [
+      "PhD Scholar (Pursuing) - (Woxsen University, Hyderabad, India)",
+      "MTECH - (Mahaveer Institute, Hyderabad)",
+      "BTECH (CSE) (Padmavathi Mahila University, Tirupathi) "
+    ],
+    "specialization": "Machine Learning, Data Mining",
+    "research": "Medical And health",
+    "courses_taught": "System Software and Design, Operating Systems",
+    "years of teaching experience": "07 Months",
+    "years of research experience": "07 Months",
+    "imageURL": "/images/faculty/46.png"
+  },
+  {
+    "name": "Mr. Kartik Goswami",
+    "designation": "Teaching Assistant, School of Technology",
+    "education": [
+      "PhD Schooler- Woxsen University",
+      "M.Tech(Thermal)",
+      "B.Tech(Mechanical)"
+    ],
+    "specialization": "Thermal,Mterial Science,Mechanical",
+    "research": "Real-time monitoring and control on synthesis and characterization of sputter-deposited aluminide coating using integration of AI/ML and data driven model",
+    "courses_taught": "SSD(Software System and designing), Data Structure",
+    "years of teaching experience": "06 month",
+    "years of research experience": "07 month",
+    "imageURL": "/images/faculty/47.png"
+  },
+  {
+    "name": "Ms. ASHIMA SOOD",
+    "designation": "Teaching Assistant, School of Technology",
+    "education": [
+      "PhD Scholar(Pursuing) - (Woxsen University, Hyderabad, India)",
+      "M.Sc. Data Science -",
+      "(Chandigarh University, Chandigarh, India)",
+      "B.Sc. (Hons.) Agriculture - (CSKHPKV, Palampur, Himachal Pradesh, India)"
+    ],
+    "specialization": "Data Science",
+    "research": "Artificial Intelligence in Agriculture",
+    "courses_taught": "System Software and Design, Machine Learning, Cloud Computing, Computer Network, Malware Analysis",
+    "years of research experience": "1 Year",
+    "imageURL": "/images/faculty/48.png"
+  },
+  {
+    "name": "Mr Regana Manohar Prasad",
+    "designation": "Teaching Assistant - School of Sciences",
+    "education": "Ph.D(Mathematics-Pursuing-Woxsen University),M.Sc. (Applied Mathematics) – University of Hyderabad.",
+    "specialization": "Applied Mathematics",
+    "research": "Differential Equations and Dynamical Systems-Lie Group analysis",
+    "courses_taught ": "Engineering Mathematics I,II &III,Discrete Mathematics,  Probability & Statistics ",
+    "imageURL": "/images/faculty/49.png"
+  },
+  {
+    "name": "Ms. Sreejita Choudhuri",
+    "designation": "Teaching Assistant – School of Sciences",
+    "education": [
+      "M.Sc. in Environmental Science from the University of Calcutta, West Bengal",
+      "Currently pursuing PhD at Woxsen University"
+    ],
+    "specialization": "Biotechnology ",
+    "research Area": "Environmental Biotechnology and AI research Topic: Assessing the effects of less studied,Endocrine Disruptors on Fertility",
+    "courses_taught": "Assessing the Effects of Environmental Endocrine Disruptors on Fertility",
+    "imageURL": "/images/faculty/50.png"
+  },
+  {
+    "name": "Mr Avinash",
+    "designation": "Teaching Assistant – School of Sciences",
+    "education": "M.Sc. (Nanoscience) - Central University of Gujarat.Gandhinagar, Gujarat.",
+    "specialization": "Nano-catalysis and nanofabrication",
+    "research": "Water splitting, electrocatalysis",
+    "courses_taught": "Nano and co-a Chemistry",
+    "imageURL": "/images/faculty/51.png"
+  },
+  {
+    "name": "Mr. Arba",
+    "designation": "Teaching Assistant– School of Sciences",
+    "education": "MSc (Physics) - Parul University",
+    "specialization": "Nano-catalysis and nanofabrication",
+    "research": "Flexible Piezoelectric sensor",
+    "courses_taught": "Fundamentals of Applied Physics, Fundamentals of Electronics & Electrical Circuits",
+    "imageURL": "/images/faculty/52.png"
+  },
+  {
+    "name": "Mr. Debkumar Bhattacharyya",
+    "designation": "Teaching Assistant– School of Sciences",
+    "education": [
+      "M.sc (Mathematics), Kazi Nazrul University, West Bengal"
+    ],
+    "specialization": "Pure Mathematics (Complex analysis, Operator theory)",
+    "research": "Nuclear thermal hydraulics, Machine Learning",
+    "courses_taught": "Fundamentals of Applied Physics, Fundamentals of Electronics & Electrical Circuits",
+    "imageURL": "/images/faculty/53.png"
+  },
+  {
+    "name": "Dr Nagaraj",
+    "education": [
+      "MBBS – Rajiv Gandhi University of Health Sciences, Bengaluru"
+    ],
+    "specialization": "Clinical Medicine, BLS, ACLS",
+    "designation": "Duty Medical Officer",
+    "imageURL": "/images/faculty/54.png"
+  },
+  {
+    "name": "Dr Mohammed Baseeth Zuber",
+    "education": [
+      "MBBS – Rajiv Gandhi University of Health Sciences, Bengaluru"
+    ],
+    "specialization": "Clinical Medicine, BLS, ACLS",
+    "designation": "Duty Medical Officer",
+    "imageURL": "/images/faculty/55.png"
+  },
+  {
+    "name": "Dr Aadila Nausheen",
+    "education": [
+      "MBBS – Rajiv Gandhi University of Health Sciences, Bengaluru"
+    ],
+    "specialization": "Clinical Medicine, BLS, ACLS",
+    "designation": "Duty Medical Officer",
+    "imageURL": "/images/faculty/56.png"
+  },
+  {
+    "name": "Dr Matta S Sowmya",
+    "education": [
+      "MBBS – Dr. NTR University of Health Sciences,",
+      "Andhra Pradesh"
+    ],
+    "designation": "Duty Medical Officer",
+    "imageURL": "/images/faculty/57.png"
+  },
+  {
+    "name": "Mrs Shaik Haleema",
+    "education": [
+      "MSc Nursing – Rajiv Gandhi University of Health Sciences, Bengaluru"
+    ],
+    "designation": "Staff Nurse",
+    "imageURL": "/images/faculty/58.png"
+  },
+  {
+    "name": "Ms Ruchitha",
+    "education": [
+      "BSc Nursing – Singareni Collieries Hospital, Kothagudem"
+    ],
+    "designation": "Staff Nurse",
+    "imageURL": "/images/faculty/59.png"
+  },
+  {
+    "name": "Mr Gade Praveen",
+    "education": [
+      "MCA– Andhra University, Vishakhapatnam"
+    ],
+    "designation": "Clinical Manager",
+    "imageURL": "/images/faculty/60.png"
+  },
+  {
+    "name": "Mr Rajesh Ampolu",
+    "designation": "(CSE - Tutor)",
+    "education": "B.Sc (M.P.Cs) – Dr. Br. Ambedkar University, Srikakulam",
+    "specialization": "Computer Science",
+    "courses_taught": "Python, Computer organization and architecture,Java, Operating System with Python",
+    "imageURL": "/images/faculty/61.png"
+  },
+  {
+    "name": "Mr. Apparao Puchakayala",
+    "designation": "(CSE - Tutor)",
+    "education": "B.Sc (M.P.Cs) – Kakatiya University , Warangal , Telangana",
+    "specialization": "Computer Science",
+    "courses_taught": "Object-Oriented Programming Language, Design Analysis and Algorithms, Database Management System, Web Technologies, Software System and Design, Full Stack Development, Computational Thinking and Problem Solving.",
+    "imageURL": "/images/faculty/62.png"
+  },
+  {
+    "name": "Mr. Kolli Naveen",
+    "designation": "(CSE - Tutor)",
+    "education": "BSc (M.S.Cs) – Kakatiya University.",
+    "specialization": "Computer Science",
+    "courses_taught": "Python, Data Structures, Machine learning, Database Management Systems and Cyber-Threat Intelligence.",
+    "imageURL": "/images/faculty/63.png"
+  },
+  {
+    "name": "Mr. Radharapu Gopinadh",
+    "designation": "(CSE - Tutor)",
+    "education": [
+      "B.Sc(M.P.CS)-Marvel Degree College, Kakatiya University, Warangal, Telangana",
+      "Currently Pursuing a master’s in computer science from Kakatiya University, Warangal, Telangana"
+    ],
+    "specialization": "Computer Science",
+    "courses_taught": "Web Technology, Operating Systems, Object Oriented Programming System, Data Base Management, Software System Designing, Software Engineering",
+    "imageURL": "/images/faculty/64.png"
+  },
+  {
+    "name": "Mr. Syed Varish",
+    "designation": "(CSE - Tutor)",
+    "education": "MCA – JNTUGV-Vizianagaram",
+    "specialization": "Information Technology Domain: Deep Learning",
+    "Project Tittle": "Crop Disease Detection Using Deep Learning Techniques.",
+    "courses_taught": "Python, Data Structures, Operating System with Python, Computational Thinking and Problem Solving, Database Management System, Design Analysis and Algorithms",
+    "imageURL": "/images/faculty/65.png"
+  },
+  {
+    "name": "Mrs. Asam Meena",
+    "designation": "(CSE - Tutor)",
+    "education": "B Tech (Electronics and Communication Engineering)",
+    "specialization": "Manual testing & Automation testing using selenium with java",
+    "courses_taught": "Object-Oriented Programming Language, Database Management System, Software System and Design, Machine Learning & Blockchain",
+    "imageURL": "/images/faculty/66.png"
+  },
+  {
+    "name": "Mr. Paga Ravivarma",
+    "designation": "(EEE - Tutor)",
+    "education": "B.Tech (EEE), KLR College of Engineering and Technology, JNTUH Hyderabad, Telangana.",
+    "specialization": "EEE",
+    "courses_taught": "Basic Electrical & Electronics and IoT.",
+    "imageURL": "/images/faculty/67.png"
+  },
+  {
+    "name": "Mr. K Subash",
+    "designation": "(EEE - Tutor)",
+    "education": "B.Tech (ECE), Mahatma Gandhi Institute of Technology, JNTUH Hyderabad, Telangana.",
+    "specialization": "ECE",
+    "courses_taught": "Basic Electrical & Electronics and IoT.",
+    "imageURL": "/images/faculty/68.png"
+  },
+  {
+    "name": "Mr. K Seshu Nelson",
+    "designation": "(English- Tutor)",
+    "education": "M A. B.Ed. (English Language and Literature) – Sri Venkateswara University, Tirupati",
+    "specialization": "English Literature",
+    "courses_taught": "Communication skills (English)",
+    "imageURL": "/images/faculty/69.png"
+  },
+  {
+    "name": "Ms. Asmabi N K",
+    "designation": "(English- Tutor)",
+    "education": "M A (English Language and Literature) – University of Kerala, Thiruvananthapuram",
+    "specialization": "English Literature",
+    "courses_taught": "Communication skills (English)",
+    "imageURL": "/images/faculty/70.png"
+  },
+  {
+    "name": "Mr. Sandeep K",
+    "designation": "(Maths - Tutor)",
+    "education": "M. Sc",
+    "specialization": "Mathematics",
+    "courses_taught": "software systems and design, web technology,\tDBMS",
+    "imageURL": "/images/faculty/71.png"
+  },
+  {
+    "name": "Mr.S.G.Shankar Rao",
+    "designation": "(Physics-Tutor)",
+    "education": "M.Sc. Tech (Geophysics), Dr.B.R. Ambedkar university, Srikakulam, Andhra Pradesh",
+    "specialization": "Geo physics",
+    "courses_taught": "Applied physics, Fundamentals of electrical and electronics, and Mechanics",
+    "imageURL": "/images/faculty/72.png"
+  },
+  {
+    "name": "Ms.K.M.D.D Pravalli",
+    "designation": "(Physics-Tutor)",
+    "education": "M.Sc Physics-VIT-AP university",
+    "specialization": "Physics",
+    "courses_taught": "Applied physics, Fundamentals of electrical and electronics, and Mechanics",
+    "imageURL": "/images/faculty/73.png"
+  },
+  {
+    "name": "Mr. Sagar Subhash Babar",
+    "designation": "(Chemistry-Tutor)",
+    "education": "M.Sc. Chemistry, Savitribai Phule Pune University, Pune",
+    "specialization": "Organic",
+    "courses_taught": "Physical and Organic Chemistry, Advanced Topics in Organometallic and Bioinorganic Chemistry, Chemistry for Sustainable Future.",
+    "imageURL": "/images/faculty/74.png"
+  },
+  {
+    "name": "Mr. Desina Praveen",
+    "designation": "(Chemistry-Tutor)",
+    "education": "M.Sc. Forensic Science _ Acharya Nagarjuna university Guntur Andhra Pradesh.",
+    "specialization": "Forensic science",
+    "courses_taught": "Physical and Organic Chemistry, Advanced Topics in Organometallic and Bioinorganic Chemistry, Chemistry for Sustainable Future.",
+    "imageURL": "/images/faculty/75.png"
+  },
+  {
+    "name": "Mr. Shyamlal Kanhai",
+    "designation": "(Chemistry-Tutor)",
+    "education": "M.Sc Chemistry, Singhania University, Pacheri Bari, Jhunjhunu in the northern Indian state of Rajasthan",
+    "specialization": "General Chemistry",
+    "courses_taught": "Physical and Organic Chemistry, Advanced Topics in Organometallic and Bioinorganic Chemistry, Chemistry For Sustainable Future.",
+    "imageURL": "/images/faculty/76.png"
+  },
+  {
+    "name": "Mr. Chaitanya Shivaji Bhingardeve",
+    "designation": "(Biotech-Tutor)",
+    "education": "B. Pharmacy - Shivaji University Kolhapur.",
+    "courses_taught": "Biochemistry, Microbiology, Cell & Molecular Biology",
+    "imageURL": "/images/faculty/77.png"
+  },
+  {
+    "name": "Ms. Ruchitha Dogga",
+    "designation": "(Biotech- Tutor)",
+    "education": "M.Sc Microbiology, Padmavati University, Tirupati, Andhra Pradesh",
+    "specialization": "Industrial Microbiology",
+    "courses_taught": "Biochemistry, Microbiology, Cell & Molecular Biology",
+    "imageURL": "/images/faculty/78.png"
+  },
+  {
+    "name": "Ms. Navya Chintala",
+    "designation": "(Biotech - Tutor)",
+    "education": "M.Sc Agriculture, S.V Agricultural College, Tirupathi, Andhra Pradesh",
+    "specialization": "Genetics & Plant Breeding",
+    "courses_taught": "Biochemistry, Cell & Molecular Biology",
+    "imageURL": "/images/faculty/79.png"
+  },
+  {
+    "name": "Mr. Aniket Gorakh Jagtap",
+    "designation": "(SOS-Tutor)",
+    "education": "Bachlor of Engineering in Information Technology from Savitribai Phule Pune University, Pune, Maharashtra, India",
+    "specialization": "Information Technology",
+    "courses_taught": "Introduction to Programming, Data Structures and Algorithms, Numerical Techniques and Programming, Machine Learning, Data Analytics, Python Pogramming, Soft Computing, Probability & Statistics and Artificial Intelligence",
+    "imageURL": "/images/faculty/80.png"
+  },
+  {
+    "name": "Mr. Ankit Paul",
+    "designation": "(SOS-Tutor)",
+    "education": "Master's In Computer Application from Nerim under Dibhrugarh University, Guwahati, Assam, India",
+    "specialization": "Data Analysis ",
+    "courses_taught": "Introduction to Programming, Data Structures and Algorithms, Data Visualization in R, Machine Learning, Data Analytics, Python Pogramming, Deeplearning, probability & Statistics and Artificial Intelligence",
+    "imageURL": "/images/faculty/81.png"
+  },
+  {
+    "name": "Mr. V V Kiran Kumar",
+    "designation": "Program Manager – School of Technology",
+    "education": "M.Sc Computer Science Osmania University,Hyderabad",
+    "Experience": "17 Years",
+    "imageURL": "/images/faculty/82.png"
+  },
+  {
+    "name": "Mr Dhanunjaya T",
+    "designation": "Assistant Program Manager - School of Sciences",
+    "education": "M. Sc (Physics) - Dr. B.R Ambedkar University, Srikakulam",
+    "specialization": "Physics",
+    "courses_taught": "Applied physics, Fundamentals of electrical and electronics, and Mechanics",
+    "imageURL": "/images/faculty/83.png"
+  }
+]

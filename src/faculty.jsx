@@ -27,6 +27,23 @@ const FacultyPage = () => {
       faculty.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
+  // Helper to render content as array
+  const renderList = (data) => {
+    if (!data) return null;
+    const items = Array.isArray(data)
+      ? data
+      : typeof data === "string"
+      ? data.split(",").map((item) => item.trim())
+      : [];
+    return (
+      <ul>
+        {items.map((item, i) => (
+          <li key={i}>{item}</li>
+        ))}
+      </ul>
+    );
+  };
+
   return (
     <div className="faculty-page">
       <h1 className="faculty-title">Meet Our Faculty</h1>
@@ -96,59 +113,45 @@ const FacultyPage = () => {
               <h2>{selectedFaculty.name}</h2>
               <h4>{selectedFaculty.designation}</h4>
 
-              <div className="modal-section">
-                <strong>Education:</strong>
-                <ul>
-                  {selectedFaculty.education?.map((item, i) => (
-                    <li key={i}>{item}</li>
-                  ))}
-                </ul>
-              </div>
+              {selectedFaculty.education && (
+                <div className="modal-section">
+                  <strong>Education:</strong>
+                  {renderList(selectedFaculty.education)}
+                </div>
+              )}
 
               {selectedFaculty.specialization && (
                 <div className="modal-section">
                   <strong>Specialization:</strong>
-                  <ul>
-                    {selectedFaculty.specialization.map((item, i) => (
-                      <li key={i}>{item}</li>
-                    ))}
-                  </ul>
+                  {renderList(selectedFaculty.specialization)}
                 </div>
               )}
 
               {selectedFaculty.research && (
                 <div className="modal-section">
                   <strong>Research:</strong>
-                  <ul>
-                    {selectedFaculty.research.map((item, i) => (
-                      <li key={i}>{item}</li>
-                    ))}
-                  </ul>
+                  {renderList(selectedFaculty.research)}
                 </div>
               )}
 
               {selectedFaculty.courses_taught && (
                 <div className="modal-section">
                   <strong>Courses Taught:</strong>
-                  <ul>
-                    {selectedFaculty.courses_taught.map((item, i) => (
-                      <li key={i}>{item}</li>
-                    ))}
-                  </ul>
+                  {renderList(selectedFaculty.courses_taught)}
                 </div>
               )}
 
               <div className="modal-section">
-                {selectedFaculty.teaching_experience && (
+                {selectedFaculty["years of teaching experience"] && (
                   <p>
                     <strong>Teaching Experience:</strong>{" "}
-                    {selectedFaculty.teaching_experience}
+                    {selectedFaculty["years of teaching experience"]}
                   </p>
                 )}
-                {selectedFaculty.research_experience && (
+                {selectedFaculty["years of research experience"] && (
                   <p>
                     <strong>Research Experience:</strong>{" "}
-                    {selectedFaculty.research_experience}
+                    {selectedFaculty["years of research experience"]}
                   </p>
                 )}
               </div>
