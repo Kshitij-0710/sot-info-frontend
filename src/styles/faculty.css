@@ -245,6 +245,10 @@
 
 /* Mobile Responsive Modal Fix */
 @media (max-width: 768px) {
+  .modal-header-desktop {
+    display: none;
+  }
+
   .faculty-modal {
     flex-direction: column;
     padding: 1rem;
@@ -350,4 +354,24 @@
 .search-bar input:focus {
   outline: none;
   border-color: #ff5964;
+}
+
+.modal-header-desktop {
+  display: block;
+  margin-bottom: 1rem;
+  color: #f0f0f0;
+}
+
+.modal-header-desktop h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #f64758;
+  margin: 0 0 0.3rem;
+}
+
+.modal-header-desktop h4 {
+  font-size: 1.2rem;
+  color: #ccc;
+  font-weight: 500;
+  margin: 0;
 }
