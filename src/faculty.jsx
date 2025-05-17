@@ -119,9 +119,11 @@ const FacultyPage = () => {
             </div>
 
             <div className="modal-content">
-              {/* Desktop-only name/designation */}
-              <h2 className="modal-header-desktop">{selectedFaculty.name}</h2>
-              <h4 className="modal-header-desktop">{selectedFaculty.designation}</h4>
+              {/* Desktop-only name/designation block */}
+              <div className="modal-header-desktop">
+                <h2>{selectedFaculty.name}</h2>
+                <h4>{selectedFaculty.designation}</h4>
+              </div>
 
               {selectedFaculty.education && (
                 <div className="modal-section">
