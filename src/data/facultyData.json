@@ -1,7 +1,7 @@
 [
   {
     "name": "Dr. Peplluis Esteva de la Rosa",
-    "imageURL": "/images/faculty/1.png",
+    "imageURL": "https://woxsen.edu.in/uploads/f20241106112340.webp",
     "designation": "Executive Dean - School of Technology",
     "education": [
       "MBA, University of Girona 2002",
@@ -349,7 +349,7 @@
     "courses_taught": "Data Structures and Algorithms, Python, Machine Learning, Reinforcement Learning",
     "years of teaching experience": "1 year",
     "years of research experience": "9 years",
-    "imageURL": "/images/faculty/23.png"
+    "imageURL": "https://woxsen.edu.in/uploads/A20240405044908.webp"
   },
   {
     "name": "Prof. Meher Gayatri Devi Tiwari",
@@ -648,7 +648,7 @@
     "courses_taught": "System Software and Design, Operating Systems",
     "years of teaching experience": "07 Months",
     "years of research experience": "07 Months",
-    "imageURL": "/images/faculty/46.png"
+    "imageURL": "https://res.cloudinary.com/dgqjbp4is/image/upload/v1747472584/46_obiqg5.gif"
   },
   {
     "name": "Mr. Kartik Goswami",
@@ -678,7 +678,7 @@
     "research": "Artificial Intelligence in Agriculture",
     "courses_taught": "System Software and Design, Machine Learning, Cloud Computing, Computer Network, Malware Analysis",
     "years of research experience": "1 Year",
-    "imageURL": "/images/faculty/48.png"
+    "imageURL": "https://res.cloudinary.com/dgqjbp4is/image/upload/v1747472584/48_bqtk8g.jpg"
   },
   {
     "name": "Mr Regana Manohar Prasad",
@@ -737,7 +737,7 @@
     ],
     "specialization": "Clinical Medicine, BLS, ACLS",
     "designation": "Duty Medical Officer",
-    "imageURL": "/images/faculty/54.png"
+    "imageURL": "https://res.cloudinary.com/dgqjbp4is/image/upload/v1747472609/54_we6hju.gif"
   },
   {
     "name": "Dr Mohammed Baseeth Zuber",
@@ -746,7 +746,7 @@
     ],
     "specialization": "Clinical Medicine, BLS, ACLS",
     "designation": "Duty Medical Officer",
-    "imageURL": "/images/faculty/55.png"
+    "imageURL": "https://res.cloudinary.com/dgqjbp4is/image/upload/v1747472609/55_ekf8l9.gif"
   },
   {
     "name": "Dr Aadila Nausheen",
@@ -755,7 +755,7 @@
     ],
     "specialization": "Clinical Medicine, BLS, ACLS",
     "designation": "Duty Medical Officer",
-    "imageURL": "/images/faculty/56.png"
+    "imageURL": "https://res.cloudinary.com/dgqjbp4is/image/upload/v1747472612/56_pzleua.gif"
   },
   {
     "name": "Dr Matta S Sowmya",
@@ -764,7 +764,7 @@
       "Andhra Pradesh"
     ],
     "designation": "Duty Medical Officer",
-    "imageURL": "/images/faculty/57.png"
+    "imageURL": "https://res.cloudinary.com/dgqjbp4is/image/upload/v1747472612/57_dqq9kk.gif"
   },
   {
     "name": "Mrs Shaik Haleema",
@@ -772,7 +772,7 @@
       "MSc Nursing – Rajiv Gandhi University of Health Sciences, Bengaluru"
     ],
     "designation": "Staff Nurse",
-    "imageURL": "/images/faculty/58.png"
+    "imageURL": "https://res.cloudinary.com/dgqjbp4is/image/upload/v1747472612/58_jbt1v8.gif"
   },
   {
     "name": "Ms Ruchitha",
@@ -780,7 +780,7 @@
       "BSc Nursing – Singareni Collieries Hospital, Kothagudem"
     ],
     "designation": "Staff Nurse",
-    "imageURL": "/images/faculty/59.png"
+    "imageURL": "https://res.cloudinary.com/dgqjbp4is/image/upload/v1747472618/59_ughrr8.gif"
   },
   {
     "name": "Mr Gade Praveen",
@@ -788,7 +788,7 @@
       "MCA– Andhra University, Vishakhapatnam"
     ],
     "designation": "Clinical Manager",
-    "imageURL": "/images/faculty/60.png"
+    "imageURL": "https://res.cloudinary.com/dgqjbp4is/image/upload/v1747472608/60_fvs7pe.gif"
   },
   {
     "name": "Mr Rajesh Ampolu",
@@ -823,7 +823,7 @@
     ],
     "specialization": "Computer Science",
     "courses_taught": "Web Technology, Operating Systems, Object Oriented Programming System, Data Base Management, Software System Designing, Software Engineering",
-    "imageURL": "/images/faculty/64.png"
+    "imageURL": "https://res.cloudinary.com/dgqjbp4is/image/upload/v1747472624/64_mk9imk.gif"
   },
   {
     "name": "Mr. Syed Varish",
@@ -904,7 +904,7 @@
     "education": "M.Sc. Chemistry, Savitribai Phule Pune University, Pune",
     "specialization": "Organic",
     "courses_taught": "Physical and Organic Chemistry, Advanced Topics in Organometallic and Bioinorganic Chemistry, Chemistry for Sustainable Future.",
-    "imageURL": "/images/faculty/74.png"
+    "imageURL": "https://res.cloudinary.com/dgqjbp4is/image/upload/v1747472653/74_v989i0.jpg"
   },
   {
     "name": "Mr. Desina Praveen",
@@ -912,7 +912,7 @@
     "education": "M.Sc. Forensic Science _ Acharya Nagarjuna university Guntur Andhra Pradesh.",
     "specialization": "Forensic science",
     "courses_taught": "Physical and Organic Chemistry, Advanced Topics in Organometallic and Bioinorganic Chemistry, Chemistry for Sustainable Future.",
-    "imageURL": "/images/faculty/75.png"
+    "imageURL": "https://res.cloudinary.com/dgqjbp4is/image/upload/v1747472655/75_xpg12w.jpg"
   },
   {
     "name": "Mr. Shyamlal Kanhai",
@@ -920,14 +920,14 @@
     "education": "M.Sc Chemistry, Singhania University, Pacheri Bari, Jhunjhunu in the northern Indian state of Rajasthan",
     "specialization": "General Chemistry",
     "courses_taught": "Physical and Organic Chemistry, Advanced Topics in Organometallic and Bioinorganic Chemistry, Chemistry For Sustainable Future.",
-    "imageURL": "/images/faculty/76.png"
+    "imageURL": "https://res.cloudinary.com/dgqjbp4is/image/upload/v1747472656/76_bpyfge.jpg"
   },
   {
     "name": "Mr. Chaitanya Shivaji Bhingardeve",
     "designation": "(Biotech-Tutor)",
     "education": "B. Pharmacy - Shivaji University Kolhapur.",
     "courses_taught": "Biochemistry, Microbiology, Cell & Molecular Biology",
-    "imageURL": "/images/faculty/77.png"
+    "imageURL": "https://res.cloudinary.com/dgqjbp4is/image/upload/v1747472657/77_t3xpsl.jpg"
   },
   {
     "name": "Ms. Ruchitha Dogga",
@@ -935,7 +935,7 @@
     "education": "M.Sc Microbiology, Padmavati University, Tirupati, Andhra Pradesh",
     "specialization": "Industrial Microbiology",
     "courses_taught": "Biochemistry, Microbiology, Cell & Molecular Biology",
-    "imageURL": "/images/faculty/78.png"
+    "imageURL": "https://res.cloudinary.com/dgqjbp4is/image/upload/v1747472658/78_odoan8.jpg"
   },
   {
     "name": "Ms. Navya Chintala",
@@ -943,7 +943,7 @@
     "education": "M.Sc Agriculture, S.V Agricultural College, Tirupathi, Andhra Pradesh",
     "specialization": "Genetics & Plant Breeding",
     "courses_taught": "Biochemistry, Cell & Molecular Biology",
-    "imageURL": "/images/faculty/79.png"
+    "imageURL": "https://res.cloudinary.com/dgqjbp4is/image/upload/v1747472660/79_datekg.jpg"
   },
   {
     "name": "Mr. Aniket Gorakh Jagtap",
@@ -951,7 +951,7 @@
     "education": "Bachlor of Engineering in Information Technology from Savitribai Phule Pune University, Pune, Maharashtra, India",
     "specialization": "Information Technology",
     "courses_taught": "Introduction to Programming, Data Structures and Algorithms, Numerical Techniques and Programming, Machine Learning, Data Analytics, Python Pogramming, Soft Computing, Probability & Statistics and Artificial Intelligence",
-    "imageURL": "/images/faculty/80.png"
+    "imageURL": "https://res.cloudinary.com/dgqjbp4is/image/upload/v1747472651/80_flza0y.jpg"
   },
   {
     "name": "Mr. Ankit Paul",
@@ -959,7 +959,7 @@
     "education": "Master's In Computer Application from Nerim under Dibhrugarh University, Guwahati, Assam, India",
     "specialization": "Data Analysis ",
     "courses_taught": "Introduction to Programming, Data Structures and Algorithms, Data Visualization in R, Machine Learning, Data Analytics, Python Pogramming, Deeplearning, probability & Statistics and Artificial Intelligence",
-    "imageURL": "/images/faculty/81.png"
+    "imageURL": "https://res.cloudinary.com/dgqjbp4is/image/upload/v1747472652/81_fzdapz.gif"
   },
   {
     "name": "Mr. V V Kiran Kumar",
