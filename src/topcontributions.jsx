@@ -486,7 +486,7 @@ const TopContributions = () => {
                   <div className="card" onClick={() => handleAPIProjectClick(project)}>
                     <h4>{project.title}</h4>
                     <p className="contributor">{project.user?.name || 'Student'}</p>
-                    <p>{project.description || 'No description available'}</p>
+                    <p className="project-description">{project.description || 'No description available'}</p>
                     <button className="view-details-btn" onClick={(e) => {
                       e.stopPropagation(); // Prevent card click
                       handleAPIProjectClick(project);
@@ -514,7 +514,7 @@ const TopContributions = () => {
                   <div className="card" onClick={() => handleAPIProjectClick(project)}>
                     <h4>{project.title}</h4>
                     <p className="contributor">{project.user?.name || 'Faculty'}</p>
-                    <p>{project.description || 'No description available'}</p>
+                    <p className="project-description">{project.description || 'No description available'}</p>
                     <button className="view-details-btn" onClick={(e) => {
                       e.stopPropagation(); // Prevent card click
                       handleAPIProjectClick(project);
