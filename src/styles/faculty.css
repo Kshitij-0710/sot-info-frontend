@@ -1,59 +1,387 @@
-/* faculty.css */
+/* faculty.css - modified for 4 cards per row */
 
 .faculty-page {
-    padding: 3rem 2rem;
-    background-color: #f4f6f9;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  }
-  
-  .faculty-title {
-    font-size: 2.5rem;
-    font-weight: 600;
-    color: #2c3e50;
-    text-align: center;
-    margin-bottom: 3rem;
-  }
-  
+  padding: 3rem 2rem;
+  background-color: #0d0d0d;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  min-height: 100vh;
+}
+
+.faculty-title {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: #f64758;
+  text-align: center;
+  margin-bottom: 3rem;
+  animation: fadeInUp 1s ease;
+}
+
+.faculty-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(4, 1fr);
+  justify-items: center;
+  transition: all 0.5s ease;
+}
+
+@media (max-width: 1024px) {
   .faculty-grid {
-    display: grid;
-    gap: 2rem;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    justify-items: center;
+    grid-template-columns: repeat(2, 1fr);
   }
-  
-  .faculty-card {
-    background-color: #ffffff;
-    border-radius: 1.5rem;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
-    padding: 1.5rem;
+}
+
+@media (max-width: 600px) {
+  .faculty-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.faculty-card {
+  background-color: #1a1a1a;
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 16px rgba(255, 255, 255, 0.05);
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 300px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  color: #f0f0f0;
+  animation: fadeInUp 0.7s ease;
+  position: relative;
+}
+
+.faculty-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 6px 24px rgba(246, 71, 88, 0.4);
+}
+
+.faculty-image {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  object-position: center;
+  background-color: #000;
+  border-radius: 1rem;
+  border: 3px solid #f64758;
+  transition: transform 0.4s ease;
+  display: block;
+}
+
+.faculty-card h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #f64758;
+  margin-bottom: 0.5rem;
+}
+
+.faculty-card a {
+  text-decoration: none;
+  color: #ccc;
+  transition: color 0.2s ease;
+}
+
+.faculty-card a:hover {
+  color: #f64758;
+  text-decoration: underline;
+}
+
+.faculty-card.hod::before {
+  content: "HOD";
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background-color: #f64758;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: bold;
+  padding: 0.3rem 0.6rem;
+  border-radius: 9999px;
+  box-shadow: 0 0 10px rgba(246, 71, 88, 0.5);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Modal Styling */
+.faculty-modal-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.faculty-modal {
+  background-color: #1a1a1a;
+  padding: 2rem;
+  border-radius: 1rem;
+  width: 90%;
+  max-width: 800px;
+  color: #f0f0f0;
+  position: relative;
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  animation: fadeInUp 0.5s ease;
+  box-shadow: 0 0 25px rgba(246, 71, 88, 0.3);
+}
+
+.modal-image-wrapper {
+  flex: 1 1 300px;
+  max-width: 300px;
+}
+
+.modal-image {
+  width: 100%;
+  height: auto;
+  border-radius: 1rem;
+  border: 3px solid #f64758;
+  object-fit: cover;
+  object-position: center;
+  background-color: #000;
+}
+
+.modal-content {
+  flex: 2 1 400px;
+  overflow-y: auto;
+  max-height: 70vh;
+}
+
+.modal-section {
+  margin-top: 1rem;
+}
+
+.modal-section ul {
+  padding-left: 1.2rem;
+  margin-top: 0.5rem;
+}
+
+.modal-section li {
+  margin-bottom: 0.3rem;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: #f64758;
+  cursor: pointer;
+}
+
+/* Scrollbar Styling */
+.modal-content::-webkit-scrollbar {
+  width: 8px;
+}
+.modal-content::-webkit-scrollbar-track {
+  background: #1a1a1a;
+  border-radius: 10px;
+}
+.modal-content::-webkit-scrollbar-thumb {
+  background-color: #f64758;
+  border-radius: 10px;
+  border: 2px solid #1a1a1a;
+}
+.modal-content {
+  scrollbar-width: thin;
+  scrollbar-color: #f64758 #1a1a1a;
+}
+
+/* Filter bar */
+.filter-bar {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+.filter-bar button {
+  background-color: #1a1a1a;
+  color: #f0f0f0;
+  border: 2px solid #f64758;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.filter-bar button:hover,
+.filter-bar button.active {
+  background-color: #f64758;
+  color: #fff;
+}
+
+/* Show name + designation under image on mobile */
+.modal-header-mobile {
+  display: none;
+  text-align: center;
+  padding: 0.5rem 1rem 0;
+  color: #f0f0f0;
+}
+.modal-header-mobile h2 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #f64758;
+  margin-bottom: 0.2rem;
+}
+.modal-header-mobile h4 {
+  font-size: 1rem;
+  font-weight: normal;
+  color: #ccc;
+  margin-bottom: 0.5rem;
+}
+
+/* Mobile Responsive Modal Fix */
+@media (max-width: 768px) {
+  .faculty-modal {
+    flex-direction: column;
+    padding: 1rem;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  .modal-image-wrapper {
     width: 100%;
-    max-width: 300px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .faculty-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-  }
-  
-  .faculty-image {
-    width: 100%;
-    height: 240px;
-    object-fit: cover;
-    border-radius: 1rem;
-    margin-bottom: 1rem;
-  }
-  
-  .faculty-card h3 {
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: #34495e;
+    max-width: 100%;
+    max-height: 300px;
     margin-bottom: 0.5rem;
   }
-  
-  .faculty-card p {
-    margin: 0.25rem 0;
-    font-size: 0.95rem;
-    color: #6c7a89;
+
+  .modal-image {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
   }
-  
+
+  .modal-header-mobile {
+    display: block;
+  }
+
+  .modal-content {
+    max-height: unset;
+    width: 100%;
+    padding-top: 0;
+  }
+
+  .modal-header-desktop {
+    display: none;
+  }
+
+  .faculty-modal-overlay {
+    align-items: flex-start;
+  }
+
+  .close-btn {
+    top: 8px;
+    right: 12px;
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .faculty-modal-overlay {
+    align-items: flex-start;
+    overflow-y: auto;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  .faculty-modal {
+    flex-direction: column;
+    max-height: unset;
+    width: 100%;
+    margin: auto;
+  }
+
+  .modal-content {
+    max-height: unset;
+    overflow-y: visible;
+    padding-bottom: 1rem;
+  }
+}
+
+
+/* Closing animation */
+@keyframes modalFadeOutScale {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+}
+.faculty-modal.closing {
+  animation: modalFadeOutScale 0.3s ease forwards;
+}
+
+.search-bar {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+.search-bar input {
+  width: 300px;
+  max-width: 90vw;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  border: 2px solid #f64758;
+  font-size: 1rem;
+  color: #f0f0f0;
+  background-color: #1a1a1a;
+  transition: border-color 0.3s ease;
+}
+.search-bar input::placeholder {
+  color: #bbb;
+}
+.search-bar input:focus {
+  outline: none;
+  border-color: #ff5964;
+}
+
+.modal-header-desktop {
+  display: block;
+  margin-bottom: 1rem;
+  color: #f0f0f0;
+}
+
+.modal-header-desktop h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #f64758;
+  margin: 0 0 0.3rem;
+}
+
+.modal-header-desktop h4 {
+  font-size: 1.2rem;
+  color: #ccc;
+  font-weight: 500;
+  margin: 0;
+}
+
+/* Hide desktop header on mobile */
+@media (max-width: 768px) {
+  .modal-header-desktop {
+    display: none;
+  }
+}
+
+/* Hide mobile header on desktop */
+@media (min-width: 769px) {
+  .modal-header-mobile {
+    display: none;
+  }
+}

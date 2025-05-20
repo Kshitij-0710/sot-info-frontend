@@ -253,8 +253,29 @@ button[type="submit"]:hover {
   color: #ddd;
   font-size: 0.9rem;
   line-height: 1.4;
-  flex-grow: 1;
+  /* flex-grow: 1; */
 }
+
+.project-description {
+  display: -webkit-box;
+  display: box; /* fallback for some future implementations */
+  -webkit-box-orient: vertical;
+  box-orient: vertical;
+  -webkit-line-clamp: 8;
+  line-clamp: 8;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  font-size: 0.95rem;
+  line-height: 1.5rem;
+  max-height: 12rem;
+  color: #ddd;
+  margin-bottom: 0.5rem;
+}
+
+
+
 /* Add these styles to your index.css or relevant stylesheet */
 
 
